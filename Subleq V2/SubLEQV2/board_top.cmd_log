@@ -1,0 +1,107 @@
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+xst -intstyle ise -ifn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.xst" -ofn "D:/Library/Projects/Subeq/Subleq V2/SubLEQV2/board_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Nexys4DDR_Master.ucf -p xc7a100t-csg324-3 "board_top.ngc" board_top.ngd  
+map -intstyle ise -p xc7a100t-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -mt off -ir off -pr off -lc off -power off -o board_top_map.ncd board_top.ngd board_top.pcf 
+par -w -intstyle ise -ol high -mt off board_top_map.ncd board_top.ncd board_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf -ucf Nexys4DDR_Master.ucf 
+bitgen -intstyle ise -f board_top.ut board_top.ncd 

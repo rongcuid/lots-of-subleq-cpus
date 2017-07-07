@@ -1,0 +1,687 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 3
+-n 3 -fastpaths -xml board_top.twx board_top.ncd -o board_top.twr board_top.pcf
+-ucf Nexys4DDR_Master.ucf
+
+Design file:              board_top.ncd
+Physical constraint file: board_top.pcf
+Device,package,speed:     xc7a100t,csg324,C,-3 (PRODUCTION 1.10 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 
+50%;
+For more information, see Period Analysis in the Timing Closure User Guide (UG612).
+
+ 77829 paths analyzed, 2014 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
+ Minimum period is   5.512ns.
+--------------------------------------------------------------------------------
+
+Paths for end point CPU0/MMU0/SFR0/do_3 (SLICE_X4Y82.A1), 739 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     4.488ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/a_4 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_3 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.499ns (Levels of Logic = 7)
+  Clock Path Skew:      0.022ns (0.634 - 0.612)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/a_4 to CPU0/MMU0/SFR0/do_3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y79.BMUX    Tshcko                0.466   CPU0/CPU0/a<7>
+                                                       CPU0/CPU0/a_4
+    SLICE_X10Y81.A2      net (fanout=2)        0.691   CPU0/CPU0/a<4>
+    SLICE_X10Y81.COUT    Topcya                0.476   CPU0/CPU0/state_FSM_FFd5-In
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_lut<6>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.COUT    Tbyp                  0.092   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CMUX    Tcinc                 0.300   CPU0/Mmux_mmu_addr26
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_xor<16>
+    SLICE_X11Y86.D1      net (fanout=8)        0.766   CPU0/CPU0/a[7]_b[15]_add_24_OUT<16>
+    SLICE_X11Y86.D       Tilo                  0.097   CPU0/mmu_addr<29>
+                                                       CPU0/Mmux_mmu_addr221
+    SLICE_X9Y84.B1       net (fanout=1)        0.705   CPU0/mmu_addr<29>
+    SLICE_X9Y84.B        Tilo                  0.097   cpu_resetn_inv
+                                                       CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A1       net (fanout=31)       0.875   CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A        Tilo                  0.097   CPU0/bl_mmu_di<23>
+                                                       CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o<30>1
+    SLICE_X4Y82.A1       net (fanout=4)        0.770   CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o
+    SLICE_X4Y82.CLK      Tas                   0.067   CPU0/MMU0/SFR0/do<5>
+                                                       CPU0/MMU0/SFR0/_n1125<3>1
+                                                       CPU0/MMU0/SFR0/do_3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.499ns (1.692ns logic, 3.807ns route)
+                                                       (30.8% logic, 69.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     4.498ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/b_3 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_3 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.488ns (Levels of Logic = 8)
+  Clock Path Skew:      0.021ns (0.634 - 0.613)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/b_3 to CPU0/MMU0/SFR0/do_3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X11Y81.BMUX    Tshcko                0.427   CPU0/CPU0/b<7>
+                                                       CPU0/CPU0/b_3
+    SLICE_X10Y80.B1      net (fanout=2)        0.604   CPU0/CPU0/b<3>
+    SLICE_X10Y80.COUT    Topcyb                0.499   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<5>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_lut<3>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<5>
+    SLICE_X10Y81.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<5>
+    SLICE_X10Y81.COUT    Tbyp                  0.092   CPU0/CPU0/state_FSM_FFd5-In
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.COUT    Tbyp                  0.092   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CMUX    Tcinc                 0.300   CPU0/Mmux_mmu_addr26
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_xor<16>
+    SLICE_X11Y86.D1      net (fanout=8)        0.766   CPU0/CPU0/a[7]_b[15]_add_24_OUT<16>
+    SLICE_X11Y86.D       Tilo                  0.097   CPU0/mmu_addr<29>
+                                                       CPU0/Mmux_mmu_addr221
+    SLICE_X9Y84.B1       net (fanout=1)        0.705   CPU0/mmu_addr<29>
+    SLICE_X9Y84.B        Tilo                  0.097   cpu_resetn_inv
+                                                       CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A1       net (fanout=31)       0.875   CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A        Tilo                  0.097   CPU0/bl_mmu_di<23>
+                                                       CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o<30>1
+    SLICE_X4Y82.A1       net (fanout=4)        0.770   CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o
+    SLICE_X4Y82.CLK      Tas                   0.067   CPU0/MMU0/SFR0/do<5>
+                                                       CPU0/MMU0/SFR0/_n1125<3>1
+                                                       CPU0/MMU0/SFR0/do_3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.488ns (1.768ns logic, 3.720ns route)
+                                                       (32.2% logic, 67.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     4.522ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/a_4 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_3 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.465ns (Levels of Logic = 6)
+  Clock Path Skew:      0.022ns (0.634 - 0.612)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/a_4 to CPU0/MMU0/SFR0/do_3
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y79.BMUX    Tshcko                0.466   CPU0/CPU0/a<7>
+                                                       CPU0/CPU0/a_4
+    SLICE_X10Y81.A2      net (fanout=2)        0.691   CPU0/CPU0/a<4>
+    SLICE_X10Y81.COUT    Topcya                0.476   CPU0/CPU0/state_FSM_FFd5-In
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_lut<6>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.DMUX    Tcind                 0.362   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X12Y81.B1      net (fanout=2)        0.720   CPU0/CPU0/a[7]_b[15]_add_24_OUT<13>
+    SLICE_X12Y81.B       Tilo                  0.097   CPU0/CPU0/state_FSM_FFd4-In
+                                                       CPU0/Mmux_mmu_addr5
+    SLICE_X10Y78.B2      net (fanout=2)        0.759   CPU0/mmu_addr<13>
+    SLICE_X10Y78.B       Tilo                  0.097   CPU0/lowword<15>
+                                                       CPU0/MMU0/SFR0/_n1120<0>22
+    SLICE_X7Y79.A2       net (fanout=22)       0.863   CPU0/MMU0/SFR0/_n1120<0>22
+    SLICE_X7Y79.A        Tilo                  0.097   CPU0/bl_mmu_di<23>
+                                                       CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o<30>1
+    SLICE_X4Y82.A1       net (fanout=4)        0.770   CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o
+    SLICE_X4Y82.CLK      Tas                   0.067   CPU0/MMU0/SFR0/do<5>
+                                                       CPU0/MMU0/SFR0/_n1125<3>1
+                                                       CPU0/MMU0/SFR0/do_3
+    -------------------------------------------------  ---------------------------
+    Total                                      5.465ns (1.662ns logic, 3.803ns route)
+                                                       (30.4% logic, 69.6% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CPU0/MMU0/SFR0/do_4 (SLICE_X4Y82.B1), 739 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     4.498ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/a_4 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_4 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.489ns (Levels of Logic = 7)
+  Clock Path Skew:      0.022ns (0.634 - 0.612)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/a_4 to CPU0/MMU0/SFR0/do_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y79.BMUX    Tshcko                0.466   CPU0/CPU0/a<7>
+                                                       CPU0/CPU0/a_4
+    SLICE_X10Y81.A2      net (fanout=2)        0.691   CPU0/CPU0/a<4>
+    SLICE_X10Y81.COUT    Topcya                0.476   CPU0/CPU0/state_FSM_FFd5-In
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_lut<6>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.COUT    Tbyp                  0.092   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CMUX    Tcinc                 0.300   CPU0/Mmux_mmu_addr26
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_xor<16>
+    SLICE_X11Y86.D1      net (fanout=8)        0.766   CPU0/CPU0/a[7]_b[15]_add_24_OUT<16>
+    SLICE_X11Y86.D       Tilo                  0.097   CPU0/mmu_addr<29>
+                                                       CPU0/Mmux_mmu_addr221
+    SLICE_X9Y84.B1       net (fanout=1)        0.705   CPU0/mmu_addr<29>
+    SLICE_X9Y84.B        Tilo                  0.097   cpu_resetn_inv
+                                                       CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A1       net (fanout=31)       0.875   CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A        Tilo                  0.097   CPU0/bl_mmu_di<23>
+                                                       CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o<30>1
+    SLICE_X4Y82.B1       net (fanout=4)        0.762   CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o
+    SLICE_X4Y82.CLK      Tas                   0.065   CPU0/MMU0/SFR0/do<5>
+                                                       CPU0/MMU0/SFR0/_n1124<4>1
+                                                       CPU0/MMU0/SFR0/do_4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.489ns (1.690ns logic, 3.799ns route)
+                                                       (30.8% logic, 69.2% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     4.508ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/b_3 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_4 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.478ns (Levels of Logic = 8)
+  Clock Path Skew:      0.021ns (0.634 - 0.613)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/b_3 to CPU0/MMU0/SFR0/do_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X11Y81.BMUX    Tshcko                0.427   CPU0/CPU0/b<7>
+                                                       CPU0/CPU0/b_3
+    SLICE_X10Y80.B1      net (fanout=2)        0.604   CPU0/CPU0/b<3>
+    SLICE_X10Y80.COUT    Topcyb                0.499   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<5>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_lut<3>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<5>
+    SLICE_X10Y81.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<5>
+    SLICE_X10Y81.COUT    Tbyp                  0.092   CPU0/CPU0/state_FSM_FFd5-In
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.COUT    Tbyp                  0.092   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X10Y83.CMUX    Tcinc                 0.300   CPU0/Mmux_mmu_addr26
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_xor<16>
+    SLICE_X11Y86.D1      net (fanout=8)        0.766   CPU0/CPU0/a[7]_b[15]_add_24_OUT<16>
+    SLICE_X11Y86.D       Tilo                  0.097   CPU0/mmu_addr<29>
+                                                       CPU0/Mmux_mmu_addr221
+    SLICE_X9Y84.B1       net (fanout=1)        0.705   CPU0/mmu_addr<29>
+    SLICE_X9Y84.B        Tilo                  0.097   cpu_resetn_inv
+                                                       CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A1       net (fanout=31)       0.875   CPU0/MMU0/SFR0/_n1120<0>24
+    SLICE_X7Y79.A        Tilo                  0.097   CPU0/bl_mmu_di<23>
+                                                       CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o<30>1
+    SLICE_X4Y82.B1       net (fanout=4)        0.762   CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o
+    SLICE_X4Y82.CLK      Tas                   0.065   CPU0/MMU0/SFR0/do<5>
+                                                       CPU0/MMU0/SFR0/_n1124<4>1
+                                                       CPU0/MMU0/SFR0/do_4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.478ns (1.766ns logic, 3.712ns route)
+                                                       (32.2% logic, 67.8% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     4.532ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/a_4 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_4 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.455ns (Levels of Logic = 6)
+  Clock Path Skew:      0.022ns (0.634 - 0.612)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/a_4 to CPU0/MMU0/SFR0/do_4
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y79.BMUX    Tshcko                0.466   CPU0/CPU0/a<7>
+                                                       CPU0/CPU0/a_4
+    SLICE_X10Y81.A2      net (fanout=2)        0.691   CPU0/CPU0/a<4>
+    SLICE_X10Y81.COUT    Topcya                0.476   CPU0/CPU0/state_FSM_FFd5-In
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_lut<6>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.CIN     net (fanout=1)        0.000   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<9>
+    SLICE_X10Y82.DMUX    Tcind                 0.362   CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+                                                       CPU0/CPU0/Madd_a[7]_b[15]_add_24_OUT_cy<13>
+    SLICE_X12Y81.B1      net (fanout=2)        0.720   CPU0/CPU0/a[7]_b[15]_add_24_OUT<13>
+    SLICE_X12Y81.B       Tilo                  0.097   CPU0/CPU0/state_FSM_FFd4-In
+                                                       CPU0/Mmux_mmu_addr5
+    SLICE_X10Y78.B2      net (fanout=2)        0.759   CPU0/mmu_addr<13>
+    SLICE_X10Y78.B       Tilo                  0.097   CPU0/lowword<15>
+                                                       CPU0/MMU0/SFR0/_n1120<0>22
+    SLICE_X7Y79.A2       net (fanout=22)       0.863   CPU0/MMU0/SFR0/_n1120<0>22
+    SLICE_X7Y79.A        Tilo                  0.097   CPU0/bl_mmu_di<23>
+                                                       CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o<30>1
+    SLICE_X4Y82.B1       net (fanout=4)        0.762   CPU0/MMU0/SFR0/GND_10_o_addr[30]_equal_17_o
+    SLICE_X4Y82.CLK      Tas                   0.065   CPU0/MMU0/SFR0/do<5>
+                                                       CPU0/MMU0/SFR0/_n1124<4>1
+                                                       CPU0/MMU0/SFR0/do_4
+    -------------------------------------------------  ---------------------------
+    Total                                      5.455ns (1.660ns logic, 3.795ns route)
+                                                       (30.4% logic, 69.6% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CPU0/MMU0/SFR0/do_15 (SLICE_X11Y78.D5), 325 paths
+--------------------------------------------------------------------------------
+Slack (setup path):     4.571ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/state_FSM_FFd4 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_15 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.365ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.029ns (0.100 - 0.129)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/state_FSM_FFd4 to CPU0/MMU0/SFR0/do_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X10Y84.AQ      Tcko                  0.393   CPU0/CPU0/state_FSM_FFd3-In
+                                                       CPU0/CPU0/state_FSM_FFd4
+    SLICE_X11Y79.D2      net (fanout=17)       0.884   CPU0/CPU0/state_FSM_FFd3-In
+    SLICE_X11Y79.D       Tilo                  0.097   CPU0/CPU0/state_mmu_addr<0>2
+                                                       CPU0/CPU0/state_mmu_addr<0>21
+    SLICE_X5Y83.A2       net (fanout=28)       1.072   CPU0/CPU0/state_mmu_addr<0>2
+    SLICE_X5Y83.AMUX     Tilo                  0.239   N143
+                                                       CPU0/Mmux_mmu_addr121
+    SLICE_X11Y77.A2      net (fanout=60)       1.200   CPU0/mmu_addr<1>
+    SLICE_X11Y77.A       Tilo                  0.097   ssd_hex<0>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1_SW0_SW0
+    SLICE_X11Y78.C1      net (fanout=1)        0.806   N158
+    SLICE_X11Y78.C       Tilo                  0.097   CPU0/MMU0/SFR0/do<15>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1_SW0
+    SLICE_X11Y78.D5      net (fanout=1)        0.416   N117
+    SLICE_X11Y78.CLK     Tas                   0.064   CPU0/MMU0/SFR0/do<15>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1
+                                                       CPU0/MMU0/SFR0/do_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.365ns (0.987ns logic, 4.378ns route)
+                                                       (18.4% logic, 81.6% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     4.648ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/state_FSM_FFd2 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_15 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.275ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.042ns (0.570 - 0.612)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/state_FSM_FFd2 to CPU0/MMU0/SFR0/do_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y80.AMUX    Tshcko                0.463   CPU0/CPU0/state_FSM_FFd1
+                                                       CPU0/CPU0/state_FSM_FFd2
+    SLICE_X11Y79.D3      net (fanout=94)       0.724   CPU0/CPU0/state_FSM_FFd1-In
+    SLICE_X11Y79.D       Tilo                  0.097   CPU0/CPU0/state_mmu_addr<0>2
+                                                       CPU0/CPU0/state_mmu_addr<0>21
+    SLICE_X5Y83.A2       net (fanout=28)       1.072   CPU0/CPU0/state_mmu_addr<0>2
+    SLICE_X5Y83.AMUX     Tilo                  0.239   N143
+                                                       CPU0/Mmux_mmu_addr121
+    SLICE_X11Y77.A2      net (fanout=60)       1.200   CPU0/mmu_addr<1>
+    SLICE_X11Y77.A       Tilo                  0.097   ssd_hex<0>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1_SW0_SW0
+    SLICE_X11Y78.C1      net (fanout=1)        0.806   N158
+    SLICE_X11Y78.C       Tilo                  0.097   CPU0/MMU0/SFR0/do<15>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1_SW0
+    SLICE_X11Y78.D5      net (fanout=1)        0.416   N117
+    SLICE_X11Y78.CLK     Tas                   0.064   CPU0/MMU0/SFR0/do<15>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1
+                                                       CPU0/MMU0/SFR0/do_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.275ns (1.057ns logic, 4.218ns route)
+                                                       (20.0% logic, 80.0% route)
+
+--------------------------------------------------------------------------------
+Slack (setup path):     4.872ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               CPU0/CPU0/state_FSM_FFd1 (FF)
+  Destination:          CPU0/MMU0/SFR0/do_15 (FF)
+  Requirement:          10.000ns
+  Data Path Delay:      5.051ns (Levels of Logic = 5)
+  Clock Path Skew:      -0.042ns (0.570 - 0.612)
+  Source Clock:         clk100mhz_BUFGP rising at 0.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.035ns
+
+  Clock Uncertainty:          0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter (TSJ):  0.070ns
+    Total Input Jitter (TIJ):   0.000ns
+    Discrete Jitter (DJ):       0.000ns
+    Phase Error (PE):           0.000ns
+
+  Maximum Data Path at Slow Process Corner: CPU0/CPU0/state_FSM_FFd1 to CPU0/MMU0/SFR0/do_15
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X12Y80.BQ      Tcko                  0.393   CPU0/CPU0/state_FSM_FFd1
+                                                       CPU0/CPU0/state_FSM_FFd1
+    SLICE_X11Y79.D5      net (fanout=98)       0.570   CPU0/CPU0/state_FSM_FFd1
+    SLICE_X11Y79.D       Tilo                  0.097   CPU0/CPU0/state_mmu_addr<0>2
+                                                       CPU0/CPU0/state_mmu_addr<0>21
+    SLICE_X5Y83.A2       net (fanout=28)       1.072   CPU0/CPU0/state_mmu_addr<0>2
+    SLICE_X5Y83.AMUX     Tilo                  0.239   N143
+                                                       CPU0/Mmux_mmu_addr121
+    SLICE_X11Y77.A2      net (fanout=60)       1.200   CPU0/mmu_addr<1>
+    SLICE_X11Y77.A       Tilo                  0.097   ssd_hex<0>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1_SW0_SW0
+    SLICE_X11Y78.C1      net (fanout=1)        0.806   N158
+    SLICE_X11Y78.C       Tilo                  0.097   CPU0/MMU0/SFR0/do<15>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1_SW0
+    SLICE_X11Y78.D5      net (fanout=1)        0.416   N117
+    SLICE_X11Y78.CLK     Tas                   0.064   CPU0/MMU0/SFR0/do<15>
+                                                       CPU0/MMU0/SFR0/_n1123<15>1
+                                                       CPU0/MMU0/SFR0/do_15
+    -------------------------------------------------  ---------------------------
+    Total                                      5.051ns (0.987ns logic, 4.064ns route)
+                                                       (19.5% logic, 80.5% route)
+
+--------------------------------------------------------------------------------
+
+Hold Paths: TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 50%;
+--------------------------------------------------------------------------------
+
+Paths for end point CPU0/MMU0/RAM0/Mram_data (RAMB36_X0Y16.DIADI28), 4 paths
+--------------------------------------------------------------------------------
+Slack (hold path):      0.129ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CPU0/CPU0/data_b_28 (FF)
+  Destination:          CPU0/MMU0/RAM0/Mram_data (RAM)
+  Requirement:          0.000ns
+  Data Path Delay:      0.178ns (Levels of Logic = 1)
+  Clock Path Skew:      0.049ns (0.116 - 0.067)
+  Source Clock:         clk100mhz_BUFGP rising at 10.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CPU0/CPU0/data_b_28 to CPU0/MMU0/RAM0/Mram_data
+    Location                Delay type         Delay(ns)  Physical Resource
+                                                          Logical Resource(s)
+    ----------------------------------------------------  -------------------
+    SLICE_X8Y84.AQ          Tcko                  0.164   CPU0/CPU0/data_b<31>
+                                                          CPU0/CPU0/data_b_28
+    SLICE_X9Y82.A5          net (fanout=3)        0.158   CPU0/CPU0/data_b<28>
+    SLICE_X9Y82.A           Tilo                  0.045   CPU0/mmu_di<13>
+                                                          CPU0/Mmux_mmu_di211
+    RAMB36_X0Y16.DIADI28    net (fanout=2)        0.107   CPU0/mmu_di<28>
+    RAMB36_X0Y16.CLKARDCLKL Trckd_DIA   (-Th)     0.296   CPU0/MMU0/RAM0/Mram_data
+                                                          CPU0/MMU0/RAM0/Mram_data
+    ----------------------------------------------------  ---------------------------
+    Total                                         0.178ns (-0.087ns logic, 0.265ns route)
+                                                          (-48.9% logic, 148.9% route)
+
+--------------------------------------------------------------------------------
+Slack (hold path):      0.273ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CPU0/state_FSM_FFd2 (FF)
+  Destination:          CPU0/MMU0/RAM0/Mram_data (RAM)
+  Requirement:          0.000ns
+  Data Path Delay:      0.322ns (Levels of Logic = 1)
+  Clock Path Skew:      0.049ns (0.116 - 0.067)
+  Source Clock:         clk100mhz_BUFGP rising at 10.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CPU0/state_FSM_FFd2 to CPU0/MMU0/RAM0/Mram_data
+    Location                Delay type         Delay(ns)  Physical Resource
+                                                          Logical Resource(s)
+    ----------------------------------------------------  -------------------
+    SLICE_X9Y85.CQ          Tcko                  0.141   CPU0/resetb_cpu
+                                                          CPU0/state_FSM_FFd2
+    SLICE_X9Y82.A6          net (fanout=94)       0.325   CPU0/state_FSM_FFd2
+    SLICE_X9Y82.A           Tilo                  0.045   CPU0/mmu_di<13>
+                                                          CPU0/Mmux_mmu_di211
+    RAMB36_X0Y16.DIADI28    net (fanout=2)        0.107   CPU0/mmu_di<28>
+    RAMB36_X0Y16.CLKARDCLKL Trckd_DIA   (-Th)     0.296   CPU0/MMU0/RAM0/Mram_data
+                                                          CPU0/MMU0/RAM0/Mram_data
+    ----------------------------------------------------  ---------------------------
+    Total                                         0.322ns (-0.110ns logic, 0.432ns route)
+                                                          (-34.2% logic, 134.2% route)
+
+--------------------------------------------------------------------------------
+Slack (hold path):      0.393ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CPU0/bl_mmu_di_28 (FF)
+  Destination:          CPU0/MMU0/RAM0/Mram_data (RAM)
+  Requirement:          0.000ns
+  Data Path Delay:      0.448ns (Levels of Logic = 1)
+  Clock Path Skew:      0.055ns (0.116 - 0.061)
+  Source Clock:         clk100mhz_BUFGP rising at 10.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CPU0/bl_mmu_di_28 to CPU0/MMU0/RAM0/Mram_data
+    Location                Delay type         Delay(ns)  Physical Resource
+                                                          Logical Resource(s)
+    ----------------------------------------------------  -------------------
+    SLICE_X9Y78.AQ          Tcko                  0.141   CPU0/bl_mmu_di<31>
+                                                          CPU0/bl_mmu_di_28
+    SLICE_X9Y82.A1          net (fanout=1)        0.451   CPU0/bl_mmu_di<28>
+    SLICE_X9Y82.A           Tilo                  0.045   CPU0/mmu_di<13>
+                                                          CPU0/Mmux_mmu_di211
+    RAMB36_X0Y16.DIADI28    net (fanout=2)        0.107   CPU0/mmu_di<28>
+    RAMB36_X0Y16.CLKARDCLKL Trckd_DIA   (-Th)     0.296   CPU0/MMU0/RAM0/Mram_data
+                                                          CPU0/MMU0/RAM0/Mram_data
+    ----------------------------------------------------  ---------------------------
+    Total                                         0.448ns (-0.110ns logic, 0.558ns route)
+                                                          (-24.6% logic, 124.6% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CPU0/CPU0/pc_23 (SLICE_X12Y85.B6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.146ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CPU0/CPU0/data_c_23 (FF)
+  Destination:          CPU0/CPU0/pc_23 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.161ns (Levels of Logic = 1)
+  Clock Path Skew:      0.015ns (0.082 - 0.067)
+  Source Clock:         clk100mhz_BUFGP rising at 10.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CPU0/CPU0/data_c_23 to CPU0/CPU0/pc_23
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X15Y85.BQ      Tcko                  0.141   CPU0/CPU0/data_c<25>
+                                                       CPU0/CPU0/data_c_23
+    SLICE_X12Y85.B6      net (fanout=1)        0.096   CPU0/CPU0/data_c<23>
+    SLICE_X12Y85.CLK     Tah         (-Th)     0.076   CPU0/CPU0/pc<25>
+                                                       CPU0/CPU0/Mmux_state[2]_X_7_o_wide_mux_6_OUT91
+                                                       CPU0/CPU0/pc_23
+    -------------------------------------------------  ---------------------------
+    Total                                      0.161ns (0.065ns logic, 0.096ns route)
+                                                       (40.4% logic, 59.6% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point CPU0/CPU0/pc_11 (SLICE_X12Y82.B6), 1 path
+--------------------------------------------------------------------------------
+Slack (hold path):      0.147ns (requirement - (clock path skew + uncertainty - data path))
+  Source:               CPU0/CPU0/data_c_11 (FF)
+  Destination:          CPU0/CPU0/pc_11 (FF)
+  Requirement:          0.000ns
+  Data Path Delay:      0.161ns (Levels of Logic = 1)
+  Clock Path Skew:      0.014ns (0.079 - 0.065)
+  Source Clock:         clk100mhz_BUFGP rising at 10.000ns
+  Destination Clock:    clk100mhz_BUFGP rising at 10.000ns
+  Clock Uncertainty:    0.000ns
+
+  Minimum Data Path at Fast Process Corner: CPU0/CPU0/data_c_11 to CPU0/CPU0/pc_11
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X15Y82.BQ      Tcko                  0.141   CPU0/CPU0/data_c<13>
+                                                       CPU0/CPU0/data_c_11
+    SLICE_X12Y82.B6      net (fanout=1)        0.096   CPU0/CPU0/data_c<11>
+    SLICE_X12Y82.CLK     Tah         (-Th)     0.076   CPU0/CPU0/pc<13>
+                                                       CPU0/CPU0/Mmux_state[2]_X_7_o_wide_mux_6_OUT211
+                                                       CPU0/CPU0/pc_11
+    -------------------------------------------------  ---------------------------
+    Total                                      0.161ns (0.065ns logic, 0.096ns route)
+                                                       (40.4% logic, 59.6% route)
+
+--------------------------------------------------------------------------------
+
+Component Switching Limit Checks: TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 50%;
+--------------------------------------------------------------------------------
+Slack: 8.038ns (period - min period limit)
+  Period: 10.000ns
+  Min period limit: 1.962ns (509.684MHz) (Trper_CLKA)
+  Physical resource: CPU0/MMU0/RAM0/Mram_data/CLKARDCLKL
+  Logical resource: CPU0/MMU0/RAM0/Mram_data/CLKARDCLKL
+  Location pin: RAMB36_X0Y16.CLKARDCLKL
+  Clock network: clk100mhz_BUFGP
+--------------------------------------------------------------------------------
+Slack: 8.038ns (period - min period limit)
+  Period: 10.000ns
+  Min period limit: 1.962ns (509.684MHz) (Trper_CLKA)
+  Physical resource: CPU0/MMU0/RAM0/Mram_data/CLKARDCLKU
+  Logical resource: CPU0/MMU0/RAM0/Mram_data/CLKARDCLKU
+  Location pin: RAMB36_X0Y16.CLKARDCLKU
+  Clock network: clk100mhz_BUFGP
+--------------------------------------------------------------------------------
+Slack: 8.408ns (period - min period limit)
+  Period: 10.000ns
+  Min period limit: 1.592ns (628.141MHz) (Tbcper_I(Fmax))
+  Physical resource: clk100mhz_BUFGP/BUFG/I0
+  Logical resource: clk100mhz_BUFGP/BUFG/I0
+  Location pin: BUFGCTRL_X0Y31.I0
+  Clock network: clk100mhz_BUFGP/IBUFG
+--------------------------------------------------------------------------------
+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock to Setup on destination clock clk100mhz
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk100mhz      |    5.512|         |         |         |
+---------------+---------+---------+---------+---------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 77829 paths, 0 nets, and 2899 connections
+
+Design statistics:
+   Minimum period:   5.512ns{1}   (Maximum frequency: 181.422MHz)
+
+
+------------------------------------Footnotes-----------------------------------
+1)  The minimum period statistic assumes all single cycle delays.
+
+Analysis completed Fri Jun 30 21:39:07 2017 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 677 MB
+
+
+

@@ -1,0 +1,6 @@
+vhdl work "../Sources/SFR.vhd"
+vhdl work "../Sources/MainRAM.vhd"
+vhdl work "../Sources/MMU.vhd"
+vhdl work "../Sources/CPU.vhd"
+vhdl work "../Sources/cpu_top.vhd"
+vhdl work "../Sources/cpu_top_tb.vhd"

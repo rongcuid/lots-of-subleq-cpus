@@ -1,0 +1,212 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Fri Jun 30 21:38:26 2017
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "clk100mhz" LOCATE = SITE "E3" LEVEL 1;
+COMP "ca" LOCATE = SITE "T10" LEVEL 1;
+COMP "cb" LOCATE = SITE "R10" LEVEL 1;
+COMP "cc" LOCATE = SITE "K16" LEVEL 1;
+COMP "cd" LOCATE = SITE "K13" LEVEL 1;
+COMP "ce" LOCATE = SITE "P15" LEVEL 1;
+COMP "cf" LOCATE = SITE "T11" LEVEL 1;
+COMP "cg" LOCATE = SITE "L18" LEVEL 1;
+COMP "dp" LOCATE = SITE "H15" LEVEL 1;
+COMP "btnc" LOCATE = SITE "N17" LEVEL 1;
+COMP "btnd" LOCATE = SITE "P18" LEVEL 1;
+COMP "btnl" LOCATE = SITE "P17" LEVEL 1;
+COMP "btnr" LOCATE = SITE "M17" LEVEL 1;
+COMP "btnu" LOCATE = SITE "M18" LEVEL 1;
+COMP "sw<10>" LOCATE = SITE "R16" LEVEL 1;
+COMP "sw<11>" LOCATE = SITE "T13" LEVEL 1;
+COMP "sw<12>" LOCATE = SITE "H6" LEVEL 1;
+COMP "sw<13>" LOCATE = SITE "U12" LEVEL 1;
+COMP "sw<14>" LOCATE = SITE "U11" LEVEL 1;
+COMP "sw<15>" LOCATE = SITE "V10" LEVEL 1;
+COMP "sw<0>" LOCATE = SITE "J15" LEVEL 1;
+COMP "sw<1>" LOCATE = SITE "L16" LEVEL 1;
+COMP "sw<2>" LOCATE = SITE "M13" LEVEL 1;
+COMP "sw<3>" LOCATE = SITE "R15" LEVEL 1;
+COMP "sw<4>" LOCATE = SITE "R17" LEVEL 1;
+COMP "sw<5>" LOCATE = SITE "T18" LEVEL 1;
+COMP "sw<6>" LOCATE = SITE "U18" LEVEL 1;
+COMP "sw<7>" LOCATE = SITE "R13" LEVEL 1;
+COMP "sw<8>" LOCATE = SITE "T8" LEVEL 1;
+COMP "sw<9>" LOCATE = SITE "U8" LEVEL 1;
+COMP "cpu_resetn" LOCATE = SITE "C12" LEVEL 1;
+COMP "led<0>" LOCATE = SITE "H17" LEVEL 1;
+COMP "led<1>" LOCATE = SITE "K15" LEVEL 1;
+COMP "led<2>" LOCATE = SITE "J13" LEVEL 1;
+COMP "led<3>" LOCATE = SITE "N14" LEVEL 1;
+COMP "led<4>" LOCATE = SITE "R18" LEVEL 1;
+COMP "led<5>" LOCATE = SITE "V17" LEVEL 1;
+COMP "led<6>" LOCATE = SITE "U17" LEVEL 1;
+COMP "led<7>" LOCATE = SITE "U16" LEVEL 1;
+COMP "led<8>" LOCATE = SITE "V16" LEVEL 1;
+COMP "led<9>" LOCATE = SITE "T15" LEVEL 1;
+COMP "led<14>" LOCATE = SITE "V12" LEVEL 1;
+COMP "led<13>" LOCATE = SITE "V14" LEVEL 1;
+COMP "led<12>" LOCATE = SITE "V15" LEVEL 1;
+COMP "led<11>" LOCATE = SITE "T16" LEVEL 1;
+COMP "led<10>" LOCATE = SITE "U14" LEVEL 1;
+COMP "led<15>" LOCATE = SITE "V11" LEVEL 1;
+COMP "an<0>" LOCATE = SITE "J17" LEVEL 1;
+COMP "an<1>" LOCATE = SITE "J18" LEVEL 1;
+COMP "an<2>" LOCATE = SITE "T9" LEVEL 1;
+COMP "an<3>" LOCATE = SITE "J14" LEVEL 1;
+COMP "an<4>" LOCATE = SITE "P14" LEVEL 1;
+COMP "an<5>" LOCATE = SITE "T14" LEVEL 1;
+COMP "an<6>" LOCATE = SITE "K2" LEVEL 1;
+COMP "an<7>" LOCATE = SITE "U13" LEVEL 1;
+PIN CPU0/MMU0/RAM0/Mram_data_pins<63> = BEL "CPU0/MMU0/RAM0/Mram_data" PINNAME
+        CLKARDCLKU;
+PIN CPU0/MMU0/RAM0/Mram_data_pins<62> = BEL "CPU0/MMU0/RAM0/Mram_data" PINNAME
+        CLKARDCLKL;
+TIMEGRP sys_clk_pin = BEL "seg_cpu_0" BEL "seg_cpu_1" BEL "seg_cpu_2" BEL
+        "seg_cpu_3" BEL "seg_cpu_4" BEL "seg_cpu_5" BEL "seg_cpu_6" BEL
+        "seg_cpu_7" BEL "an_0" BEL "an_1" BEL "an_2" BEL "an_3" BEL "an_4" BEL
+        "an_5" BEL "an_6" BEL "an_7" BEL "ssd_hex_0" BEL "ssd_hex_1" BEL
+        "ssd_hex_2" BEL "ssd_hex_3" BEL "counter_0" BEL "counter_1" BEL
+        "counter_2" BEL "counter_3" BEL "counter_4" BEL "counter_5" BEL
+        "counter_6" BEL "counter_7" BEL "counter_8" BEL "counter_9" BEL
+        "counter_10" BEL "counter_11" BEL "counter_12" BEL "counter_13" BEL
+        "counter_14" BEL "counter_15" BEL "counter_16" BEL "counter_17" BEL
+        "counter_18" BEL "counter_19" BEL "counter_20" BEL "counter_21" BEL
+        "counter_22" BEL "counter_23" BEL "counter_24" BEL "counter_25" BEL
+        "counter_26" BEL "counter_27" BEL "counter_28" BEL "counter_29" BEL
+        "counter_30" BEL "counter_31" BEL "ssd_pointer_0" BEL "ssd_pointer_1"
+        BEL "ssd_pointer_2" BEL "CPU0/bl_mmu_addr_30" BEL
+        "CPU0/bl_mmu_addr_29" BEL "CPU0/bl_mmu_addr_28" BEL
+        "CPU0/bl_mmu_addr_27" BEL "CPU0/bl_mmu_addr_26" BEL
+        "CPU0/bl_mmu_addr_25" BEL "CPU0/bl_mmu_addr_24" BEL
+        "CPU0/bl_mmu_addr_23" BEL "CPU0/bl_mmu_addr_22" BEL
+        "CPU0/bl_mmu_addr_21" BEL "CPU0/bl_mmu_addr_20" BEL
+        "CPU0/bl_mmu_addr_19" BEL "CPU0/bl_mmu_addr_18" BEL
+        "CPU0/bl_mmu_addr_17" BEL "CPU0/bl_mmu_addr_16" BEL
+        "CPU0/bl_mmu_addr_15" BEL "CPU0/bl_mmu_addr_14" BEL
+        "CPU0/bl_mmu_addr_13" BEL "CPU0/bl_mmu_addr_12" BEL
+        "CPU0/bl_mmu_addr_11" BEL "CPU0/bl_mmu_addr_10" BEL
+        "CPU0/bl_mmu_addr_9" BEL "CPU0/bl_mmu_addr_8" BEL "CPU0/bl_mmu_addr_7"
+        BEL "CPU0/bl_mmu_addr_6" BEL "CPU0/bl_mmu_addr_5" BEL
+        "CPU0/bl_mmu_addr_4" BEL "CPU0/bl_mmu_addr_3" BEL "CPU0/bl_mmu_addr_2"
+        BEL "CPU0/bl_addr_15" BEL "CPU0/bl_addr_14" BEL "CPU0/bl_addr_13" BEL
+        "CPU0/bl_addr_12" BEL "CPU0/bl_addr_11" BEL "CPU0/bl_addr_10" BEL
+        "CPU0/bl_addr_9" BEL "CPU0/bl_addr_8" BEL "CPU0/bl_addr_7" BEL
+        "CPU0/bl_addr_6" BEL "CPU0/bl_addr_5" BEL "CPU0/bl_addr_4" BEL
+        "CPU0/bl_addr_3" BEL "CPU0/bl_addr_2" BEL "CPU0/state_FSM_FFd1" BEL
+        "CPU0/state_FSM_FFd2" BEL "CPU0/bl_we" BEL "CPU0/bl_mmu_di_31" BEL
+        "CPU0/bl_mmu_di_30" BEL "CPU0/bl_mmu_di_29" BEL "CPU0/bl_mmu_di_28"
+        BEL "CPU0/bl_mmu_di_27" BEL "CPU0/bl_mmu_di_26" BEL
+        "CPU0/bl_mmu_di_25" BEL "CPU0/bl_mmu_di_24" BEL "CPU0/bl_mmu_di_23"
+        BEL "CPU0/bl_mmu_di_22" BEL "CPU0/bl_mmu_di_21" BEL
+        "CPU0/bl_mmu_di_20" BEL "CPU0/bl_mmu_di_19" BEL "CPU0/bl_mmu_di_18"
+        BEL "CPU0/bl_mmu_di_17" BEL "CPU0/bl_mmu_di_16" BEL
+        "CPU0/bl_mmu_di_15" BEL "CPU0/bl_mmu_di_14" BEL "CPU0/bl_mmu_di_13"
+        BEL "CPU0/bl_mmu_di_12" BEL "CPU0/bl_mmu_di_11" BEL
+        "CPU0/bl_mmu_di_10" BEL "CPU0/bl_mmu_di_9" BEL "CPU0/bl_mmu_di_8" BEL
+        "CPU0/bl_mmu_di_7" BEL "CPU0/bl_mmu_di_6" BEL "CPU0/bl_mmu_di_5" BEL
+        "CPU0/bl_mmu_di_4" BEL "CPU0/bl_mmu_di_3" BEL "CPU0/bl_mmu_di_2" BEL
+        "CPU0/bl_mmu_di_1" BEL "CPU0/bl_mmu_di_0" BEL "CPU0/lowword_15" BEL
+        "CPU0/lowword_14" BEL "CPU0/lowword_13" BEL "CPU0/lowword_12" BEL
+        "CPU0/lowword_11" BEL "CPU0/lowword_10" BEL "CPU0/lowword_9" BEL
+        "CPU0/lowword_8" BEL "CPU0/lowword_7" BEL "CPU0/lowword_6" BEL
+        "CPU0/lowword_5" BEL "CPU0/lowword_4" BEL "CPU0/lowword_3" BEL
+        "CPU0/lowword_2" BEL "CPU0/lowword_1" BEL "CPU0/lowword_0" BEL
+        "CPU0/MMU0/SFR0/ssd7_7" BEL "CPU0/MMU0/SFR0/ssd7_6" BEL
+        "CPU0/MMU0/SFR0/ssd7_5" BEL "CPU0/MMU0/SFR0/ssd7_4" BEL
+        "CPU0/MMU0/SFR0/ssd7_3" BEL "CPU0/MMU0/SFR0/ssd7_2" BEL
+        "CPU0/MMU0/SFR0/ssd7_1" BEL "CPU0/MMU0/SFR0/ssd7_0" BEL
+        "CPU0/MMU0/SFR0/ssd6_7" BEL "CPU0/MMU0/SFR0/ssd6_6" BEL
+        "CPU0/MMU0/SFR0/ssd6_5" BEL "CPU0/MMU0/SFR0/ssd6_4" BEL
+        "CPU0/MMU0/SFR0/ssd6_3" BEL "CPU0/MMU0/SFR0/ssd6_2" BEL
+        "CPU0/MMU0/SFR0/ssd6_1" BEL "CPU0/MMU0/SFR0/ssd6_0" BEL
+        "CPU0/MMU0/SFR0/ssd5_7" BEL "CPU0/MMU0/SFR0/ssd5_6" BEL
+        "CPU0/MMU0/SFR0/ssd5_5" BEL "CPU0/MMU0/SFR0/ssd5_4" BEL
+        "CPU0/MMU0/SFR0/ssd5_3" BEL "CPU0/MMU0/SFR0/ssd5_2" BEL
+        "CPU0/MMU0/SFR0/ssd5_1" BEL "CPU0/MMU0/SFR0/ssd5_0" BEL
+        "CPU0/MMU0/SFR0/ssd3_7" BEL "CPU0/MMU0/SFR0/ssd3_6" BEL
+        "CPU0/MMU0/SFR0/ssd3_5" BEL "CPU0/MMU0/SFR0/ssd3_4" BEL
+        "CPU0/MMU0/SFR0/ssd3_3" BEL "CPU0/MMU0/SFR0/ssd3_2" BEL
+        "CPU0/MMU0/SFR0/ssd3_1" BEL "CPU0/MMU0/SFR0/ssd3_0" BEL
+        "CPU0/MMU0/SFR0/ssd2_7" BEL "CPU0/MMU0/SFR0/ssd2_6" BEL
+        "CPU0/MMU0/SFR0/ssd2_5" BEL "CPU0/MMU0/SFR0/ssd2_4" BEL
+        "CPU0/MMU0/SFR0/ssd2_3" BEL "CPU0/MMU0/SFR0/ssd2_2" BEL
+        "CPU0/MMU0/SFR0/ssd2_1" BEL "CPU0/MMU0/SFR0/ssd2_0" BEL
+        "CPU0/MMU0/SFR0/ssd1_7" BEL "CPU0/MMU0/SFR0/ssd1_6" BEL
+        "CPU0/MMU0/SFR0/ssd1_5" BEL "CPU0/MMU0/SFR0/ssd1_4" BEL
+        "CPU0/MMU0/SFR0/ssd1_3" BEL "CPU0/MMU0/SFR0/ssd1_2" BEL
+        "CPU0/MMU0/SFR0/ssd1_1" BEL "CPU0/MMU0/SFR0/ssd1_0" BEL
+        "CPU0/MMU0/SFR0/do_15" BEL "CPU0/MMU0/SFR0/do_14" BEL
+        "CPU0/MMU0/SFR0/do_13" BEL "CPU0/MMU0/SFR0/do_12" BEL
+        "CPU0/MMU0/SFR0/do_11" BEL "CPU0/MMU0/SFR0/do_10" BEL
+        "CPU0/MMU0/SFR0/do_9" BEL "CPU0/MMU0/SFR0/do_8" BEL
+        "CPU0/MMU0/SFR0/do_7" BEL "CPU0/MMU0/SFR0/do_6" BEL
+        "CPU0/MMU0/SFR0/do_5" BEL "CPU0/MMU0/SFR0/do_4" BEL
+        "CPU0/MMU0/SFR0/do_3" BEL "CPU0/MMU0/SFR0/do_2" BEL
+        "CPU0/MMU0/SFR0/do_1" BEL "CPU0/MMU0/SFR0/do_0" BEL
+        "CPU0/MMU0/SFR0/ssd0_7" BEL "CPU0/MMU0/SFR0/ssd0_6" BEL
+        "CPU0/MMU0/SFR0/ssd0_5" BEL "CPU0/MMU0/SFR0/ssd0_4" BEL
+        "CPU0/MMU0/SFR0/ssd0_3" BEL "CPU0/MMU0/SFR0/ssd0_2" BEL
+        "CPU0/MMU0/SFR0/ssd0_1" BEL "CPU0/MMU0/SFR0/ssd0_0" BEL
+        "CPU0/MMU0/SFR0/ssd4_7" BEL "CPU0/MMU0/SFR0/ssd4_6" BEL
+        "CPU0/MMU0/SFR0/ssd4_5" BEL "CPU0/MMU0/SFR0/ssd4_4" BEL
+        "CPU0/MMU0/SFR0/ssd4_3" BEL "CPU0/MMU0/SFR0/ssd4_2" BEL
+        "CPU0/MMU0/SFR0/ssd4_1" BEL "CPU0/MMU0/SFR0/ssd4_0" BEL
+        "CPU0/CPU0/state_FSM_FFd6" BEL "CPU0/CPU0/state_FSM_FFd1" BEL
+        "CPU0/CPU0/state_FSM_FFd2" BEL "CPU0/CPU0/state_FSM_FFd3" BEL
+        "CPU0/CPU0/data_b_31" BEL "CPU0/CPU0/data_b_30" BEL
+        "CPU0/CPU0/data_b_29" BEL "CPU0/CPU0/data_b_28" BEL
+        "CPU0/CPU0/data_b_27" BEL "CPU0/CPU0/data_b_26" BEL
+        "CPU0/CPU0/data_b_25" BEL "CPU0/CPU0/data_b_24" BEL
+        "CPU0/CPU0/data_b_23" BEL "CPU0/CPU0/data_b_22" BEL
+        "CPU0/CPU0/data_b_21" BEL "CPU0/CPU0/data_b_20" BEL
+        "CPU0/CPU0/data_b_19" BEL "CPU0/CPU0/data_b_18" BEL
+        "CPU0/CPU0/data_b_17" BEL "CPU0/CPU0/data_b_16" BEL
+        "CPU0/CPU0/data_b_15" BEL "CPU0/CPU0/data_b_14" BEL
+        "CPU0/CPU0/data_b_13" BEL "CPU0/CPU0/data_b_12" BEL
+        "CPU0/CPU0/data_b_11" BEL "CPU0/CPU0/data_b_10" BEL
+        "CPU0/CPU0/data_b_9" BEL "CPU0/CPU0/data_b_8" BEL "CPU0/CPU0/data_b_7"
+        BEL "CPU0/CPU0/data_b_6" BEL "CPU0/CPU0/data_b_5" BEL
+        "CPU0/CPU0/data_b_4" BEL "CPU0/CPU0/data_b_3" BEL "CPU0/CPU0/data_b_2"
+        BEL "CPU0/CPU0/data_b_1" BEL "CPU0/CPU0/data_b_0" BEL
+        "CPU0/CPU0/state_FSM_FFd4" BEL "CPU0/CPU0/state_FSM_FFd5" BEL
+        "CPU0/CPU0/pc_30" BEL "CPU0/CPU0/pc_29" BEL "CPU0/CPU0/pc_28" BEL
+        "CPU0/CPU0/pc_27" BEL "CPU0/CPU0/pc_26" BEL "CPU0/CPU0/pc_25" BEL
+        "CPU0/CPU0/pc_24" BEL "CPU0/CPU0/pc_23" BEL "CPU0/CPU0/pc_22" BEL
+        "CPU0/CPU0/pc_21" BEL "CPU0/CPU0/pc_20" BEL "CPU0/CPU0/pc_19" BEL
+        "CPU0/CPU0/pc_18" BEL "CPU0/CPU0/pc_17" BEL "CPU0/CPU0/pc_16" BEL
+        "CPU0/CPU0/pc_15" BEL "CPU0/CPU0/pc_14" BEL "CPU0/CPU0/pc_13" BEL
+        "CPU0/CPU0/pc_12" BEL "CPU0/CPU0/pc_11" BEL "CPU0/CPU0/pc_10" BEL
+        "CPU0/CPU0/pc_9" BEL "CPU0/CPU0/pc_8" BEL "CPU0/CPU0/pc_7" BEL
+        "CPU0/CPU0/pc_6" BEL "CPU0/CPU0/pc_5" BEL "CPU0/CPU0/pc_4" BEL
+        "CPU0/CPU0/pc_3" BEL "CPU0/CPU0/pc_2" BEL "CPU0/CPU0/data_c_30" BEL
+        "CPU0/CPU0/data_c_29" BEL "CPU0/CPU0/data_c_28" BEL
+        "CPU0/CPU0/data_c_27" BEL "CPU0/CPU0/data_c_26" BEL
+        "CPU0/CPU0/data_c_25" BEL "CPU0/CPU0/data_c_24" BEL
+        "CPU0/CPU0/data_c_23" BEL "CPU0/CPU0/data_c_22" BEL
+        "CPU0/CPU0/data_c_21" BEL "CPU0/CPU0/data_c_20" BEL
+        "CPU0/CPU0/data_c_19" BEL "CPU0/CPU0/data_c_18" BEL
+        "CPU0/CPU0/data_c_17" BEL "CPU0/CPU0/data_c_16" BEL
+        "CPU0/CPU0/data_c_15" BEL "CPU0/CPU0/data_c_14" BEL
+        "CPU0/CPU0/data_c_13" BEL "CPU0/CPU0/data_c_12" BEL
+        "CPU0/CPU0/data_c_11" BEL "CPU0/CPU0/data_c_10" BEL
+        "CPU0/CPU0/data_c_9" BEL "CPU0/CPU0/data_c_8" BEL "CPU0/CPU0/data_c_7"
+        BEL "CPU0/CPU0/data_c_6" BEL "CPU0/CPU0/data_c_5" BEL
+        "CPU0/CPU0/data_c_4" BEL "CPU0/CPU0/data_c_3" BEL "CPU0/CPU0/data_c_2"
+        BEL "CPU0/CPU0/c_7" BEL "CPU0/CPU0/c_6" BEL "CPU0/CPU0/c_5" BEL
+        "CPU0/CPU0/c_4" BEL "CPU0/CPU0/c_3" BEL "CPU0/CPU0/c_2" BEL
+        "CPU0/CPU0/c_1" BEL "CPU0/CPU0/c_0" BEL "CPU0/CPU0/a_7" BEL
+        "CPU0/CPU0/a_6" BEL "CPU0/CPU0/a_5" BEL "CPU0/CPU0/a_4" BEL
+        "CPU0/CPU0/a_3" BEL "CPU0/CPU0/a_2" BEL "CPU0/CPU0/a_1" BEL
+        "CPU0/CPU0/a_0" BEL "CPU0/CPU0/b_15" BEL "CPU0/CPU0/b_14" BEL
+        "CPU0/CPU0/b_13" BEL "CPU0/CPU0/b_12" BEL "CPU0/CPU0/b_11" BEL
+        "CPU0/CPU0/b_10" BEL "CPU0/CPU0/b_9" BEL "CPU0/CPU0/b_8" BEL
+        "CPU0/CPU0/b_7" BEL "CPU0/CPU0/b_6" BEL "CPU0/CPU0/b_5" BEL
+        "CPU0/CPU0/b_4" BEL "CPU0/CPU0/b_3" BEL "CPU0/CPU0/b_2" BEL
+        "CPU0/CPU0/b_1" BEL "CPU0/CPU0/b_0" BEL "CPU0/bl_commit" BEL
+        "CPU0/released" BEL "CPU0/resetb_cpu" BEL "CPU0/MMU0/SFR0/hit" BEL
+        "clk100mhz_BUFGP/BUFG" PIN "CPU0/MMU0/RAM0/Mram_data_pins<63>" PIN
+        "CPU0/MMU0/RAM0/Mram_data_pins<62>";
+TS_sys_clk_pin = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 50%;
+SCHEMATIC END;
+

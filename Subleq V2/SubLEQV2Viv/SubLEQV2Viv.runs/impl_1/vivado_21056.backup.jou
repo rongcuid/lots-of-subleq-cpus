@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Fri Jun 30 21:57:23 2017
+# Process ID: 21056
+# Current directory: D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/impl_1
+# Command line: vivado.exe -log board_top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source board_top.tcl -notrace
+# Log file: D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/impl_1/board_top.vdi
+# Journal file: D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source board_top.tcl -notrace

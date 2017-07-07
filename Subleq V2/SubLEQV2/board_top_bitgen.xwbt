@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\Library\Projects\Subeq\Subleq V2\SubLEQV2\board_top.ncd
+OUTFILE=D:\Library\Projects\Subeq\Subleq V2\SubLEQV2\board_top.bit
+FAMILY=Artix7
+PART=xc7a100t-3csg324
+WORKINGDIR=D:\Library\Projects\Subeq\Subleq V2\SubLEQV2
+LICENSE=ISE
+USER_INFO=174127445_174127446_210604357_969

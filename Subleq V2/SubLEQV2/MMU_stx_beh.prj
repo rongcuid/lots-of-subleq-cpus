@@ -1,0 +1,3 @@
+vhdl isim_temp "../Sources/SFR.vhd"
+vhdl isim_temp "../Sources/MainRAM.vhd"
+vhdl isim_temp "../Sources/MMU.vhd"

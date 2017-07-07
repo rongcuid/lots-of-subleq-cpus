@@ -1,0 +1,492 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Fri Jun 30 21:54:54 2017
+# Process ID: 4016
+# Current directory: D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/synth_1
+# Command line: vivado.exe -log board_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source board_top.tcl
+# Log file: D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/synth_1/board_top.vds
+# Journal file: D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source board_top.tcl -notrace
+Command: synth_design -top board_top -part xc7a100tcsg324-3
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t-csg324'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t-csg324'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 20020 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 310.176 ; gain = 78.504
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'board_top' [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:48]
+INFO: [Synth 8-3491] module 'cpu_top' declared at 'D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:46' bound to instance 'CPU0' of component 'cpu_top' [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:83]
+INFO: [Synth 8-638] synthesizing module 'cpu_top' [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:58]
+INFO: [Synth 8-3491] module 'CPU' declared at 'D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:34' bound to instance 'CPU0' of component 'CPU' [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:101]
+INFO: [Synth 8-638] synthesizing module 'CPU' [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:45]
+WARNING: [Synth 8-6014] Unused sequential element c_tmp_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:81]
+WARNING: [Synth 8-6014] Unused sequential element z16_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:103]
+WARNING: [Synth 8-6014] Unused sequential element tmp32_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:96]
+INFO: [Synth 8-256] done synthesizing module 'CPU' (1#1) [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:45]
+INFO: [Synth 8-3491] module 'MMU' declared at 'D:/Library/Projects/Subeq/Subleq V2/Sources/MMU.vhd:34' bound to instance 'MMU0' of component 'MMU' [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:110]
+INFO: [Synth 8-638] synthesizing module 'MMU' [D:/Library/Projects/Subeq/Subleq V2/Sources/MMU.vhd:50]
+INFO: [Synth 8-3491] module 'MainRAM' declared at 'D:/Library/Projects/Subeq/Subleq V2/Sources/MainRAM.vhd:34' bound to instance 'RAM0' of component 'MainRAM' [D:/Library/Projects/Subeq/Subleq V2/Sources/MMU.vhd:94]
+INFO: [Synth 8-638] synthesizing module 'MainRAM' [D:/Library/Projects/Subeq/Subleq V2/Sources/MainRAM.vhd:46]
+INFO: [Synth 8-256] done synthesizing module 'MainRAM' (2#1) [D:/Library/Projects/Subeq/Subleq V2/Sources/MainRAM.vhd:46]
+INFO: [Synth 8-3491] module 'SFR' declared at 'D:/Library/Projects/Subeq/Subleq V2/Sources/SFR.vhd:34' bound to instance 'SFR0' of component 'SFR' [D:/Library/Projects/Subeq/Subleq V2/Sources/MMU.vhd:97]
+INFO: [Synth 8-638] synthesizing module 'SFR' [D:/Library/Projects/Subeq/Subleq V2/Sources/SFR.vhd:52]
+WARNING: [Synth 8-6014] Unused sequential element tmp32_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/SFR.vhd:68]
+INFO: [Synth 8-256] done synthesizing module 'SFR' (3#1) [D:/Library/Projects/Subeq/Subleq V2/Sources/SFR.vhd:52]
+WARNING: [Synth 8-6014] Unused sequential element selected_device_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/MMU.vhd:86]
+INFO: [Synth 8-256] done synthesizing module 'MMU' (4#1) [D:/Library/Projects/Subeq/Subleq V2/Sources/MMU.vhd:50]
+WARNING: [Synth 8-6014] Unused sequential element EOF_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:173]
+INFO: [Synth 8-256] done synthesizing module 'cpu_top' (5#1) [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:58]
+INFO: [Synth 8-226] default block is never used [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:95]
+INFO: [Synth 8-226] default block is never used [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:138]
+WARNING: [Synth 8-6014] Unused sequential element tmp_seg_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:128]
+WARNING: [Synth 8-6014] Unused sequential element btn_pressed_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:173]
+WARNING: [Synth 8-6014] Unused sequential element counter_btn_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:172]
+WARNING: [Synth 8-6014] Unused sequential element btn_debounced_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:174]
+INFO: [Synth 8-256] done synthesizing module 'board_top' (6#1) [D:/Library/Projects/Subeq/Subleq V2/Sources/board_top.vhd:48]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 349.504 ; gain = 117.832
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 349.504 ; gain = 117.832
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a100tcsg324-3
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/Nexys4DDR_Master.xdc]
+Finished Parsing XDC File [D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/Nexys4DDR_Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/Nexys4DDR_Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/board_top_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/board_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 667.711 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-3
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'CPU'
+WARNING: [Synth 8-6014] Unused sequential element state_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:60]
+INFO: [Synth 8-5545] ROM "hit" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd3" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd2" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd1" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd0" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd7" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd6" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd5" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd4" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+WARNING: [Synth 8-6014] Unused sequential element bl_mmu_addr_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:148]
+WARNING: [Synth 8-6014] Unused sequential element bl_addr_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:98]
+INFO: [Synth 8-5545] ROM "counter" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd_pointer" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+WARNING: [Synth 8-6014] Unused sequential element state_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:60]
+WARNING: [Synth 8-6014] Unused sequential element state_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:60]
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                     if1 |                              000 |                              000
+                  if2_id |                              001 |                              001
+                   memb1 |                              010 |                              010
+             memb2_mema1 |                              011 |                              011
+                   mema2 |                              100 |                              100
+                   br_wb |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'CPU'
+WARNING: [Synth 8-6014] Unused sequential element state_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/CPU.vhd:60]
+WARNING: [Synth 8-327] inferring latch for variable 'bl_en_reg' [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:152]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 4     
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 7     
+	               16 Bit    Registers := 2     
+	                8 Bit    Registers := 12    
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 6     
++---RAMs : 
+	              32K Bit         RAMs := 1     
++---Muxes : 
+	   6 Input     32 Bit        Muxes := 3     
+	  18 Input     32 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      8 Bit        Muxes := 9     
+	  11 Input      8 Bit        Muxes := 6     
+	  17 Input      8 Bit        Muxes := 1     
+	   6 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   6 Input      1 Bit        Muxes := 5     
+	  18 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 14    
+	  11 Input      1 Bit        Muxes := 8     
+	   4 Input      1 Bit        Muxes := 7     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module board_top 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 3     
+	  17 Input      8 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module CPU 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 3     
+	   3 Input     32 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 3     
+	               16 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
++---Muxes : 
+	   6 Input     32 Bit        Muxes := 3     
+	   6 Input      3 Bit        Muxes := 1     
+	   6 Input      1 Bit        Muxes := 5     
+Module MainRAM 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
++---RAMs : 
+	              32K Bit         RAMs := 1     
+Module SFR 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	                8 Bit    Registers := 8     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	  18 Input     32 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 6     
+	  11 Input      8 Bit        Muxes := 6     
+	  18 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 9     
+	  11 Input      1 Bit        Muxes := 8     
+Module MMU 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+Module cpu_top 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+	               16 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 5     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 4     
+	   4 Input      1 Bit        Muxes := 7     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5546] ROM "hit" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5545] ROM "counter" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+INFO: [Synth 8-5545] ROM "ssd_pointer" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
+WARNING: [Synth 8-6014] Unused sequential element CPU0/bl_addr_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:98]
+WARNING: [Synth 8-6014] Unused sequential element CPU0/bl_mmu_addr_reg was removed.  [D:/Library/Projects/Subeq/Subleq V2/Sources/cpu_top.vhd:148]
+WARNING: [Synth 8-3917] design board_top has port led[13] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[12] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[11] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[10] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[9] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[7] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[6] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[5] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[4] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[3] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[2] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[1] driven by constant 0
+WARNING: [Synth 8-3917] design board_top has port led[0] driven by constant 0
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[30]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[31]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[29]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[28]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[19]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[20]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[21]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[22]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[23]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[24]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[25]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[26]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[27]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[17]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3886] merging instance 'CPU0/MMU0/SFR0/do_reg[18]' (FDE) to 'CPU0/MMU0/SFR0/do_reg[16]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\CPU0/MMU0/SFR0 /\do_reg[16] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_16/\CPU0/bl_mmu_addr_reg[1] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_16/\CPU0/bl_mmu_addr_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_21/\CPU0/bl_addr_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (i_21/\CPU0/bl_addr_reg[1] )
+WARNING: [Synth 8-3332] Sequential element (do_reg[16]) is unused and will be removed from module SFR.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_mmu_addr_reg[0]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_mmu_addr_reg[1]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[0]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[1]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[16]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[17]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[18]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[19]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[20]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[21]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[22]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[23]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[24]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[25]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[26]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[27]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[28]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[29]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[30]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/bl_addr_reg[31]) is unused and will be removed from module board_top.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping  Report (see note below)
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|MainRAM:    | data_reg   | 1 K x 32(WRITE_FIRST)  | W | R |                        |   |   | Port A           | 0      | 1      | 
++------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3332] Sequential element (CPU0/CPU0/pc_reg[0]) is unused and will be removed from module board_top.
+WARNING: [Synth 8-3332] Sequential element (CPU0/CPU0/data_c_reg[0]) is unused and will be removed from module board_top.
+INFO: [Synth 8-4480] The timing for the instance CPU0/MMU0/RAM0/data_reg (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     1|
+|2     |CARRY4   |    52|
+|3     |LUT1     |   113|
+|4     |LUT2     |   118|
+|5     |LUT3     |    45|
+|6     |LUT4     |   102|
+|7     |LUT5     |    53|
+|8     |LUT6     |   131|
+|9     |MUXF7    |    12|
+|10    |RAMB36E1 |     1|
+|11    |FDCE     |   187|
+|12    |FDPE     |     2|
+|13    |FDRE     |   167|
+|14    |FDSE     |     8|
+|15    |IBUF     |    23|
+|16    |OBUF     |    32|
++------+---------+------+
+
+Report Instance Areas: 
++------+-----------+--------+------+
+|      |Instance   |Module  |Cells |
++------+-----------+--------+------+
+|1     |top        |        |  1047|
+|2     |  CPU0     |cpu_top |   842|
+|3     |    CPU0   |CPU     |   471|
+|4     |    MMU0   |MMU     |   180|
+|5     |      RAM0 |MainRAM |    17|
+|6     |      SFR0 |SFR     |   163|
++------+-----------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 45 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:27 . Memory (MB): peak = 667.711 ; gain = 117.832
+Synthesis Optimization Complete : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 667.711 ; gain = 436.039
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 76 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+67 Infos, 55 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:35 ; elapsed = 00:00:37 . Memory (MB): peak = 667.711 ; gain = 444.313
+INFO: [Common 17-1381] The checkpoint 'D:/Library/Projects/Subeq/Subleq V2/SubLEQV2Viv/SubLEQV2Viv.runs/synth_1/board_top.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 667.711 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 30 21:55:35 2017...

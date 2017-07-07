@@ -1,0 +1,91 @@
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Fri Jun 30 21:57:56 2017
+| Host         : rongcuidHPC running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file board_top_control_sets_placed.rpt
+| Design       : board_top
+| Device       : xc7a100t
+--------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Flip-Flop Distribution
+3. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    24 |
+| Unused register locations in slices containing registers |    28 |
++----------------------------------------------------------+-------+
+
+
+2. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               8 |            3 |
+| No           | No                    | Yes                    |              43 |           14 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |             148 |           42 |
+| Yes          | No                    | Yes                    |             146 |           54 |
+| Yes          | Yes                   | No                     |              19 |            4 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+3. Detailed Control Set Information
+-----------------------------------
+
++----------------------+------------------------------+-------------------------+------------------+----------------+
+|     Clock Signal     |         Enable Signal        |     Set/Reset Signal    | Slice Load Count | Bel Load Count |
++----------------------+------------------------------+-------------------------+------------------+----------------+
+|  CLK100MHZ_IBUF_BUFG |                              | CPU0/resetb_cpu_reg_n_0 |                3 |              3 |
+|  CLK100MHZ_IBUF_BUFG | AN[7]_i_2_n_0                | AN[7]_i_1_n_0           |                1 |              4 |
+|  CLK100MHZ_IBUF_BUFG | AN[7]_i_2_n_0                | AN[3]_i_1_n_0           |                1 |              4 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/do_reg[4]          |                         |                3 |              5 |
+|  CLK100MHZ_IBUF_BUFG | ssd_pointer                  | CPU0/MMU0/SFR0/AR[0]    |                5 |              7 |
+|  CLK100MHZ_IBUF_BUFG |                              |                         |                3 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/E[0]               | CPU0/MMU0/SFR0/AR[0]    |                4 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd0_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                4 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd1_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                3 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd2_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                2 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd4_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                4 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd5_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                3 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd6_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                2 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/ssd7_reg[0][0]     | CPU0/MMU0/SFR0/AR[0]    |                5 |              8 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/do_reg[4]          | CPU0/CPU0/do_reg[5]     |                2 |             11 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/bl_addr                 | CPU0/MMU0/SFR0/AR[0]    |                4 |             14 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/lowword0                |                         |                3 |             16 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/bl_mmu_addr[2]_i_1_n_0  | CPU0/MMU0/SFR0/AR[0]    |                8 |             30 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/__0/i__n_0         | CPU0/resetb_cpu_reg_n_0 |               10 |             31 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/data_c[31]_i_1_n_0 |                         |                9 |             31 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/b[15]_i_1_n_0      |                         |                8 |             32 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/CPU0/data_b[31]_i_1_n_0 |                         |               11 |             32 |
+|  CLK100MHZ_IBUF_BUFG | CPU0/bl_mmu_di[31]_i_1_n_0   |                         |                8 |             32 |
+|  CLK100MHZ_IBUF_BUFG |                              | CPU0/MMU0/SFR0/AR[0]    |               11 |             40 |
++----------------------+------------------------------+-------------------------+------------------+----------------+
+
+
++--------+-----------------------+
+| Fanout | Number of ControlSets |
++--------+-----------------------+
+| 3      |                     1 |
+| 4      |                     2 |
+| 5      |                     1 |
+| 7      |                     1 |
+| 8      |                     9 |
+| 11     |                     1 |
+| 14     |                     1 |
+| 16+    |                     8 |
++--------+-----------------------+
+
+

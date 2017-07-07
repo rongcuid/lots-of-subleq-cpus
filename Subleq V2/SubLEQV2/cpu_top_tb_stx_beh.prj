@@ -1,0 +1,6 @@
+vhdl isim_temp "../Sources/SFR.vhd"
+vhdl isim_temp "../Sources/MainRAM.vhd"
+vhdl isim_temp "../Sources/MMU.vhd"
+vhdl isim_temp "../Sources/CPU.vhd"
+vhdl isim_temp "../Sources/cpu_top.vhd"
+vhdl isim_temp "../Sources/cpu_top_tb.vhd"

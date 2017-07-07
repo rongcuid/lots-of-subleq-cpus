@@ -1,0 +1,156 @@
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2017.2 (win64) Build 1909853 Thu Jun 15 18:39:09 MDT 2017
+| Date         : Fri Jun 30 21:58:29 2017
+| Host         : rongcuidHPC running 64-bit major release  (build 9200)
+| Command      : report_drc -file board_top_drc_routed.rpt -pb board_top_drc_routed.pb -rpx board_top_drc_routed.rpx
+| Design       : board_top
+| Device       : xc7a100tcsg324-3
+| Speed File   : -3
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 22
++-----------+----------+-----------------------------------------------------+------------+
+| Rule      | Severity | Description                                         | Violations |
++-----------+----------+-----------------------------------------------------+------------+
+| CFGBVS-1  | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
+| CHECK-3   | Warning  | Report rule limit reached                           | 1          |
+| REQP-1839 | Warning  | RAMB36 async control check                          | 20         |
++-----------+----------+-----------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+CFGBVS-1#1 Warning
+Missing CFGBVS and CONFIG_VOLTAGE Design Properties  
+Neither the CFGBVS nor CONFIG_VOLTAGE voltage property is set in the current_design.  Configuration bank voltage select (CFGBVS) must be set to VCCO or GND, and CONFIG_VOLTAGE must be set to the correct configuration voltage, in order to determine the I/O voltage support for the pins in bank 0.  It is suggested to specify these either using the 'Edit Device Properties' function in the GUI or directly in the XDC file using the following syntax:
+
+ set_property CFGBVS value1 [current_design]
+ #where value1 is either VCCO or GND
+
+ set_property CONFIG_VOLTAGE value2 [current_design]
+ #where value2 is the voltage provided to configuration bank 0
+
+Refer to the device configuration user guide for more information.
+Related violations: <none>
+
+CHECK-3#1 Warning
+Report rule limit reached  
+REQP-1839 rule limit reached: 20 violations have been found.
+Related violations: <none>
+
+REQP-1839#1 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[12] (net: CPU0/MMU0/RAM0/ADDRARDADDR[7]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#2 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[12] (net: CPU0/MMU0/RAM0/ADDRARDADDR[7]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#3 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[12] (net: CPU0/MMU0/RAM0/ADDRARDADDR[7]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#4 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[12] (net: CPU0/MMU0/RAM0/ADDRARDADDR[7]) which is driven by a register (CPU0/CPU0/pc_reg[9]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#5 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[12] (net: CPU0/MMU0/RAM0/ADDRARDADDR[7]) which is driven by a register (CPU0/bl_mmu_addr_reg[9]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#6 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[12] (net: CPU0/MMU0/RAM0/ADDRARDADDR[7]) which is driven by a register (CPU0/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#7 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#8 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#9 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#10 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/CPU0/pc_reg[10]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#11 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/bl_mmu_addr_reg[10]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#12 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#13 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[13] (net: CPU0/MMU0/RAM0/ADDRARDADDR[8]) which is driven by a register (CPU0/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#14 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#15 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#16 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/CPU0/FSM_sequential_state_reg[2]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#17 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/CPU0/pc_reg[11]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#18 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/bl_mmu_addr_reg[11]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#19 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/state_reg[0]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1839#20 Warning
+RAMB36 async control check  
+The RAMB36E1 CPU0/MMU0/RAM0/data_reg has an input control pin CPU0/MMU0/RAM0/data_reg/ADDRARDADDR[14] (net: CPU0/MMU0/RAM0/ADDRARDADDR[9]) which is driven by a register (CPU0/state_reg[1]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+
