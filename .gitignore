@@ -58,3 +58,4 @@ log/
 build/
 work/
 output/*
+!output/.gitkeep
