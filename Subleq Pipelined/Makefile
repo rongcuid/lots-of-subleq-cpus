@@ -10,6 +10,6 @@ test_mmu_tb: test/simulation/test_mmu_tb.vhd src/mmu.vhd src/BRAM.vhd
 	$(GHDLE) test_mmu_tb
 
 test_mmu: test_mmu_tb
-	$(GHDL) --wave=output/test_mmu_tb.ghw -r test_mmu_tb | tee output/test_mmu_tb.log
+	$(GHDLR) test_mmu_tb --vcd=output/test_mmu_tb.vcd --wave=output/test_mmu_tb.ghw | tee output/test_mmu_tb.log
 
 .PHONY: test_mmu

@@ -54,6 +54,8 @@ architecture behavioral of test_mmu_tb is
   signal be3n_tb, be2n_tb, be1n_tb, be0n_tb : std_logic;
   signal addr_tb : std_logic_vector(31 downto 0);
   signal di_tb, do_tb : std_logic_vector(63 downto 0);
+  -- Simulation control
+  shared variable END_SIMULATION : boolean := false;
   -- Test procedures
   procedure reset (
     signal resetb : out std_logic
@@ -101,13 +103,14 @@ architecture behavioral of test_mmu_tb is
       addr_tmp := i * 8;
       addr <= std_logic_vector(to_unsigned(addr_tmp, 32));
       di <= std_logic_vector(data_unsigned);
+      en <= '1'; we <= '1';
       -- Display some info
-      write(addr_line, addr_tb);
-      write(data_line, do_tb);
-      report "Test 1 Iter " & integer'image(i) &
-        ": Addr in = " & integer'image(addr_tmp) &
-        "; Prev_Addr = " & addr_line.all &
-        "; Prev_Data = " & data_line.all severity note;
+      hwrite(addr_line, addr_tb);
+      hwrite(data_line, do_tb);
+      report "Test 1 Iter " & integer'image(i) & lf &
+        "  Addr in = " & integer'image(addr_tmp) & lf &
+        "  Prev_Addr = " & addr_line.all & lf &
+        "  Prev_Data = " & data_line.all severity note;
       -- Wait a clock
       wait until rising_edge(clk_tb);
     end loop;
@@ -126,6 +129,17 @@ begin
     do => do_tb
     );
 
+  clk : process
+  begin
+    if (not END_SIMULATION) then
+    clk_tb <= '0';
+    wait for 5 ns;
+    clk_tb <= '1';
+    wait for 5 ns;
+    else
+      wait;
+    end if;
+  end process clk;
 
   stimulus : process
   begin
@@ -135,6 +149,8 @@ begin
            addr_tb, di_tb, do_tb
            );
     -- End Simulation
-    assert false report "Simulation Ended" severity failure;
+    END_SIMULATION := true;
+    wait;
+    -- assert false report "Simulation Ended" severity failure;
   end process stimulus;
 end architecture behavioral;

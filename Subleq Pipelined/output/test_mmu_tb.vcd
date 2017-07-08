@@ -1,0 +1,822 @@
+$date
+  Fri Jul  7 19:46:35 2017
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$var reg 1 ! clk_tb $end
+$var reg 1 " resetb_tb $end
+$var reg 1 # we_tb $end
+$var reg 1 $ en_tb $end
+$var reg 1 % be7n_tb $end
+$var reg 1 & be6n_tb $end
+$var reg 1 ' be5n_tb $end
+$var reg 1 ( be4n_tb $end
+$var reg 1 ) be3n_tb $end
+$var reg 1 * be2n_tb $end
+$var reg 1 + be1n_tb $end
+$var reg 1 , be0n_tb $end
+$var reg 32 - addr_tb[31:0] $end
+$var reg 64 . di_tb[63:0] $end
+$var reg 64 / do_tb[63:0] $end
+$scope module uut $end
+$var reg 1 0 clk $end
+$var reg 1 1 resetb $end
+$var reg 1 2 we $end
+$var reg 1 3 en $end
+$var reg 29 4 addr[28:0] $end
+$var reg 1 5 be7n $end
+$var reg 1 6 be6n $end
+$var reg 1 7 be5n $end
+$var reg 1 8 be4n $end
+$var reg 1 9 be3n $end
+$var reg 1 : be2n $end
+$var reg 1 ; be1n $end
+$var reg 1 < be0n $end
+$var reg 64 = di[63:0] $end
+$var reg 64 > do[63:0] $end
+$var reg 1 ? we_ram0 $end
+$var reg 1 @ en_ram0 $end
+$var reg 1 A we_ram1 $end
+$var reg 1 B en_ram1 $end
+$var reg 1 C we_ram2 $end
+$var reg 1 D en_ram2 $end
+$var reg 1 E we_ram3 $end
+$var reg 1 F en_ram3 $end
+$var reg 1 G we_ram4 $end
+$var reg 1 H en_ram4 $end
+$var reg 1 I we_ram5 $end
+$var reg 1 J en_ram5 $end
+$var reg 1 K we_ram6 $end
+$var reg 1 L en_ram6 $end
+$var reg 1 M we_ram7 $end
+$var reg 1 N en_ram7 $end
+$var reg 8 O di_ram0[7:0] $end
+$var reg 8 P di_ram1[7:0] $end
+$var reg 8 Q di_ram2[7:0] $end
+$var reg 8 R di_ram3[7:0] $end
+$var reg 8 S di_ram4[7:0] $end
+$var reg 8 T di_ram5[7:0] $end
+$var reg 8 U di_ram6[7:0] $end
+$var reg 8 V di_ram7[7:0] $end
+$var reg 8 W do_ram0[7:0] $end
+$var reg 8 X do_ram1[7:0] $end
+$var reg 8 Y do_ram2[7:0] $end
+$var reg 8 Z do_ram3[7:0] $end
+$var reg 8 [ do_ram4[7:0] $end
+$var reg 8 \ do_ram5[7:0] $end
+$var reg 8 ] do_ram6[7:0] $end
+$var reg 8 ^ do_ram7[7:0] $end
+$var reg 64 _ do_ram[63:0] $end
+$scope module ram0 $end
+$var reg 1 ` clk $end
+$var reg 1 a we $end
+$var reg 1 b en $end
+$var reg 10 c addr[9:0] $end
+$var reg 8 d di[7:0] $end
+$var reg 8 e do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram1 $end
+$var reg 1 f clk $end
+$var reg 1 g we $end
+$var reg 1 h en $end
+$var reg 10 i addr[9:0] $end
+$var reg 8 j di[7:0] $end
+$var reg 8 k do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram2 $end
+$var reg 1 l clk $end
+$var reg 1 m we $end
+$var reg 1 n en $end
+$var reg 10 o addr[9:0] $end
+$var reg 8 p di[7:0] $end
+$var reg 8 q do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram3 $end
+$var reg 1 r clk $end
+$var reg 1 s we $end
+$var reg 1 t en $end
+$var reg 10 u addr[9:0] $end
+$var reg 8 v di[7:0] $end
+$var reg 8 w do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram4 $end
+$var reg 1 x clk $end
+$var reg 1 y we $end
+$var reg 1 z en $end
+$var reg 10 { addr[9:0] $end
+$var reg 8 | di[7:0] $end
+$var reg 8 } do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram5 $end
+$var reg 1 !" clk $end
+$var reg 1 "" we $end
+$var reg 1 #" en $end
+$var reg 10 $" addr[9:0] $end
+$var reg 8 %" di[7:0] $end
+$var reg 8 &" do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram6 $end
+$var reg 1 '" clk $end
+$var reg 1 (" we $end
+$var reg 1 )" en $end
+$var reg 10 *" addr[9:0] $end
+$var reg 8 +" di[7:0] $end
+$var reg 8 ," do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$scope module ram7 $end
+$var reg 1 -" clk $end
+$var reg 1 ." we $end
+$var reg 1 /" en $end
+$var reg 10 0" addr[9:0] $end
+$var reg 8 1" di[7:0] $end
+$var reg 8 2" do[7:0] $end
+$comment data is not handled $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+0!
+U"
+0#
+0$
+0%
+0&
+0'
+0(
+0)
+0*
+0+
+0,
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU -
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU .
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU /
+00
+U1
+02
+03
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUU 4
+05
+06
+07
+08
+09
+0:
+0;
+0<
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU =
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+0?
+0@
+0A
+0B
+0C
+0D
+0E
+0F
+0G
+0H
+0I
+0J
+0K
+0L
+0M
+0N
+bUUUUUUUU O
+bUUUUUUUU P
+bUUUUUUUU Q
+bUUUUUUUU R
+bUUUUUUUU S
+bUUUUUUUU T
+bUUUUUUUU U
+bUUUUUUUU V
+bUUUUUUUU W
+bUUUUUUUU X
+bUUUUUUUU Y
+bUUUUUUUU Z
+bUUUUUUUU [
+bUUUUUUUU \
+bUUUUUUUU ]
+bUUUUUUUU ^
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU _
+0`
+0a
+0b
+bUUUUUUUUUU c
+bUUUUUUUU d
+bUUUUUUUU e
+0f
+0g
+0h
+bUUUUUUUUUU i
+bUUUUUUUU j
+bUUUUUUUU k
+0l
+0m
+0n
+bUUUUUUUUUU o
+bUUUUUUUU p
+bUUUUUUUU q
+0r
+0s
+0t
+bUUUUUUUUUU u
+bUUUUUUUU v
+bUUUUUUUU w
+0x
+0y
+0z
+bUUUUUUUUUU {
+bUUUUUUUU |
+bUUUUUUUU }
+0!"
+0""
+0#"
+bUUUUUUUUUU $"
+bUUUUUUUU %"
+bUUUUUUUU &"
+0'"
+0("
+0)"
+bUUUUUUUUUU *"
+bUUUUUUUU +"
+bUUUUUUUU ,"
+0-"
+0."
+0/"
+bUUUUUUUUUU 0"
+bUUUUUUUU 1"
+bUUUUUUUU 2"
+#5000000
+1!
+0"
+10
+01
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#10000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#15000000
+1!
+10
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#20000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#25000000
+1!
+1"
+1#
+1$
+b00000000000000000000000000000000 -
+b1101111010101101101111101110111110111010101011011100000011011110 .
+10
+11
+12
+13
+b00000000000000000000000000000 4
+b1101111010101101101111101110111110111010101011011100000011011110 =
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1?
+1@
+1A
+1B
+1C
+1D
+1E
+1F
+1G
+1H
+1I
+1J
+1K
+1L
+1M
+1N
+b11011110 O
+b11000000 P
+b10101101 Q
+b10111010 R
+b11101111 S
+b10111110 T
+b10101101 U
+b11011110 V
+1`
+1a
+1b
+b0000000000 c
+b11011110 d
+1f
+1g
+1h
+b0000000000 i
+b11000000 j
+1l
+1m
+1n
+b0000000000 o
+b10101101 p
+1r
+1s
+1t
+b0000000000 u
+b10111010 v
+1x
+1y
+1z
+b0000000000 {
+b11101111 |
+1!"
+1""
+1#"
+b0000000000 $"
+b10111110 %"
+1'"
+1("
+1)"
+b0000000000 *"
+b10101101 +"
+1-"
+1."
+1/"
+b0000000000 0"
+b11011110 1"
+#30000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#35000000
+1!
+b00000000000000000000000000001000 -
+10
+b00000000000000000000000000001 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+b11011110 W
+b11000000 X
+b10101101 Y
+b10111010 Z
+b11101111 [
+b10111110 \
+b10101101 ]
+b11011110 ^
+b1101111010101101101111101110111110111010101011011100000011011110 _
+1`
+b11011110 e
+1f
+b11000000 k
+1l
+b10101101 q
+1r
+b10111010 w
+1x
+b11101111 }
+1!"
+b10111110 &"
+1'"
+b10101101 ,"
+1-"
+b11011110 2"
+#40000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#45000000
+1!
+b00000000000000000000000000010000 -
+10
+b00000000000000000000000000010 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#50000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#55000000
+1!
+b00000000000000000000000000011000 -
+10
+b00000000000000000000000000011 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#60000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#65000000
+1!
+b00000000000000000000000000100000 -
+10
+b00000000000000000000000000100 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+b0000000001 c
+1f
+b0000000001 i
+1l
+b0000000001 o
+1r
+b0000000001 u
+1x
+b0000000001 {
+1!"
+b0000000001 $"
+1'"
+b0000000001 *"
+1-"
+b0000000001 0"
+#70000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#75000000
+1!
+b00000000000000000000000000101000 -
+10
+b00000000000000000000000000101 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#80000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#85000000
+1!
+b00000000000000000000000000110000 -
+10
+b00000000000000000000000000110 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#90000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#95000000
+1!
+b00000000000000000000000000111000 -
+10
+b00000000000000000000000000111 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#100000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#105000000
+1!
+b00000000000000000000000001000000 -
+10
+b00000000000000000000000001000 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+b0000000010 c
+1f
+b0000000010 i
+1l
+b0000000010 o
+1r
+b0000000010 u
+1x
+b0000000010 {
+1!"
+b0000000010 $"
+1'"
+b0000000010 *"
+1-"
+b0000000010 0"
+#110000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#115000000
+1!
+b00000000000000000000000001001000 -
+10
+b00000000000000000000000001001 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#120000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#125000000
+1!
+b00000000000000000000000001010000 -
+10
+b00000000000000000000000001010 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#130000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#135000000
+1!
+b00000000000000000000000001011000 -
+10
+b00000000000000000000000001011 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#140000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#145000000
+1!
+b00000000000000000000000001100000 -
+10
+b00000000000000000000000001100 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+b0000000011 c
+1f
+b0000000011 i
+1l
+b0000000011 o
+1r
+b0000000011 u
+1x
+b0000000011 {
+1!"
+b0000000011 $"
+1'"
+b0000000011 *"
+1-"
+b0000000011 0"
+#150000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#155000000
+1!
+b00000000000000000000000001101000 -
+10
+b00000000000000000000000001101 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#160000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#165000000
+1!
+b00000000000000000000000001110000 -
+10
+b00000000000000000000000001110 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#170000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#175000000
+1!
+b00000000000000000000000001111000 -
+10
+b00000000000000000000000001111 4
+bUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU >
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#180000000
+0!
+00
+0`
+0f
+0l
+0r
+0x
+0!"
+0'"
+0-"
+#185000000
+1!
+10
+1`
+1f
+1l
+1r
+1x
+1!"
+1'"
+1-"
+#190000000

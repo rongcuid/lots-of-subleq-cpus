@@ -1,0 +1,79 @@
+[*]
+[*] GTKWave Analyzer v3.3.79 (w)1999-2017 BSI
+[*] Sat Jul  8 02:21:33 2017
+[*]
+[dumpfile] "/mnt/hgfs/Projects/Subeq/Upgraded-SUBLEQ/lots-of-subleq-cpus/Subleq Pipelined/output/test_mmu_tb.ghw"
+[dumpfile_mtime] "Sat Jul  8 02:20:44 2017"
+[dumpfile_size] 250690
+[savefile] "/mnt/hgfs/Projects/Subeq/Upgraded-SUBLEQ/lots-of-subleq-cpus/Subleq Pipelined/output/test_mmu_tb.gtkw"
+[timestart] 0
+[size] 2356 1228
+[pos] -669 -319
+*-25.000000 34700000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.test_mmu_tb.
+[treeopen] top.test_mmu_tb.uut.
+[sst_width] 220
+[signals_width] 134
+[sst_expanded] 1
+[sst_vpaned_height] 778
+@200
+-TB
+@28
+top.test_mmu_tb.clk_tb
+top.test_mmu_tb.resetb_tb
+top.test_mmu_tb.be0n_tb
+top.test_mmu_tb.be1n_tb
+top.test_mmu_tb.be2n_tb
+top.test_mmu_tb.be3n_tb
+top.test_mmu_tb.be4n_tb
+top.test_mmu_tb.be5n_tb
+top.test_mmu_tb.be6n_tb
+top.test_mmu_tb.be7n_tb
+top.test_mmu_tb.en_tb
+top.test_mmu_tb.we_tb
+@22
+#{top.test_mmu_tb.addr_tb[31:0]} top.test_mmu_tb.addr_tb[31] top.test_mmu_tb.addr_tb[30] top.test_mmu_tb.addr_tb[29] top.test_mmu_tb.addr_tb[28] top.test_mmu_tb.addr_tb[27] top.test_mmu_tb.addr_tb[26] top.test_mmu_tb.addr_tb[25] top.test_mmu_tb.addr_tb[24] top.test_mmu_tb.addr_tb[23] top.test_mmu_tb.addr_tb[22] top.test_mmu_tb.addr_tb[21] top.test_mmu_tb.addr_tb[20] top.test_mmu_tb.addr_tb[19] top.test_mmu_tb.addr_tb[18] top.test_mmu_tb.addr_tb[17] top.test_mmu_tb.addr_tb[16] top.test_mmu_tb.addr_tb[15] top.test_mmu_tb.addr_tb[14] top.test_mmu_tb.addr_tb[13] top.test_mmu_tb.addr_tb[12] top.test_mmu_tb.addr_tb[11] top.test_mmu_tb.addr_tb[10] top.test_mmu_tb.addr_tb[9] top.test_mmu_tb.addr_tb[8] top.test_mmu_tb.addr_tb[7] top.test_mmu_tb.addr_tb[6] top.test_mmu_tb.addr_tb[5] top.test_mmu_tb.addr_tb[4] top.test_mmu_tb.addr_tb[3] top.test_mmu_tb.addr_tb[2] top.test_mmu_tb.addr_tb[1] top.test_mmu_tb.addr_tb[0]
+#{top.test_mmu_tb.do_tb[63:0]} top.test_mmu_tb.do_tb[63] top.test_mmu_tb.do_tb[62] top.test_mmu_tb.do_tb[61] top.test_mmu_tb.do_tb[60] top.test_mmu_tb.do_tb[59] top.test_mmu_tb.do_tb[58] top.test_mmu_tb.do_tb[57] top.test_mmu_tb.do_tb[56] top.test_mmu_tb.do_tb[55] top.test_mmu_tb.do_tb[54] top.test_mmu_tb.do_tb[53] top.test_mmu_tb.do_tb[52] top.test_mmu_tb.do_tb[51] top.test_mmu_tb.do_tb[50] top.test_mmu_tb.do_tb[49] top.test_mmu_tb.do_tb[48] top.test_mmu_tb.do_tb[47] top.test_mmu_tb.do_tb[46] top.test_mmu_tb.do_tb[45] top.test_mmu_tb.do_tb[44] top.test_mmu_tb.do_tb[43] top.test_mmu_tb.do_tb[42] top.test_mmu_tb.do_tb[41] top.test_mmu_tb.do_tb[40] top.test_mmu_tb.do_tb[39] top.test_mmu_tb.do_tb[38] top.test_mmu_tb.do_tb[37] top.test_mmu_tb.do_tb[36] top.test_mmu_tb.do_tb[35] top.test_mmu_tb.do_tb[34] top.test_mmu_tb.do_tb[33] top.test_mmu_tb.do_tb[32] top.test_mmu_tb.do_tb[31] top.test_mmu_tb.do_tb[30] top.test_mmu_tb.do_tb[29] top.test_mmu_tb.do_tb[28] top.test_mmu_tb.do_tb[27] top.test_mmu_tb.do_tb[26] top.test_mmu_tb.do_tb[25] top.test_mmu_tb.do_tb[24] top.test_mmu_tb.do_tb[23] top.test_mmu_tb.do_tb[22] top.test_mmu_tb.do_tb[21] top.test_mmu_tb.do_tb[20] top.test_mmu_tb.do_tb[19] top.test_mmu_tb.do_tb[18] top.test_mmu_tb.do_tb[17] top.test_mmu_tb.do_tb[16] top.test_mmu_tb.do_tb[15] top.test_mmu_tb.do_tb[14] top.test_mmu_tb.do_tb[13] top.test_mmu_tb.do_tb[12] top.test_mmu_tb.do_tb[11] top.test_mmu_tb.do_tb[10] top.test_mmu_tb.do_tb[9] top.test_mmu_tb.do_tb[8] top.test_mmu_tb.do_tb[7] top.test_mmu_tb.do_tb[6] top.test_mmu_tb.do_tb[5] top.test_mmu_tb.do_tb[4] top.test_mmu_tb.do_tb[3] top.test_mmu_tb.do_tb[2] top.test_mmu_tb.do_tb[1] top.test_mmu_tb.do_tb[0]
+#{top.test_mmu_tb.di_tb[63:0]} top.test_mmu_tb.di_tb[63] top.test_mmu_tb.di_tb[62] top.test_mmu_tb.di_tb[61] top.test_mmu_tb.di_tb[60] top.test_mmu_tb.di_tb[59] top.test_mmu_tb.di_tb[58] top.test_mmu_tb.di_tb[57] top.test_mmu_tb.di_tb[56] top.test_mmu_tb.di_tb[55] top.test_mmu_tb.di_tb[54] top.test_mmu_tb.di_tb[53] top.test_mmu_tb.di_tb[52] top.test_mmu_tb.di_tb[51] top.test_mmu_tb.di_tb[50] top.test_mmu_tb.di_tb[49] top.test_mmu_tb.di_tb[48] top.test_mmu_tb.di_tb[47] top.test_mmu_tb.di_tb[46] top.test_mmu_tb.di_tb[45] top.test_mmu_tb.di_tb[44] top.test_mmu_tb.di_tb[43] top.test_mmu_tb.di_tb[42] top.test_mmu_tb.di_tb[41] top.test_mmu_tb.di_tb[40] top.test_mmu_tb.di_tb[39] top.test_mmu_tb.di_tb[38] top.test_mmu_tb.di_tb[37] top.test_mmu_tb.di_tb[36] top.test_mmu_tb.di_tb[35] top.test_mmu_tb.di_tb[34] top.test_mmu_tb.di_tb[33] top.test_mmu_tb.di_tb[32] top.test_mmu_tb.di_tb[31] top.test_mmu_tb.di_tb[30] top.test_mmu_tb.di_tb[29] top.test_mmu_tb.di_tb[28] top.test_mmu_tb.di_tb[27] top.test_mmu_tb.di_tb[26] top.test_mmu_tb.di_tb[25] top.test_mmu_tb.di_tb[24] top.test_mmu_tb.di_tb[23] top.test_mmu_tb.di_tb[22] top.test_mmu_tb.di_tb[21] top.test_mmu_tb.di_tb[20] top.test_mmu_tb.di_tb[19] top.test_mmu_tb.di_tb[18] top.test_mmu_tb.di_tb[17] top.test_mmu_tb.di_tb[16] top.test_mmu_tb.di_tb[15] top.test_mmu_tb.di_tb[14] top.test_mmu_tb.di_tb[13] top.test_mmu_tb.di_tb[12] top.test_mmu_tb.di_tb[11] top.test_mmu_tb.di_tb[10] top.test_mmu_tb.di_tb[9] top.test_mmu_tb.di_tb[8] top.test_mmu_tb.di_tb[7] top.test_mmu_tb.di_tb[6] top.test_mmu_tb.di_tb[5] top.test_mmu_tb.di_tb[4] top.test_mmu_tb.di_tb[3] top.test_mmu_tb.di_tb[2] top.test_mmu_tb.di_tb[1] top.test_mmu_tb.di_tb[0]
+@200
+-MMU
+@28
+top.test_mmu_tb.uut.en_ram7
+top.test_mmu_tb.uut.we_ram7
+top.test_mmu_tb.uut.en_ram6
+top.test_mmu_tb.uut.we_ram6
+top.test_mmu_tb.uut.en_ram5
+top.test_mmu_tb.uut.we_ram5
+top.test_mmu_tb.uut.en_ram4
+top.test_mmu_tb.uut.we_ram4
+top.test_mmu_tb.uut.en_ram3
+top.test_mmu_tb.uut.we_ram3
+top.test_mmu_tb.uut.en_ram2
+top.test_mmu_tb.uut.we_ram2
+top.test_mmu_tb.uut.en_ram1
+top.test_mmu_tb.uut.we_ram1
+top.test_mmu_tb.uut.en_ram0
+top.test_mmu_tb.uut.we_ram0
+top.test_mmu_tb.uut.be0n
+top.test_mmu_tb.uut.be1n
+top.test_mmu_tb.uut.be2n
+top.test_mmu_tb.uut.be3n
+top.test_mmu_tb.uut.be4n
+top.test_mmu_tb.uut.be5n
+top.test_mmu_tb.uut.be6n
+top.test_mmu_tb.uut.be7n
+top.test_mmu_tb.uut.en
+top.test_mmu_tb.uut.we
+top.test_mmu_tb.uut.resetb
+top.test_mmu_tb.uut.clk
+@22
+#{top.test_mmu_tb.uut.do_ram7[7:0]} top.test_mmu_tb.uut.do_ram7[7] top.test_mmu_tb.uut.do_ram7[6] top.test_mmu_tb.uut.do_ram7[5] top.test_mmu_tb.uut.do_ram7[4] top.test_mmu_tb.uut.do_ram7[3] top.test_mmu_tb.uut.do_ram7[2] top.test_mmu_tb.uut.do_ram7[1] top.test_mmu_tb.uut.do_ram7[0]
+#{top.test_mmu_tb.uut.di_ram7[7:0]} top.test_mmu_tb.uut.di_ram7[7] top.test_mmu_tb.uut.di_ram7[6] top.test_mmu_tb.uut.di_ram7[5] top.test_mmu_tb.uut.di_ram7[4] top.test_mmu_tb.uut.di_ram7[3] top.test_mmu_tb.uut.di_ram7[2] top.test_mmu_tb.uut.di_ram7[1] top.test_mmu_tb.uut.di_ram7[0]
+#{top.test_mmu_tb.uut.addr[28:0]} top.test_mmu_tb.uut.addr[28] top.test_mmu_tb.uut.addr[27] top.test_mmu_tb.uut.addr[26] top.test_mmu_tb.uut.addr[25] top.test_mmu_tb.uut.addr[24] top.test_mmu_tb.uut.addr[23] top.test_mmu_tb.uut.addr[22] top.test_mmu_tb.uut.addr[21] top.test_mmu_tb.uut.addr[20] top.test_mmu_tb.uut.addr[19] top.test_mmu_tb.uut.addr[18] top.test_mmu_tb.uut.addr[17] top.test_mmu_tb.uut.addr[16] top.test_mmu_tb.uut.addr[15] top.test_mmu_tb.uut.addr[14] top.test_mmu_tb.uut.addr[13] top.test_mmu_tb.uut.addr[12] top.test_mmu_tb.uut.addr[11] top.test_mmu_tb.uut.addr[10] top.test_mmu_tb.uut.addr[9] top.test_mmu_tb.uut.addr[8] top.test_mmu_tb.uut.addr[7] top.test_mmu_tb.uut.addr[6] top.test_mmu_tb.uut.addr[5] top.test_mmu_tb.uut.addr[4] top.test_mmu_tb.uut.addr[3] top.test_mmu_tb.uut.addr[2] top.test_mmu_tb.uut.addr[1] top.test_mmu_tb.uut.addr[0]
+@23
+#{top.test_mmu_tb.uut.do[63:0]} top.test_mmu_tb.uut.do[63] top.test_mmu_tb.uut.do[62] top.test_mmu_tb.uut.do[61] top.test_mmu_tb.uut.do[60] top.test_mmu_tb.uut.do[59] top.test_mmu_tb.uut.do[58] top.test_mmu_tb.uut.do[57] top.test_mmu_tb.uut.do[56] top.test_mmu_tb.uut.do[55] top.test_mmu_tb.uut.do[54] top.test_mmu_tb.uut.do[53] top.test_mmu_tb.uut.do[52] top.test_mmu_tb.uut.do[51] top.test_mmu_tb.uut.do[50] top.test_mmu_tb.uut.do[49] top.test_mmu_tb.uut.do[48] top.test_mmu_tb.uut.do[47] top.test_mmu_tb.uut.do[46] top.test_mmu_tb.uut.do[45] top.test_mmu_tb.uut.do[44] top.test_mmu_tb.uut.do[43] top.test_mmu_tb.uut.do[42] top.test_mmu_tb.uut.do[41] top.test_mmu_tb.uut.do[40] top.test_mmu_tb.uut.do[39] top.test_mmu_tb.uut.do[38] top.test_mmu_tb.uut.do[37] top.test_mmu_tb.uut.do[36] top.test_mmu_tb.uut.do[35] top.test_mmu_tb.uut.do[34] top.test_mmu_tb.uut.do[33] top.test_mmu_tb.uut.do[32] top.test_mmu_tb.uut.do[31] top.test_mmu_tb.uut.do[30] top.test_mmu_tb.uut.do[29] top.test_mmu_tb.uut.do[28] top.test_mmu_tb.uut.do[27] top.test_mmu_tb.uut.do[26] top.test_mmu_tb.uut.do[25] top.test_mmu_tb.uut.do[24] top.test_mmu_tb.uut.do[23] top.test_mmu_tb.uut.do[22] top.test_mmu_tb.uut.do[21] top.test_mmu_tb.uut.do[20] top.test_mmu_tb.uut.do[19] top.test_mmu_tb.uut.do[18] top.test_mmu_tb.uut.do[17] top.test_mmu_tb.uut.do[16] top.test_mmu_tb.uut.do[15] top.test_mmu_tb.uut.do[14] top.test_mmu_tb.uut.do[13] top.test_mmu_tb.uut.do[12] top.test_mmu_tb.uut.do[11] top.test_mmu_tb.uut.do[10] top.test_mmu_tb.uut.do[9] top.test_mmu_tb.uut.do[8] top.test_mmu_tb.uut.do[7] top.test_mmu_tb.uut.do[6] top.test_mmu_tb.uut.do[5] top.test_mmu_tb.uut.do[4] top.test_mmu_tb.uut.do[3] top.test_mmu_tb.uut.do[2] top.test_mmu_tb.uut.do[1] top.test_mmu_tb.uut.do[0]
+@22
+#{top.test_mmu_tb.uut.di[63:0]} top.test_mmu_tb.uut.di[63] top.test_mmu_tb.uut.di[62] top.test_mmu_tb.uut.di[61] top.test_mmu_tb.uut.di[60] top.test_mmu_tb.uut.di[59] top.test_mmu_tb.uut.di[58] top.test_mmu_tb.uut.di[57] top.test_mmu_tb.uut.di[56] top.test_mmu_tb.uut.di[55] top.test_mmu_tb.uut.di[54] top.test_mmu_tb.uut.di[53] top.test_mmu_tb.uut.di[52] top.test_mmu_tb.uut.di[51] top.test_mmu_tb.uut.di[50] top.test_mmu_tb.uut.di[49] top.test_mmu_tb.uut.di[48] top.test_mmu_tb.uut.di[47] top.test_mmu_tb.uut.di[46] top.test_mmu_tb.uut.di[45] top.test_mmu_tb.uut.di[44] top.test_mmu_tb.uut.di[43] top.test_mmu_tb.uut.di[42] top.test_mmu_tb.uut.di[41] top.test_mmu_tb.uut.di[40] top.test_mmu_tb.uut.di[39] top.test_mmu_tb.uut.di[38] top.test_mmu_tb.uut.di[37] top.test_mmu_tb.uut.di[36] top.test_mmu_tb.uut.di[35] top.test_mmu_tb.uut.di[34] top.test_mmu_tb.uut.di[33] top.test_mmu_tb.uut.di[32] top.test_mmu_tb.uut.di[31] top.test_mmu_tb.uut.di[30] top.test_mmu_tb.uut.di[29] top.test_mmu_tb.uut.di[28] top.test_mmu_tb.uut.di[27] top.test_mmu_tb.uut.di[26] top.test_mmu_tb.uut.di[25] top.test_mmu_tb.uut.di[24] top.test_mmu_tb.uut.di[23] top.test_mmu_tb.uut.di[22] top.test_mmu_tb.uut.di[21] top.test_mmu_tb.uut.di[20] top.test_mmu_tb.uut.di[19] top.test_mmu_tb.uut.di[18] top.test_mmu_tb.uut.di[17] top.test_mmu_tb.uut.di[16] top.test_mmu_tb.uut.di[15] top.test_mmu_tb.uut.di[14] top.test_mmu_tb.uut.di[13] top.test_mmu_tb.uut.di[12] top.test_mmu_tb.uut.di[11] top.test_mmu_tb.uut.di[10] top.test_mmu_tb.uut.di[9] top.test_mmu_tb.uut.di[8] top.test_mmu_tb.uut.di[7] top.test_mmu_tb.uut.di[6] top.test_mmu_tb.uut.di[5] top.test_mmu_tb.uut.di[4] top.test_mmu_tb.uut.di[3] top.test_mmu_tb.uut.di[2] top.test_mmu_tb.uut.di[1] top.test_mmu_tb.uut.di[0]
+[pattern_trace] 1
+[pattern_trace] 0
