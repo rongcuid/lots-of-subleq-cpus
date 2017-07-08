@@ -26,7 +26,6 @@ module BRAM_sp(
    input wire we;
    input wire en;
    input wire [WIDTH-1:0] data_in;
-   // Note that this is combinational
    output reg [WIDTH-1:0] data_out;
 
    // Internal storage
@@ -35,10 +34,10 @@ module BRAM_sp(
       if (en) begin
 	 if (we) begin
 	    data[addr] <= data_in;
-	    data_out = di;
+	    data_out <= di;
 	 end
 	 else begin
-	    data_out = data[addr];
+	    data_out <= data[addr];
 	 end
       end
    end

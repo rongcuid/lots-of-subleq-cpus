@@ -32,7 +32,7 @@ end test_mmu_tb;
 
 architecture behavioral of test_mmu_tb is
   -- Component declarations
-  component MMU 
+  component MMU
     generic ( DEPTH_BANK : integer := 1024;
               DEPTH_LOG : integer := 10
               );
@@ -83,14 +83,14 @@ architecture behavioral of test_mmu_tb is
     signal be7n, be6n, be5n, be4n : out std_logic;
     signal be3n, be2n, be1n, be0n : out std_logic;
     signal addr : out std_logic_vector(31 downto 0);
-    signal di : out std_logic_vector(63 downto 0);
-    signal do : out std_logic_vector(63 downto 0)
+    signal di : out std_logic_vector(63 downto 0)
+    -- signal do : out std_logic_vector(63 downto 0)
     ) is
     variable addr_tmp : integer;
     variable addr_line, data_line : line;
     constant data_unsigned : unsigned(63 downto 0) :=
       X"DEADBEEFBAADC0DE";
-      
+
   begin
     we <= '0'; en <= '0';
     be7n <= '0'; be6n <= '0'; be5n <= '0'; be4n <= '0';
@@ -108,9 +108,11 @@ architecture behavioral of test_mmu_tb is
       hwrite(addr_line, addr_tb);
       hwrite(data_line, do_tb);
       report "Test 1 Iter " & integer'image(i) & lf &
-        "  Addr in = " & integer'image(addr_tmp) & lf &
-        "  Prev_Addr = " & addr_line.all & lf &
-        "  Prev_Data = " & data_line.all severity note;
+        "  Addr in = 0x" & integer'image(addr_tmp) & lf &
+        "  Prev_Addr = 0x" & addr_line.all & lf &
+        "  Prev_Data = 0x" & data_line.all severity note;
+      deallocate(addr_line);
+      deallocate(data_line);
       -- Wait a clock
       wait until rising_edge(clk_tb);
     end loop;
@@ -146,7 +148,7 @@ begin
     test_1(resetb_tb, we_tb, en_tb,
            be7n_tb, be6n_tb, be5n_tb, be4n_tb,
            be3n_tb, be2n_tb, be1n_tb, be0n_tb,
-           addr_tb, di_tb, do_tb
+           addr_tb, di_tb
            );
     -- End Simulation
     END_SIMULATION := true;
