@@ -59,3 +59,10 @@ build/
 work/
 output/*
 !output/.gitkeep
+*.log
+*.vcd
+*.ghw
+Subleq Pipelined/output/test_mmu_tb.vcd
+*.vcd
+*.ghw
+*.log
