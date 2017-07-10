@@ -67,3 +67,60 @@ begin
     end if;
   end process;
 end syn;
+
+-- This is a dual port BRAM
+entity BRAM_DP is
+  generic ( WIDTH : integer := 32;
+            DEPTH : integer := 1024;
+            DEPTH_LOG : integer := 10;
+            );
+  port (
+    clk : in std_logic;
+    awe : in std_logic;
+    aen : in std_logic;
+    aaddr : in std_logic_vector(DEPTH_LOG-1 downto 0);
+    adi : in std_logic_vector(WIDTH-1 downto 0);
+    ado : out std_logic_vector(WIDTH-1 downto 0)
+    bwe : in std_logic;
+    ben : in std_logic;
+    baddr : in std_logic_vector(DEPTH_LOG-1 downto 0);
+    bdi : in std_logic_vector(WIDTH-1 downto 0);
+    bdo : out std_logic_vector(WIDTH-1 downto 0)
+    );
+end BRAM_DP;
+
+architecture syn of BRAM_DP is
+  type ram_type is array(DEPTH-1 downto 0) of std_logic_vector (WIDTH-1 downto 0);
+  signal data: ram_type;
+
+  portA : process (clk)
+  begin
+    if clk'event and clk = '1' then
+      if en = '1' then
+        if we = '1' then
+          data(to_integer(unsigned(aaddr))) <= adi;
+          ado <= adi;
+        else
+          ado <= data(to_integer(unsigned(aaddr)));
+        end if;
+      end if;
+
+    end if;
+  end process portA;
+
+  portB : process (clk)
+  begin
+    if clk'event and clk = '1' then
+      if en = '1' then
+        if we = '1' then
+          data(to_integer(unsigned(baddr))) <= bdi;
+          bdo <= adi;
+        else
+          bdo <= data(to_integer(unsigned(baddr)));
+        end if;
+      end if;
+
+    end if;
+  end process portB;
+
+end architecture syn;
