@@ -124,7 +124,7 @@ begin
       forward_rt <= '0';
       zero_rs <= '0';
       zero_rt <= '0';
-    else
+    elsif (clk'event and clk = '1') then
       -- If any reads share address with write back,
       -- writeback value will be selected
       rs_forward : if (wb_we = '1' and rs_a = wb_a) then

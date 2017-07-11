@@ -123,7 +123,67 @@ architecture behavioral of test_regfile_tb is
       wait until rising_edge(clk_tb);
     end loop;
   end procedure test_1;
-  
+
+  procedure test_2(
+    signal resetb, en, wb_we : out std_logic;
+    signal rs_a, rt_a, wb_a : out std_logic_vector(3 downto 0);
+    signal wb_d : out std_logic_vector(63 downto 0)
+    ) is
+    variable addr_tmp, addr2_tmp : std_logic_vector(3 downto 0);
+    variable rs_line, rt_line, wb_line : line;
+  begin
+    en <= '0'; wb_we <= '0';
+    reset(resetb);
+    --wait until rising_edge(resetb_tb);
+    --wait until rising_edge(clk_tb);
+    write(output, lf & "==============================================" & lf);    
+    write(output, "(II) Test 2: Expected Behaviour:" & lf);
+    write(output, "  1. Writes 15,14,...,0 to x0 to x15" & lf);
+    write(output, "  2. Then writes 1,2,4,8,... to x0 to x15" & lf);
+    write(output, "  3. At the same time, Rs reads from x0 to x15" & lf);
+    write(output, "  4. At the same time, Rt reads from x15 to x0" & lf);
+    write(output, "  5. All reads must receive latest and correct value" & lf);
+    write(output, "  6. All operations are delayed for one clock" & lf);
+    write(output, "==============================================" & lf);
+    wait until rising_edge(clk_tb);
+    -- First write cycle to put in some valid data
+    for i in 0 to 15 loop
+      addr_tmp := std_logic_vector(to_unsigned(i,4));
+      en <= '1';
+      wb_we <= '1';
+      wb_a <= addr_tmp;
+      wb_d <= std_logic_vector(to_unsigned(15-i, 64));
+      wait until rising_edge(clk_tb);
+    end loop;
+    for i in 0 to 31 loop
+      addr_tmp := std_logic_vector(to_unsigned(i,4));
+      addr2_tmp := std_logic_vector(unsigned(to_signed(15-i,4)));
+      en <= '1';
+      wb_we <= '1';
+      wb_a <= addr_tmp;
+      wb_d <= std_logic_vector(shift_left(to_unsigned(i,64), i));
+      rs_a <= addr_tmp;
+      rt_a <= addr2_tmp;
+      -- Display some info
+      if (i /= 0) then
+        hwrite(wb_line, wb_d_tb);
+        hwrite(rs_line, rs_d_tb);
+        hwrite(rt_line, rt_d_tb);
+        report "Test 2: " & lf &
+          "  Prev Wb = x"& integer'image((i-1) mod 16) & lf &
+          "  Prev Wb_d = 0x" & wb_line.all & lf &
+          "  Prev Rs = x"& integer'image((i-1) mod 16) & lf &
+          "  Prev Rs = 0x" & rs_line.all & lf &
+          "  Prev Rt = x"& integer'image((15-i+1) mod 16) & lf &
+          "  Prev Rt = 0x" & rt_line.all severity note;
+        deallocate(rs_line);
+        deallocate(rt_line);
+        deallocate(wb_line);
+      end if;
+      wait until rising_edge(clk_tb);
+    end loop;
+  end procedure test_2;
+
 begin
   UUT : RegFile port map(
     clk => clk_tb, resetb => resetb_tb, en => en_tb,
@@ -146,7 +206,9 @@ begin
 
   stimulus : process
   begin
-    test_1(resetb_tb, en_tb, wb_we_tb,
+    -- test_1(resetb_tb, en_tb, wb_we_tb,
+    --        rs_a_tb, rt_a_tb, wb_a_tb, wb_d_tb);
+    test_2(resetb_tb, en_tb, wb_we_tb,
            rs_a_tb, rt_a_tb, wb_a_tb, wb_d_tb);
     -- End Simulation
     END_SIMULATION := true;
