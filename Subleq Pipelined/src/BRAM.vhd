@@ -68,11 +68,17 @@ begin
   end process;
 end syn;
 
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+use IEEE.NUMERIC_STD.ALL;
 -- This is a dual port BRAM
 entity BRAM_DP is
   generic ( WIDTH : integer := 32;
             DEPTH : integer := 1024;
-            DEPTH_LOG : integer := 10;
+            DEPTH_LOG : integer := 10
             );
   port (
     clk : in std_logic;
@@ -80,7 +86,7 @@ entity BRAM_DP is
     aen : in std_logic;
     aaddr : in std_logic_vector(DEPTH_LOG-1 downto 0);
     adi : in std_logic_vector(WIDTH-1 downto 0);
-    ado : out std_logic_vector(WIDTH-1 downto 0)
+    ado : out std_logic_vector(WIDTH-1 downto 0);
     bwe : in std_logic;
     ben : in std_logic;
     baddr : in std_logic_vector(DEPTH_LOG-1 downto 0);
@@ -91,36 +97,63 @@ end BRAM_DP;
 
 architecture syn of BRAM_DP is
   type ram_type is array(DEPTH-1 downto 0) of std_logic_vector (WIDTH-1 downto 0);
-  signal data: ram_type;
-
-  portA : process (clk)
+  signal RAM: ram_type;
+  signal read_addra, read_addrb : std_logic_vector(DEPTH_LOG-1 downto 0);
+begin
+  process (clk)
   begin
-    if clk'event and clk = '1' then
-      if en = '1' then
-        if we = '1' then
-          data(to_integer(unsigned(aaddr))) <= adi;
-          ado <= adi;
-        else
-          ado <= data(to_integer(unsigned(aaddr)));
+    if (clk'event and clk = '1') then
+      if (aen = '1') then
+        if (awe = '1') then
+          RAM(to_integer(unsigned(aaddr))) <= adi;
         end if;
+        read_addra <= aaddr;
       end if;
-
-    end if;
-  end process portA;
-
-  portB : process (clk)
-  begin
-    if clk'event and clk = '1' then
-      if en = '1' then
-        if we = '1' then
-          data(to_integer(unsigned(baddr))) <= bdi;
-          bdo <= adi;
-        else
-          bdo <= data(to_integer(unsigned(baddr)));
+      if (ben = '1') then
+        if (bwe = '1') then
+          RAM(to_integer(unsigned(baddr))) <= bdi;
         end if;
+        read_addrb <= baddr;
       end if;
-
     end if;
-  end process portB;
+  end process;
 
+  ado <= RAM(to_integer(unsigned(read_addra)));
+  bdo <= RAM(to_integer(unsigned(read_addrb)));
 end architecture syn;
+
+-- architecture syn of BRAM_DP is
+--   type ram_type is array(DEPTH-1 downto 0) of std_logic_vector (WIDTH-1 downto 0);
+--   signal data: ram_type;
+-- begin
+--   portA : process (clk)
+--   begin
+--     if clk'event and clk = '1' then
+--       if aen = '1' then
+--         if awe = '1' then
+--           data(to_integer(unsigned(aaddr))) <= adi;
+--           ado <= adi;
+--         else
+--           ado <= data(to_integer(unsigned(aaddr)));
+--         end if;
+--       end if;
+
+--     end if;
+--   end process portA;
+
+--   portB : process (clk)
+--   begin
+--     if clk'event and clk = '1' then
+--       if ben = '1' then
+--         if bwe = '1' then
+--           data(to_integer(unsigned(baddr))) <= bdi;
+--           bdo <= bdi;
+--         else
+--           bdo <= data(to_integer(unsigned(baddr)));
+--         end if;
+--       end if;
+
+--     end if;
+--   end process portB;
+
+-- end architecture syn;

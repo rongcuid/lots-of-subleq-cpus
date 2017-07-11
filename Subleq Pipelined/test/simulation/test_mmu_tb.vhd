@@ -105,6 +105,7 @@ architecture behavioral of test_mmu_tb is
     write(output, "  1. Address increment by 0x8 for each iteration" & lf);
     write(output, "  2. Writes 0xDEADBEEFBAADC0DE every iteration" & lf);
     write(output, "  3. Writes to all 8 bytes" & lf);
+    write(output, "  4. Disregard Prev_* for first iteration" & lf);
     write(output, "==============================================" & lf);
     wait until rising_edge(clk_tb);
     for i in 0 to 15 loop
@@ -155,6 +156,7 @@ architecture behavioral of test_mmu_tb is
     write(output, "  1. Address increment by 0x8 for each iteration" & lf);
     write(output, "  2. Writes 0xBADA661E11223344 every iteration" & lf);
     write(output, "  3. Writes to individual bytes equal to iteration count" & lf);
+    write(output, "  4. Disregard Prev_* for first iteration" & lf);
     write(output, "==============================================" & lf);
     wait until rising_edge(clk_tb);
     for i in 0 to 9 loop
@@ -215,6 +217,7 @@ architecture behavioral of test_mmu_tb is
     write(output, "  1. Address increment by 0x8 for each iteration" & lf);
     write(output, "  2. Writes 0x4B1D0D06F00DCAFE every iteration" & lf);
     write(output, "  3. Writes two bytes at a time" & lf);
+    write(output, "  4. Disregard Prev_* for first iteration" & lf);
     write(output, "==============================================" & lf);
     wait until rising_edge(clk_tb);
     for i in 0 to 5 loop
@@ -271,6 +274,7 @@ architecture behavioral of test_mmu_tb is
     write(output, "  1. Address increment by 0x8 for each iteration" & lf);
     write(output, "  2. Writes 0xB00000000000DEAD every iteration" & lf);
     write(output, "  3. Writes four bytes at a time" & lf);
+    write(output, "  4. Disregard Prev_* for first iteration" & lf);
     write(output, "==============================================" & lf);
     wait until rising_edge(clk_tb);
     for i in 0 to 3 loop

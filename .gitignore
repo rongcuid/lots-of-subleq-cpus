@@ -66,3 +66,7 @@ Subleq Pipelined/output/test_mmu_tb.vcd
 *.vcd
 *.ghw
 *.log
+*.gtkw
+*.log
+*.vcd
+*.gtkw
