@@ -143,7 +143,10 @@ architecture behavioral of test_regfile_tb is
     write(output, "  3. At the same time, Rs reads from x0 to x15" & lf);
     write(output, "  4. At the same time, Rt reads from x15 to x0" & lf);
     write(output, "  5. All reads must receive latest and correct value" & lf);
-    write(output, "  6. All operations are delayed for one clock" & lf);
+    write(output, "  6. All operations are delayed for one clock, therefore correct output should be something like:" & lf);
+    write(output, "Prev Rx = x<reg>" & lf);
+    write(output, "--- Next Iteration ---" & lf);
+    write(output, "Prev Rx_d = correct data" & lf);
     write(output, "==============================================" & lf);
     wait until rising_edge(clk_tb);
     -- First write cycle to put in some valid data
@@ -173,9 +176,9 @@ architecture behavioral of test_regfile_tb is
           "  Prev Wb = x"& integer'image((i-1) mod 16) & lf &
           "  Prev Wb_d = 0x" & wb_line.all & lf &
           "  Prev Rs = x"& integer'image((i-1) mod 16) & lf &
-          "  Prev Rs = 0x" & rs_line.all & lf &
+          "  Prev Rs_d = 0x" & rs_line.all & lf &
           "  Prev Rt = x"& integer'image((15-i+1) mod 16) & lf &
-          "  Prev Rt = 0x" & rt_line.all severity note;
+          "  Prev Rt_d = 0x" & rt_line.all severity note;
         deallocate(rs_line);
         deallocate(rt_line);
         deallocate(wb_line);
@@ -206,8 +209,8 @@ begin
 
   stimulus : process
   begin
-    -- test_1(resetb_tb, en_tb, wb_we_tb,
-    --        rs_a_tb, rt_a_tb, wb_a_tb, wb_d_tb);
+    test_1(resetb_tb, en_tb, wb_we_tb,
+           rs_a_tb, rt_a_tb, wb_a_tb, wb_d_tb);
     test_2(resetb_tb, en_tb, wb_we_tb,
            rs_a_tb, rt_a_tb, wb_a_tb, wb_d_tb);
     -- End Simulation
