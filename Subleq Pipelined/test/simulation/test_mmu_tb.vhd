@@ -39,322 +39,266 @@ architecture behavioral of test_mmu_tb is
     port (
       clk : in std_logic;
       resetb : in std_logic;
-      we : in std_logic;
-      en : in std_logic;
-      addr : in std_logic_vector(31 downto 3);
-      be7n, be6n, be5n, be4n, be3n, be2n, be1n, be0n : in std_logic;
-      di : in std_logic_vector(63 downto 0);
-      do : out std_logic_vector(63 downto 0)
+      -- Instruction Memory
+      we_i : in std_logic;
+      en_i : in std_logic;
+      addr_i : in std_logic_vector(31 downto 3);
+      ben_i : in std_logic_vector(7 downto 0);
+      di_i : in std_logic_vector(63 downto 0);
+      do_i : out std_logic_vector(63 downto 0);
+      -- Data Memory
+      we_d : in std_logic;
+      en_d : in std_logic;
+      addr_d : in std_logic_vector(31 downto 3);
+      ben_d : in std_logic_vector(7 downto 0);
+      di_d : in std_logic_vector(63 downto 0);
+      do_d : out std_logic_vector(63 downto 0)
       );
   end component MMU;
 
   -- Signals
-  signal clk_tb, resetb_tb, we_tb, en_tb : std_logic;
-  signal be7n_tb, be6n_tb, be5n_tb, be4n_tb : std_logic;
-  signal be3n_tb, be2n_tb, be1n_tb, be0n_tb : std_logic;
-  signal addr_tb : std_logic_vector(31 downto 0);
-  signal di_tb, do_tb : std_logic_vector(63 downto 0);
+  signal clk, resetb, we_i, en_i, we_d, en_d : std_logic;
+  signal ben_i, ben_d : std_logic_vector(7 downto 0);
+  signal addr_i, addr_d : std_logic_vector(31 downto 0);
+  signal di_i, di_d, do_i, do_d : std_logic_vector(63 downto 0);
   -- Simulation control
   shared variable END_SIMULATION : boolean := false;
   -- Test procedures
   procedure reset (
-    signal resetb : out std_logic
+    signal resetb : out std_logic;
+    signal en_i, we_i, en_d, we_d : out std_logic;
+    signal ben_i, ben_d : out std_logic_vector(7 downto 0)
     ) is
   begin
-    wait until rising_edge(clk_tb);
+    wait until rising_edge(clk);
     resetb <= '0';
-    wait until rising_edge(clk_tb);
-    wait until rising_edge(clk_tb);
+    en_i <= '0'; we_i <= '0';
+    en_d <= '0'; we_d <= '0';
+    ben_i <= (others => '1');
+    ben_d <= (others => '1');
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
     resetb <= '1';
 
   end procedure reset;
-  procedure test_template(
-    signal resetb, we, en : out std_logic;
-    signal be7n, be6n, be5n, be4n : out std_logic;
-    signal be3n, be2n, be1n, be0n : out std_logic;
-    signal addr : out std_logic_vector(31 downto 0);
-    signal di : out std_logic_vector(63 downto 0);
-    signal do : out std_logic_vector(63 downto 0)
-    ) is
-    begin
-  end procedure test_template;
+  
   procedure test_1(
-    signal resetb, we, en : out std_logic;
-    signal be7n, be6n, be5n, be4n : out std_logic;
-    signal be3n, be2n, be1n, be0n : out std_logic;
-    signal addr : out std_logic_vector(31 downto 0);
-    signal di : out std_logic_vector(63 downto 0)
-    -- signal do : out std_logic_vector(63 downto 0)
+    signal resetb : out std_logic;
+    signal en_i, we_i, en_d, we_d : out std_logic;
+    signal ben_i, ben_d : out std_logic_vector(7 downto 0);
+    signal addr_i, addr_d : inout std_logic_vector(31 downto 0);
+    signal di_i, di_d : inout std_logic_vector(63 downto 0)
+   -- signal do : out std_logic_vector(63 downto 0)
     ) is
-    variable addr_tmp : integer;
-    variable naddr_line, addr_line, data_line : line;
+    variable addri_tmp, addrd_tmp : integer;
+    variable naddri_line, addri_line, datai_line : line;
+    variable naddrd_line, addrd_line, datad_line : line;
     constant data_unsigned : unsigned(63 downto 0) :=
       X"DEADBEEFBAADC0DE";
 
   begin
-    we <= '0'; en <= '0';
-    be7n <= '0'; be6n <= '0'; be5n <= '0'; be4n <= '0';
-    be3n <= '0'; be2n <= '0'; be1n <= '0'; be0n <= '0';
-    addr <= (others => '-');
-    di <= (others => '-');
-    reset(resetb);
+    reset(resetb, en_i, we_i, en_d, we_d, ben_i, ben_d);
     --wait until rising_edge(resetb_tb);
     --wait until rising_edge(clk_tb);
     write(output, lf & "==============================================" & lf);    
     write(output, "(II) Test 1: Expected Behaviour:" & lf);
-    write(output, "  1. Address increment by 0x8 for each iteration" & lf);
+    write(output, "  1. Instruction Address increment by 0x8 for each iteration" & lf);
     write(output, "  2. Writes 0xDEADBEEFBAADC0DE every iteration" & lf);
     write(output, "  3. Writes to all 8 bytes" & lf);
-    write(output, "  4. Disregard Prev_* for first iteration" & lf);
     write(output, "==============================================" & lf);
-    wait until rising_edge(clk_tb);
+    wait until rising_edge(clk);
     for i in 0 to 15 loop
       -- Write 0xDEADBEEFBAADC0DE to address 0x0000000, 0x00000008, ...
-      addr_tmp := i * 8;
-      addr <= std_logic_vector(to_unsigned(addr_tmp, 32));
-      di <= std_logic_vector(data_unsigned);
-      en <= '1'; we <= '1';
+      addri_tmp := i * 8;
+      addr_i <= std_logic_vector(to_unsigned(addri_tmp, 32));
+      di_i <= std_logic_vector(data_unsigned);
+      en_i <= '1'; we_i <= '1';
+      ben_i <= (others => '0');
       -- Display some info
-      hwrite(naddr_line, std_logic_vector(to_unsigned(addr_tmp, 32)));
-      hwrite(addr_line, addr_tb);
-      hwrite(data_line, do_tb);
-      report "Test 1 Iter " & integer'image(i) & lf &
-        "  Addr in = 0x" & naddr_line.all & lf &
-        "  Prev Addr = 0x" & addr_line.all & lf &
-        "  Prev Data = 0x" & data_line.all severity note;
-      deallocate(naddr_line);
-      deallocate(addr_line);
-      deallocate(data_line);
+      display : if (i /= 0) then
+        hwrite(naddri_line, std_logic_vector(to_unsigned(addri_tmp, 32)));
+        hwrite(addri_line, addr_i);
+        hwrite(datai_line, do_i);
+        report lf & "(TT) Test 1 Iter " & integer'image(i-1) & lf &
+          "(TT)  Addr in = 0x" & naddri_line.all & lf &
+          "(TT)  Addr = 0x" & addri_line.all & lf &
+          "(TT)  Data = 0x" & datai_line.all severity note;
+        deallocate(naddri_line);
+        deallocate(addri_line);
+        deallocate(datai_line);
+      end if display;
       -- Wait a clock
-      wait until rising_edge(clk_tb);
+      wait until rising_edge(clk);
     end loop;
   end procedure test_1;
 
   procedure test_2(
-    signal resetb, we, en : out std_logic;
-    signal be7n, be6n, be5n, be4n : out std_logic;
-    signal be3n, be2n, be1n, be0n : out std_logic;
-    signal addr : out std_logic_vector(31 downto 0);
-    signal di : out std_logic_vector(63 downto 0)
-    -- signal do : out std_logic_vector(63 downto 0)
+    signal resetb : out std_logic;
+    signal en_i, we_i, en_d, we_d : out std_logic;
+    signal ben_i, ben_d : out std_logic_vector(7 downto 0);
+    signal addr_i, addr_d : inout std_logic_vector(31 downto 0);
+    signal di_i, di_d : inout std_logic_vector(63 downto 0)
+   -- signal do : out std_logic_vector(63 downto 0)
     ) is
-    variable addr_tmp : integer;
-    variable naddr_line, addr_line, data_line : line;
+    variable addri_tmp, addrd_tmp : integer;
+    variable naddri_line, addri_line, datai_line : line;
+    variable naddrd_line, addrd_line, datad_line : line;
     constant data_unsigned : unsigned(63 downto 0) :=
-      X"BADA661E11223344";
+      X"BADA661ECAFEF00D";
 
   begin
-    we <= '0'; en <= '0';
-    be7n <= '1'; be6n <= '1'; be5n <= '1'; be4n <= '1';
-    be3n <= '1'; be2n <= '1'; be1n <= '1'; be0n <= '1';
-    addr <= (others => '-');
-    di <= (others => '-');
-    reset(resetb);
+    reset(resetb, en_i, we_i, en_d, we_d, ben_i, ben_d);
     --wait until rising_edge(resetb_tb);
+    --wait until rising_edge(clk_tb);
     write(output, lf & "==============================================" & lf);    
     write(output, "(II) Test 2: Expected Behaviour:" & lf);
-    write(output, "  1. Address increment by 0x8 for each iteration" & lf);
-    write(output, "  2. Writes 0xBADA661E11223344 every iteration" & lf);
-    write(output, "  3. Writes to individual bytes equal to iteration count" & lf);
-    write(output, "  4. Disregard Prev_* for first iteration" & lf);
+    write(output, "  1. Instruction Address increment by 0x8 for each iteration" & lf);
+    write(output, "  2. Writes 0xBADA661ECAFEF00D every iteration" & lf);
+    write(output, "  3. Writes to all 8 bytes" & lf);
+    write(output, "  4. At the same time, Data Address increment by 0x8 for each iteration" & lf);
+    write(output, "  5. The two ports should give identical outputs" & lf);
     write(output, "==============================================" & lf);
-    wait until rising_edge(clk_tb);
-    for i in 0 to 9 loop
-      case i is
-        when 0 => be0n <= '0';
-        when 1 => be0n <= '1'; be1n <= '0';
-        when 2 => be1n <= '1'; be2n <= '0';
-        when 3 => be2n <= '1'; be3n <= '0';
-        when 4 => be3n <= '1'; be4n <= '0';
-        when 5 => be4n <= '1'; be5n <= '0';
-        when 6 => be5n <= '1'; be6n <= '0';
-        when 7 => be6n <= '1'; be7n <= '0';
-        when others => be7n <= '1';
-      end case;       
-      addr_tmp := i * 8;
-      addr <= std_logic_vector(to_unsigned(addr_tmp, 32));
-      di <= std_logic_vector(data_unsigned);
-      en <= '1'; we <= '1';
+    wait until rising_edge(clk);
+    for i in 0 to 15 loop
+      -- Write 0xBADA661ECAFEF00D to address 0x0000000, 0x00000008, ...
+      addri_tmp := i * 8;
+      addr_i <= std_logic_vector(to_unsigned(addri_tmp, 32));
+      di_i <= std_logic_vector(data_unsigned);
+      en_i <= '1'; we_i <= '1';
+      ben_i <= (others => '0');
+      addrd_tmp := i * 8;
+      addr_d <= std_logic_vector(to_unsigned(addrd_tmp, 32));
+      en_d <= '1'; we_d <= '0';
+      ben_d <= (others => '0');
       -- Display some info
-      hwrite(naddr_line, std_logic_vector(to_unsigned(addr_tmp, 32)));
-      hwrite(addr_line, addr_tb);
-      hwrite(data_line, do_tb);
-      report "Test 2 Iter " & integer'image(i) & lf &
-        "  Addr in = 0x" & naddr_line.all & lf &
-        "  Prev Addr = 0x" & addr_line.all & lf &
-        "  Prev Data = 0x" & data_line.all severity note;
-      deallocate(naddr_line);
-      deallocate(addr_line);
-      deallocate(data_line);
+      display : if (i /= 0) then
+        hwrite(naddri_line, std_logic_vector(to_unsigned(addri_tmp, 32)));
+        hwrite(addri_line, addr_i);
+        hwrite(datai_line, do_i);
+        hwrite(naddrd_line, std_logic_vector(to_unsigned(addrd_tmp, 32)));
+        hwrite(addrd_line, addr_d);
+        hwrite(datad_line, do_d);
+        report lf & "(TT) Test 2 Iter " & integer'image(i-1) & lf &
+          "(TT)  I. Addr in = 0x" & naddri_line.all & lf &
+          "(TT)  I. Addr = 0x" & addri_line.all & lf &
+          "(TT)  I. Data = 0x" & datai_line.all & lf &
+          "(TT)  D. Addr in = 0x" & naddrd_line.all & lf &
+          "(TT)  D. Addr = 0x" & addrd_line.all & lf &
+          "(TT)  D. Data = 0x" & datad_line.all severity note;
+        deallocate(naddri_line);
+        deallocate(addri_line);
+        deallocate(datai_line);
+        deallocate(naddrd_line);
+        deallocate(addrd_line);
+        deallocate(datad_line);
+      end if display;
       -- Wait a clock
-      wait until rising_edge(clk_tb);
+      wait until rising_edge(clk);
     end loop;
   end procedure test_2;
 
   procedure test_3(
-    signal resetb, we, en : out std_logic;
-    signal be7n, be6n, be5n, be4n : out std_logic;
-    signal be3n, be2n, be1n, be0n : out std_logic;
-    signal addr : out std_logic_vector(31 downto 0);
-    signal di : out std_logic_vector(63 downto 0)
-    -- signal do : out std_logic_vector(63 downto 0)
+    signal resetb : out std_logic;
+    signal en_i, we_i, en_d, we_d : out std_logic;
+    signal ben_i, ben_d : out std_logic_vector(7 downto 0);
+    signal addr_i, addr_d : inout std_logic_vector(31 downto 0);
+    signal di_i, di_d : inout std_logic_vector(63 downto 0)
+   -- signal do : out std_logic_vector(63 downto 0)
     ) is
-    variable addr_tmp : integer;
-    variable naddr_line, addr_line, data_line : line;
+    variable addri_tmp, addrd_tmp : integer;
+    variable naddri_line, addri_line, datai_line : line;
+    variable naddrd_line, addrd_line, datad_line : line;
     constant data_unsigned : unsigned(63 downto 0) :=
-      X"4B1D0D06F00DCAFE";
+      X"0FF1CECAFEBADD06";
 
   begin
-    we <= '0'; en <= '0';
-    be7n <= '1'; be6n <= '1'; be5n <= '1'; be4n <= '1';
-    be3n <= '1'; be2n <= '1'; be1n <= '1'; be0n <= '1';
-    addr <= (others => '-');
-    di <= (others => '-');
-    reset(resetb);
+    reset(resetb, en_i, we_i, en_d, we_d, ben_i, ben_d);
     --wait until rising_edge(resetb_tb);
+    --wait until rising_edge(clk_tb);
     write(output, lf & "==============================================" & lf);    
     write(output, "(II) Test 3: Expected Behaviour:" & lf);
-    write(output, "  1. Address increment by 0x8 for each iteration" & lf);
-    write(output, "  2. Writes 0x4B1D0D06F00DCAFE every iteration" & lf);
-    write(output, "  3. Writes two bytes at a time" & lf);
-    write(output, "  4. Disregard Prev_* for first iteration" & lf);
+    write(output, "  1. Instruction Address increment by 0x8 for each iteration" & lf);
+    write(output, "  2. Writes 0x0FF1CECAFEBADF00D every iteration" & lf);
+    write(output, "  3. Writes only high 4 bytes" & lf);
+    write(output, "  4. At the same time, Data Address increment by 0x8 for each iteration" & lf);
+    write(output, "  5. The two ports should give identical outputs" & lf);
     write(output, "==============================================" & lf);
-    wait until rising_edge(clk_tb);
-    for i in 0 to 5 loop
-      case i is
-        when 0 => be0n <= '0'; be1n <= '0';
-        when 1 => be0n <= '1'; be1n <= '1'; be2n <= '0'; be3n <= '0';
-        when 2 => be2n <= '1'; be3n <= '1'; be4n <= '0'; be5n <= '0';
-        when 3 => be4n <= '1'; be5n <= '1'; be6n <= '0'; be7n <= '0';
-        when others => be6n <= '1'; be7n <= '1';
-      end case;       
-      addr_tmp := i * 8;
-      addr <= std_logic_vector(to_unsigned(addr_tmp, 32));
-      di <= std_logic_vector(data_unsigned);
-      en <= '1'; we <= '1';
+    wait until rising_edge(clk);
+    for i in 0 to 15 loop
+      -- Write 0x0FF1CECAFEBADF00D to address 0x0000000, 0x00000008, ...
+      addri_tmp := i * 8;
+      addr_i <= std_logic_vector(to_unsigned(addri_tmp, 32));
+      di_i <= std_logic_vector(data_unsigned);
+      en_i <= '1'; we_i <= '1';
+      ben_i(7 downto 4) <= (others => '0');
+      addrd_tmp := i * 8;
+      addr_d <= std_logic_vector(to_unsigned(addrd_tmp, 32));
+      en_d <= '1'; we_d <= '0';
+      ben_d <= (others => '0');
       -- Display some info
-      hwrite(naddr_line, std_logic_vector(to_unsigned(addr_tmp, 32)));
-      hwrite(addr_line, addr_tb);
-      hwrite(data_line, do_tb);
-      report "Test 3 Iter " & integer'image(i) & lf &
-        "  Addr in = 0x" & naddr_line.all & lf &
-        "  Prev Addr = 0x" & addr_line.all & lf &
-        "  Prev Data = 0x" & data_line.all severity note;
-      deallocate(naddr_line);
-      deallocate(addr_line);
-      deallocate(data_line);
+      display : if (i /= 0) then
+        hwrite(naddri_line, std_logic_vector(to_unsigned(addri_tmp, 32)));
+        hwrite(addri_line, addr_i);
+        hwrite(datai_line, do_i);
+        hwrite(naddrd_line, std_logic_vector(to_unsigned(addrd_tmp, 32)));
+        hwrite(addrd_line, addr_d);
+        hwrite(datad_line, do_d);
+        report lf & "(TT) Test 3 Iter " & integer'image(i-1) & lf &
+          "(TT)  I. Addr in = 0x" & naddri_line.all & lf &
+          "(TT)  I. Addr = 0x" & addri_line.all & lf &
+          "(TT)  I. Data = 0x" & datai_line.all & lf &
+          "(TT)  D. Addr in = 0x" & naddrd_line.all & lf &
+          "(TT)  D. Addr = 0x" & addrd_line.all & lf &
+          "(TT)  D. Data = 0x" & datad_line.all severity note;
+        deallocate(naddri_line);
+        deallocate(addri_line);
+        deallocate(datai_line);
+        deallocate(naddrd_line);
+        deallocate(addrd_line);
+        deallocate(datad_line);
+      end if display;
       -- Wait a clock
-      wait until rising_edge(clk_tb);
+      wait until rising_edge(clk);
     end loop;
   end procedure test_3;
-
-  procedure test_4(
-    signal resetb, we, en : out std_logic;
-    signal be7n, be6n, be5n, be4n : out std_logic;
-    signal be3n, be2n, be1n, be0n : out std_logic;
-    signal addr : out std_logic_vector(31 downto 0);
-    signal di : out std_logic_vector(63 downto 0)
-    -- signal do : out std_logic_vector(63 downto 0)
-    ) is
-    variable addr_tmp : integer;
-    variable naddr_line, addr_line, data_line : line;
-    constant data_unsigned : unsigned(63 downto 0) :=
-      X"B00000000000DEAD";
-
-  begin
-    we <= '0'; en <= '0';
-    be7n <= '1'; be6n <= '1'; be5n <= '1'; be4n <= '1';
-    be3n <= '1'; be2n <= '1'; be1n <= '1'; be0n <= '1';
-    addr <= (others => '-');
-    di <= (others => '-');
-    reset(resetb);
-    --wait until rising_edge(resetb_tb);
-    write(output, lf & "==============================================" & lf);    
-    write(output, "(II) Test 4: Expected Behaviour:" & lf);
-    write(output, "  1. Address increment by 0x8 for each iteration" & lf);
-    write(output, "  2. Writes 0xB00000000000DEAD every iteration" & lf);
-    write(output, "  3. Writes four bytes at a time" & lf);
-    write(output, "  4. Disregard Prev_* for first iteration" & lf);
-    write(output, "==============================================" & lf);
-    wait until rising_edge(clk_tb);
-    for i in 0 to 3 loop
-      case i is
-        when 0 => be0n <= '0'; be1n <= '0'; be2n <='0'; be3n <= '0';
-        when 1 => be0n <= '1'; be1n <= '1'; be2n <= '1'; be3n <= '1';
-                  be4n <= '0'; be5n <= '0'; be6n <= '0'; be7n <= '0';     
-        when others => be4n <= '1'; be5n <= '1'; be6n <= '1'; be7n <= '1';
-      end case;       
-      addr_tmp := i * 8;
-      addr <= std_logic_vector(to_unsigned(addr_tmp, 32));
-      di <= std_logic_vector(data_unsigned);
-      en <= '1'; we <= '1';
-      -- Display some info
-      hwrite(naddr_line, std_logic_vector(to_unsigned(addr_tmp, 32)));
-      hwrite(addr_line, addr_tb);
-      hwrite(data_line, do_tb);
-      report "Test 4 Iter " & integer'image(i) & lf &
-        "  Addr in = 0x" & naddr_line.all & lf &
-        "  Prev Addr = 0x" & addr_line.all & lf &
-        "  Prev Data = 0x" & data_line.all severity note;
-      deallocate(naddr_line);
-      deallocate(addr_line);
-      deallocate(data_line);
-      -- Wait a clock
-      wait until rising_edge(clk_tb);
-    end loop;
-  end procedure test_4;
-
   
 begin
   UUT : MMU port map(
-    clk => clk_tb, resetb => resetb_tb,
-    we => we_tb, en => en_tb,
-    addr => addr_tb(31 downto 3),
-    be7n=>be7n_tb, be6n=>be6n_tb,
-    be5n=>be5n_tb, be4n=>be4n_tb,
-    be3n=>be3n_tb, be2n=>be2n_tb,
-    be1n=>be1n_tb, be0n=>be0n_tb,
-    di => di_tb,
-    do => do_tb
+    clk => clk, resetb => resetb,
+    we_i => we_i, en_i => en_i,
+    addr_i => addr_i(31 downto 3), ben_i => ben_i,
+    di_i => di_i, do_i => do_i,
+    we_d => we_d, en_d => en_d,
+    addr_d => addr_d(31 downto 3), ben_d => ben_d,
+    di_d => di_d, do_d => do_d
     );
 
-  clk : process
+  clk_generation : process
   begin
     if (not END_SIMULATION) then
-    clk_tb <= '0';
-    wait for 5 ns;
-    clk_tb <= '1';
-    wait for 5 ns;
+      clk <= '0';
+      wait for 5 ns;
+      clk <= '1';
+      wait for 5 ns;
     else
       wait;
     end if;
-  end process clk;
+  end process clk_generation;
 
   stimulus : process
   begin
-    test_1(resetb_tb, we_tb, en_tb,
-           be7n_tb, be6n_tb, be5n_tb, be4n_tb,
-           be3n_tb, be2n_tb, be1n_tb, be0n_tb,
-           addr_tb, di_tb
-           );
-    test_2(resetb_tb, we_tb, en_tb,
-           be7n_tb, be6n_tb, be5n_tb, be4n_tb,
-           be3n_tb, be2n_tb, be1n_tb, be0n_tb,
-           addr_tb, di_tb
-           );
-    test_3(resetb_tb, we_tb, en_tb,
-           be7n_tb, be6n_tb, be5n_tb, be4n_tb,
-           be3n_tb, be2n_tb, be1n_tb, be0n_tb,
-           addr_tb, di_tb
-           );
-    test_4(resetb_tb, we_tb, en_tb,
-           be7n_tb, be6n_tb, be5n_tb, be4n_tb,
-           be3n_tb, be2n_tb, be1n_tb, be0n_tb,
-           addr_tb, di_tb
-           );
+    -- test_1(resetb, en_i, we_i, en_d, we_d,
+    --        ben_i, ben_d, addr_i, addr_d,
+    --        di_i, di_d);
+    -- test_2(resetb, en_i, we_i, en_d, we_d,
+    --        ben_i, ben_d, addr_i, addr_d,
+    --        di_i, di_d);
+    test_3(resetb, en_i, we_i, en_d, we_d,
+           ben_i, ben_d, addr_i, addr_d,
+           di_i, di_d);
     -- End Simulation
     END_SIMULATION := true;
     wait;
-    -- assert false report "Simulation Ended" severity failure;
+  -- assert false report "Simulation Ended" severity failure;
   end process stimulus;
 end architecture behavioral;
