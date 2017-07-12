@@ -33,12 +33,12 @@ entity CPUCore is
     resetb : in std_logic;
     -- Interface with register file
     core_rf_en : out std_logic;
-    core_rf_rs_a : out std_logic_vector(3 downto 0);
+    core_rf_rs_a : out std_logic_vector(4 downto 0);
     core_rf_rs_d : in std_logic_vector(63 downto 0);
-    core_rf_rt_a : out std_logic_vector(3 downto 0);
+    core_rf_rt_a : out std_logic_vector(4 downto 0);
     core_rf_rt_d : in std_logic_vector(63 downto 0);
     core_rf_wb_we : out std_logic;
-    core_rf_wb_a : out std_logic_vector(3 downto 0);
+    core_rf_wb_a : out std_logic_vector(4 downto 0);
     core_rf_wb_d : out std_logic_vector(63 downto 0);
     -- Interface with MMU
     core_mmu_we : out std_logic;

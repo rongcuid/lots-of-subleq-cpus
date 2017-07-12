@@ -32,8 +32,8 @@ use IEEE.NUMERIC_STD.ALL;
 -- two read ports. It is also implemented using BRAM
 entity RegFile is
   generic ( WIDTH : integer := 64;
-            DEPTH : integer := 16;
-            DEPTH_LOG : integer := 4
+            DEPTH : integer := 32;
+            DEPTH_LOG : integer := 5
             );
   port (
     clk : in std_logic;
@@ -74,8 +74,12 @@ architecture syn of RegFile is
   end component BRAM_DP;
 
   -- Raw signals from BRAM
-  signal rs_do, rs_d0, rt_do, rt_d0, wb_do : std_logic_vector(WIDTH-1 downto 0);
-  signal forward_rs, forward_rt : std_logic;
+  signal rs_do, rs_d0, rs_df,
+    rt_do, rt_d0, rt_df,
+    wb_do : std_logic_vector(WIDTH-1 downto 0);
+  signal s2_rs_a, s2_rt_a : std_logic_vector(DEPTH_LOG-1 downto 0);
+  signal forward1_rs, forward1_rt : std_logic;
+  signal forward2_rs, forward2_rt : std_logic;
   signal zero_rs, zero_rt : std_logic;
   constant ZERO : std_logic_vector(DEPTH_LOG-1 downto 0) := (others => '0');
 begin
@@ -120,22 +124,25 @@ begin
   Forward_Zero : process (clk, resetb)
     begin
     if (resetb = '0') then
-      forward_rs <= '0';
-      forward_rt <= '0';
+      forward1_rs <= '0';
+      forward1_rt <= '0';
       zero_rs <= '0';
       zero_rt <= '0';
     elsif (clk'event and clk = '1') then
+      -- Save the previous addresses
+      s2_rs_a <= rs_a;
+      s2_rt_a <= rt_a;
       -- If any reads share address with write back,
       -- writeback value will be selected
       rs_forward : if (wb_we = '1' and rs_a = wb_a) then
-        forward_rs <= '1';
-      elsif (forward_rs = '1') then
-        forward_rs <= '0';  
+        forward1_rs <= '1';
+      elsif (forward1_rs = '1') then
+        forward1_rs <= '0';  
       end if rs_forward;
       rt_forward : if (wb_we = '1' and rt_a = wb_a) then
-        forward_rt <= '1';
-      elsif (forward_rt = '1') then
-        forward_rt <= '0';  
+        forward1_rt <= '1';
+      elsif (forward1_rt = '1') then
+        forward1_rt <= '0';  
       end if rt_forward;
       -- Return 0 for $0
       rs_zero : if (rs_a = ZERO) then
@@ -152,8 +159,10 @@ begin
   end process Forward_Zero;
 
   -- Muxes to choose from keep register/memory ports
-  rs_d0 <= wb_do when forward_rs = '1' else rs_do;
-  rt_d0 <= wb_do when forward_rt = '1' else rt_do;
+  rs_df <= wb_do when forward1_rs = '1' else rs_do;
+  rt_df <= wb_do when forward1_rt = '1' else rt_do;
+  rs_d0 <= wb_do when s2_rs_a = wb_a else rs_do;
+  rt_d0 <= wb_do when s2_rt_a = wb_a else rt_do;
   -- Note that $0 always read 0
   rs_d <= (others => '0') when zero_rs = '1' else rs_d0;
   rt_d <= (others => '0') when zero_rt = '1' else rt_d0;

@@ -1,0 +1,621 @@
+(TT)==============================================
+(TT) Test 1: Expected Behaviour:
+(TT)  1. Writes 15,14,...,0 to x0 to x15
+(TT)  2. Then reads all of them
+(TT)  3. x0 must read 0
+(TT)  4. All reads must delay by one clock
+(TT)  5. Disregard Prev_* for first iteration
+(TT)==============================================
+(TT) Test 1 iteration 0
+(TT)  Rs = x0
+(TT)  Rt = x15
+(TT)  Rs_do = 0x000000000000000F
+(TT)  Rt_do = 0x000000000000000F
+(TT) Test 1 iteration 1
+(TT)  Rs = x1
+(TT)  Rt = x14
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 2
+(TT)  Rs = x2
+(TT)  Rt = x13
+(TT)  Rs_do = 0x000000000000000E
+(TT)  Rt_do = 0x0000000000000001
+(TT) Test 1 iteration 3
+(TT)  Rs = x3
+(TT)  Rt = x12
+(TT)  Rs_do = 0x000000000000000D
+(TT)  Rt_do = 0x0000000000000002
+(TT) Test 1 iteration 4
+(TT)  Rs = x4
+(TT)  Rt = x11
+(TT)  Rs_do = 0x000000000000000C
+(TT)  Rt_do = 0x0000000000000003
+(TT) Test 1 iteration 5
+(TT)  Rs = x5
+(TT)  Rt = x10
+(TT)  Rs_do = 0x000000000000000B
+(TT)  Rt_do = 0x0000000000000004
+(TT) Test 1 iteration 6
+(TT)  Rs = x6
+(TT)  Rt = x9
+(TT)  Rs_do = 0x000000000000000A
+(TT)  Rt_do = 0x0000000000000005
+(TT) Test 1 iteration 7
+(TT)  Rs = x7
+(TT)  Rt = x8
+(TT)  Rs_do = 0x0000000000000009
+(TT)  Rt_do = 0x0000000000000006
+(TT) Test 1 iteration 8
+(TT)  Rs = x8
+(TT)  Rt = x7
+(TT)  Rs_do = 0x0000000000000008
+(TT)  Rt_do = 0x0000000000000007
+(TT) Test 1 iteration 9
+(TT)  Rs = x9
+(TT)  Rt = x6
+(TT)  Rs_do = 0x0000000000000007
+(TT)  Rt_do = 0x0000000000000008
+(TT) Test 1 iteration 10
+(TT)  Rs = x10
+(TT)  Rt = x5
+(TT)  Rs_do = 0x0000000000000006
+(TT)  Rt_do = 0x0000000000000009
+(TT) Test 1 iteration 11
+(TT)  Rs = x11
+(TT)  Rt = x4
+(TT)  Rs_do = 0x0000000000000005
+(TT)  Rt_do = 0x000000000000000A
+(TT) Test 1 iteration 12
+(TT)  Rs = x12
+(TT)  Rt = x3
+(TT)  Rs_do = 0x0000000000000004
+(TT)  Rt_do = 0x000000000000000B
+(TT) Test 1 iteration 13
+(TT)  Rs = x13
+(TT)  Rt = x2
+(TT)  Rs_do = 0x0000000000000003
+(TT)  Rt_do = 0x000000000000000C
+(TT) Test 1 iteration 14
+(TT)  Rs = x14
+(TT)  Rt = x1
+(TT)  Rs_do = 0x0000000000000002
+(TT)  Rt_do = 0x000000000000000D
+(TT) Test 1 iteration 15
+(TT)  Rs = x15
+(TT)  Rt = x0
+(TT)  Rs_do = 0x0000000000000001
+(TT)  Rt_do = 0x000000000000000E
+(TT) Test 1 iteration 16
+(TT)  Rs = x16
+(TT)  Rt = x15
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 17
+(TT)  Rs = x17
+(TT)  Rt = x14
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 18
+(TT)  Rs = x18
+(TT)  Rt = x13
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 19
+(TT)  Rs = x19
+(TT)  Rt = x12
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 20
+(TT)  Rs = x20
+(TT)  Rt = x11
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 21
+(TT)  Rs = x21
+(TT)  Rt = x10
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 22
+(TT)  Rs = x22
+(TT)  Rt = x9
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 23
+(TT)  Rs = x23
+(TT)  Rt = x8
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 24
+(TT)  Rs = x24
+(TT)  Rt = x7
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 25
+(TT)  Rs = x25
+(TT)  Rt = x6
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 26
+(TT)  Rs = x26
+(TT)  Rt = x5
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 27
+(TT)  Rs = x27
+(TT)  Rt = x4
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 28
+(TT)  Rs = x28
+(TT)  Rt = x3
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 29
+(TT)  Rs = x29
+(TT)  Rt = x2
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT) Test 1 iteration 30
+(TT)  Rs = x30
+(TT)  Rt = x1
+(TT)  Rs_do = 0x0000000000000000
+(TT)  Rt_do = 0x0000000000000000
+(TT)==============================================
+(TT) Test 2: Expected Behaviour:
+(TT)  1. Writes 15,14,...,0 to x0 to x15
+(TT)  2. Then writes 1,2,4,8,... to x0 to x15
+(TT)  3. At the same time, Rs reads from x0 to x15
+(TT)  4. At the same time, Rt reads from x15 to x0
+(TT)  5. All reads must receive latest and correct value
+(TT)  6. All operations are delayed for one clock, therefore correct output should be something like:
+(TT) Rx = x<reg>
+(TT) --- Next Iteration ---
+(TT) Rx_d = correct data
+(TT) ==============================================
+(TT) Test 2 iteration  0
+(TT)  Wb = x0
+(TT)  Wb_d = 0x0000000000000000
+(TT)  Rs = x0
+(TT)  Rs_d = 0x0000000000000000
+(TT)  Rt = x15
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  1
+(TT)  Wb = x1
+(TT)  Wb_d = 0x0000000000000002
+(TT)  Rs = x1
+(TT)  Rs_d = 0x0000000000000000
+(TT)  Rt = x14
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  2
+(TT)  Wb = x2
+(TT)  Wb_d = 0x0000000000000008
+(TT)  Rs = x2
+(TT)  Rs_d = 0x0000000000000002
+(TT)  Rt = x13
+(TT)  Rt_d = 0x0000000000000001
+(TT) Test 2 iteration  3
+(TT)  Wb = x3
+(TT)  Wb_d = 0x0000000000000018
+(TT)  Rs = x3
+(TT)  Rs_d = 0x0000000000000008
+(TT)  Rt = x12
+(TT)  Rt_d = 0x0000000000000002
+(TT) Test 2 iteration  4
+(TT)  Wb = x4
+(TT)  Wb_d = 0x0000000000000040
+(TT)  Rs = x4
+(TT)  Rs_d = 0x0000000000000018
+(TT)  Rt = x11
+(TT)  Rt_d = 0x0000000000000003
+(TT) Test 2 iteration  5
+(TT)  Wb = x5
+(TT)  Wb_d = 0x00000000000000A0
+(TT)  Rs = x5
+(TT)  Rs_d = 0x0000000000000040
+(TT)  Rt = x10
+(TT)  Rt_d = 0x0000000000000004
+(TT) Test 2 iteration  6
+(TT)  Wb = x6
+(TT)  Wb_d = 0x0000000000000180
+(TT)  Rs = x6
+(TT)  Rs_d = 0x00000000000000A0
+(TT)  Rt = x9
+(TT)  Rt_d = 0x0000000000000005
+(TT) Test 2 iteration  7
+(TT)  Wb = x7
+(TT)  Wb_d = 0x0000000000000380
+(TT)  Rs = x7
+(TT)  Rs_d = 0x0000000000000180
+(TT)  Rt = x8
+(TT)  Rt_d = 0x0000000000000006
+(TT) Test 2 iteration  8
+(TT)  Wb = x8
+(TT)  Wb_d = 0x0000000000000800
+(TT)  Rs = x8
+(TT)  Rs_d = 0x0000000000000380
+(TT)  Rt = x7
+(TT)  Rt_d = 0x0000000000000380
+(TT) Test 2 iteration  9
+(TT)  Wb = x9
+(TT)  Wb_d = 0x0000000000001200
+(TT)  Rs = x9
+(TT)  Rs_d = 0x0000000000000800
+(TT)  Rt = x6
+(TT)  Rt_d = 0x0000000000000380
+(TT) Test 2 iteration  10
+(TT)  Wb = x10
+(TT)  Wb_d = 0x0000000000002800
+(TT)  Rs = x10
+(TT)  Rs_d = 0x0000000000001200
+(TT)  Rt = x5
+(TT)  Rt_d = 0x0000000000000180
+(TT) Test 2 iteration  11
+(TT)  Wb = x11
+(TT)  Wb_d = 0x0000000000005800
+(TT)  Rs = x11
+(TT)  Rs_d = 0x0000000000002800
+(TT)  Rt = x4
+(TT)  Rt_d = 0x00000000000000A0
+(TT) Test 2 iteration  12
+(TT)  Wb = x12
+(TT)  Wb_d = 0x000000000000C000
+(TT)  Rs = x12
+(TT)  Rs_d = 0x0000000000005800
+(TT)  Rt = x3
+(TT)  Rt_d = 0x0000000000000040
+(TT) Test 2 iteration  13
+(TT)  Wb = x13
+(TT)  Wb_d = 0x000000000001A000
+(TT)  Rs = x13
+(TT)  Rs_d = 0x000000000000C000
+(TT)  Rt = x2
+(TT)  Rt_d = 0x0000000000000018
+(TT) Test 2 iteration  14
+(TT)  Wb = x14
+(TT)  Wb_d = 0x0000000000038000
+(TT)  Rs = x14
+(TT)  Rs_d = 0x000000000001A000
+(TT)  Rt = x1
+(TT)  Rt_d = 0x0000000000000008
+(TT) Test 2 iteration  15
+(TT)  Wb = x15
+(TT)  Wb_d = 0x0000000000078000
+(TT)  Rs = x15
+(TT)  Rs_d = 0x0000000000038000
+(TT)  Rt = x0
+(TT)  Rt_d = 0x0000000000000002
+(TT) Test 2 iteration  16
+(TT)  Wb = x0
+(TT)  Wb_d = 0x0000000000100000
+(TT)  Rs = x0
+(TT)  Rs_d = 0x0000000000078000
+(TT)  Rt = x15
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  17
+(TT)  Wb = x1
+(TT)  Wb_d = 0x0000000000220000
+(TT)  Rs = x1
+(TT)  Rs_d = 0x0000000000100000
+(TT)  Rt = x14
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  18
+(TT)  Wb = x2
+(TT)  Wb_d = 0x0000000000480000
+(TT)  Rs = x2
+(TT)  Rs_d = 0x0000000000220000
+(TT)  Rt = x13
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  19
+(TT)  Wb = x3
+(TT)  Wb_d = 0x0000000000980000
+(TT)  Rs = x3
+(TT)  Rs_d = 0x0000000000480000
+(TT)  Rt = x12
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  20
+(TT)  Wb = x4
+(TT)  Wb_d = 0x0000000001400000
+(TT)  Rs = x4
+(TT)  Rs_d = 0x0000000000980000
+(TT)  Rt = x11
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  21
+(TT)  Wb = x5
+(TT)  Wb_d = 0x0000000002A00000
+(TT)  Rs = x5
+(TT)  Rs_d = 0x0000000001400000
+(TT)  Rt = x10
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  22
+(TT)  Wb = x6
+(TT)  Wb_d = 0x0000000005800000
+(TT)  Rs = x6
+(TT)  Rs_d = 0x0000000002A00000
+(TT)  Rt = x9
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  23
+(TT)  Wb = x7
+(TT)  Wb_d = 0x000000000B800000
+(TT)  Rs = x7
+(TT)  Rs_d = 0x0000000005800000
+(TT)  Rt = x8
+(TT)  Rt_d = 0x0000000000000000
+(TT) Test 2 iteration  24
+(TT)  Wb = x8
+(TT)  Wb_d = 0x0000000018000000
+(TT)  Rs = x8
+(TT)  Rs_d = 0x000000000B800000
+(TT)  Rt = x7
+(TT)  Rt_d = 0x000000000B800000
+(TT) Test 2 iteration  25
+(TT)  Wb = x9
+(TT)  Wb_d = 0x0000000032000000
+(TT)  Rs = x9
+(TT)  Rs_d = 0x0000000018000000
+(TT)  Rt = x6
+(TT)  Rt_d = 0x000000000B800000
+(TT) Test 2 iteration  26
+(TT)  Wb = x10
+(TT)  Wb_d = 0x0000000068000000
+(TT)  Rs = x10
+(TT)  Rs_d = 0x0000000032000000
+(TT)  Rt = x5
+(TT)  Rt_d = 0x0000000005800000
+(TT) Test 2 iteration  27
+(TT)  Wb = x11
+(TT)  Wb_d = 0x00000000D8000000
+(TT)  Rs = x11
+(TT)  Rs_d = 0x0000000068000000
+(TT)  Rt = x4
+(TT)  Rt_d = 0x0000000002A00000
+(TT) Test 2 iteration  28
+(TT)  Wb = x12
+(TT)  Wb_d = 0x00000001C0000000
+(TT)  Rs = x12
+(TT)  Rs_d = 0x00000000D8000000
+(TT)  Rt = x3
+(TT)  Rt_d = 0x0000000001400000
+(TT) Test 2 iteration  29
+(TT)  Wb = x13
+(TT)  Wb_d = 0x00000003A0000000
+(TT)  Rs = x13
+(TT)  Rs_d = 0x00000001C0000000
+(TT)  Rt = x2
+(TT)  Rt_d = 0x0000000000980000
+(TT) Test 2 iteration  30
+(TT)  Wb = x14
+(TT)  Wb_d = 0x0000000780000000
+(TT)  Rs = x14
+(TT)  Rs_d = 0x00000003A0000000
+(TT)  Rt = x1
+(TT)  Rt_d = 0x0000000000480000
+(TT)==============================================
+(TT) Test 3: Expected Behaviour:
+(TT)  1. Writes 15,14,...,0 to x0 to x15
+(TT)  2. Then writes 1,2,4,8,... to x0 to x15
+(TT)  3. At the same time, Rs reads from x0 to x15
+(TT)  4. At the same time, Rt reads from x1 to x15
+(TT)  5. All reads must receive latest and correct (same) value
+(TT)  6. All operations are delayed for one clock, therefore correct output should be something like:
+(TT) Rx = x<reg>
+(TT) --- Next Iteration ---
+(TT) Rx_d = correct data
+(TT) ==============================================
+(TT) Test 3 iteration  0
+(TT)  Wb = x1
+(TT)  Wb_d = 0x0000000000000001
+(TT)  Rs = x0
+(TT)  Rs_d = 0x0000000F80000000
+(TT)  Rt = x1
+(TT)  Rt_d = 0x0000000000100000
+(TT) Test 3 iteration  1
+(TT)  Wb = x2
+(TT)  Wb_d = 0x0000000000000004
+(TT)  Rs = x1
+(TT)  Rs_d = 0x0000000000000000
+(TT)  Rt = x2
+(TT)  Rt_d = 0x0000000000000001
+(TT) Test 3 iteration  2
+(TT)  Wb = x3
+(TT)  Wb_d = 0x000000000000000C
+(TT)  Rs = x2
+(TT)  Rs_d = 0x0000000000000004
+(TT)  Rt = x3
+(TT)  Rt_d = 0x0000000000000004
+(TT) Test 3 iteration  3
+(TT)  Wb = x4
+(TT)  Wb_d = 0x0000000000000020
+(TT)  Rs = x3
+(TT)  Rs_d = 0x000000000000000C
+(TT)  Rt = x4
+(TT)  Rt_d = 0x000000000000000C
+(TT) Test 3 iteration  4
+(TT)  Wb = x5
+(TT)  Wb_d = 0x0000000000000050
+(TT)  Rs = x4
+(TT)  Rs_d = 0x0000000000000020
+(TT)  Rt = x5
+(TT)  Rt_d = 0x0000000000000020
+(TT) Test 3 iteration  5
+(TT)  Wb = x6
+(TT)  Wb_d = 0x00000000000000C0
+(TT)  Rs = x5
+(TT)  Rs_d = 0x0000000000000050
+(TT)  Rt = x6
+(TT)  Rt_d = 0x0000000000000050
+(TT) Test 3 iteration  6
+(TT)  Wb = x7
+(TT)  Wb_d = 0x00000000000001C0
+(TT)  Rs = x6
+(TT)  Rs_d = 0x00000000000000C0
+(TT)  Rt = x7
+(TT)  Rt_d = 0x00000000000000C0
+(TT) Test 3 iteration  7
+(TT)  Wb = x8
+(TT)  Wb_d = 0x0000000000000400
+(TT)  Rs = x7
+(TT)  Rs_d = 0x00000000000001C0
+(TT)  Rt = x8
+(TT)  Rt_d = 0x00000000000001C0
+(TT) Test 3 iteration  8
+(TT)  Wb = x9
+(TT)  Wb_d = 0x0000000000000900
+(TT)  Rs = x8
+(TT)  Rs_d = 0x0000000000000400
+(TT)  Rt = x9
+(TT)  Rt_d = 0x0000000000000400
+(TT) Test 3 iteration  9
+(TT)  Wb = x10
+(TT)  Wb_d = 0x0000000000001400
+(TT)  Rs = x9
+(TT)  Rs_d = 0x0000000000000900
+(TT)  Rt = x10
+(TT)  Rt_d = 0x0000000000000900
+(TT) Test 3 iteration  10
+(TT)  Wb = x11
+(TT)  Wb_d = 0x0000000000002C00
+(TT)  Rs = x10
+(TT)  Rs_d = 0x0000000000001400
+(TT)  Rt = x11
+(TT)  Rt_d = 0x0000000000001400
+(TT) Test 3 iteration  11
+(TT)  Wb = x12
+(TT)  Wb_d = 0x0000000000006000
+(TT)  Rs = x11
+(TT)  Rs_d = 0x0000000000002C00
+(TT)  Rt = x12
+(TT)  Rt_d = 0x0000000000002C00
+(TT) Test 3 iteration  12
+(TT)  Wb = x13
+(TT)  Wb_d = 0x000000000000D000
+(TT)  Rs = x12
+(TT)  Rs_d = 0x0000000000006000
+(TT)  Rt = x13
+(TT)  Rt_d = 0x0000000000006000
+(TT) Test 3 iteration  13
+(TT)  Wb = x14
+(TT)  Wb_d = 0x000000000001C000
+(TT)  Rs = x13
+(TT)  Rs_d = 0x000000000000D000
+(TT)  Rt = x14
+(TT)  Rt_d = 0x000000000000D000
+(TT) Test 3 iteration  14
+(TT)  Wb = x15
+(TT)  Wb_d = 0x000000000003C000
+(TT)  Rs = x14
+(TT)  Rs_d = 0x000000000001C000
+(TT)  Rt = x15
+(TT)  Rt_d = 0x000000000001C000
+(TT) Test 3 iteration  15
+(TT)  Wb = x0
+(TT)  Wb_d = 0x0000000000080000
+(TT)  Rs = x15
+(TT)  Rs_d = 0x000000000003C000
+(TT)  Rt = x0
+(TT)  Rt_d = 0x000000000003C000
+(TT) Test 3 iteration  16
+(TT)  Wb = x1
+(TT)  Wb_d = 0x0000000000110000
+(TT)  Rs = x0
+(TT)  Rs_d = 0x0000000000080000
+(TT)  Rt = x1
+(TT)  Rt_d = 0x0000000000080000
+(TT) Test 3 iteration  17
+(TT)  Wb = x2
+(TT)  Wb_d = 0x0000000000240000
+(TT)  Rs = x1
+(TT)  Rs_d = 0x0000000000110000
+(TT)  Rt = x2
+(TT)  Rt_d = 0x0000000000110000
+(TT) Test 3 iteration  18
+(TT)  Wb = x3
+(TT)  Wb_d = 0x00000000004C0000
+(TT)  Rs = x2
+(TT)  Rs_d = 0x0000000000240000
+(TT)  Rt = x3
+(TT)  Rt_d = 0x0000000000240000
+(TT) Test 3 iteration  19
+(TT)  Wb = x4
+(TT)  Wb_d = 0x0000000000A00000
+(TT)  Rs = x3
+(TT)  Rs_d = 0x00000000004C0000
+(TT)  Rt = x4
+(TT)  Rt_d = 0x00000000004C0000
+(TT) Test 3 iteration  20
+(TT)  Wb = x5
+(TT)  Wb_d = 0x0000000001500000
+(TT)  Rs = x4
+(TT)  Rs_d = 0x0000000000A00000
+(TT)  Rt = x5
+(TT)  Rt_d = 0x0000000000A00000
+(TT) Test 3 iteration  21
+(TT)  Wb = x6
+(TT)  Wb_d = 0x0000000002C00000
+(TT)  Rs = x5
+(TT)  Rs_d = 0x0000000001500000
+(TT)  Rt = x6
+(TT)  Rt_d = 0x0000000001500000
+(TT) Test 3 iteration  22
+(TT)  Wb = x7
+(TT)  Wb_d = 0x0000000005C00000
+(TT)  Rs = x6
+(TT)  Rs_d = 0x0000000002C00000
+(TT)  Rt = x7
+(TT)  Rt_d = 0x0000000002C00000
+(TT) Test 3 iteration  23
+(TT)  Wb = x8
+(TT)  Wb_d = 0x000000000C000000
+(TT)  Rs = x7
+(TT)  Rs_d = 0x0000000005C00000
+(TT)  Rt = x8
+(TT)  Rt_d = 0x0000000005C00000
+(TT) Test 3 iteration  24
+(TT)  Wb = x9
+(TT)  Wb_d = 0x0000000019000000
+(TT)  Rs = x8
+(TT)  Rs_d = 0x000000000C000000
+(TT)  Rt = x9
+(TT)  Rt_d = 0x000000000C000000
+(TT) Test 3 iteration  25
+(TT)  Wb = x10
+(TT)  Wb_d = 0x0000000034000000
+(TT)  Rs = x9
+(TT)  Rs_d = 0x0000000019000000
+(TT)  Rt = x10
+(TT)  Rt_d = 0x0000000019000000
+(TT) Test 3 iteration  26
+(TT)  Wb = x11
+(TT)  Wb_d = 0x000000006C000000
+(TT)  Rs = x10
+(TT)  Rs_d = 0x0000000034000000
+(TT)  Rt = x11
+(TT)  Rt_d = 0x0000000034000000
+(TT) Test 3 iteration  27
+(TT)  Wb = x12
+(TT)  Wb_d = 0x00000000E0000000
+(TT)  Rs = x11
+(TT)  Rs_d = 0x000000006C000000
+(TT)  Rt = x12
+(TT)  Rt_d = 0x000000006C000000
+(TT) Test 3 iteration  28
+(TT)  Wb = x13
+(TT)  Wb_d = 0x00000001D0000000
+(TT)  Rs = x12
+(TT)  Rs_d = 0x00000000E0000000
+(TT)  Rt = x13
+(TT)  Rt_d = 0x00000000E0000000
+(TT) Test 3 iteration  29
+(TT)  Wb = x14
+(TT)  Wb_d = 0x00000003C0000000
+(TT)  Rs = x13
+(TT)  Rs_d = 0x00000001D0000000
+(TT)  Rt = x14
+(TT)  Rt_d = 0x00000001D0000000
+(TT) Test 3 iteration  30
+(TT)  Wb = x15
+(TT)  Wb_d = 0x00000007C0000000
+(TT)  Rs = x14
+(TT)  Rs_d = 0x00000003C0000000
+(TT)  Rt = x15
+(TT)  Rt_d = 0x00000003C0000000
