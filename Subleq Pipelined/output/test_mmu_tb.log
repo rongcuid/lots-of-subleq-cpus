@@ -1,32 +1,9 @@
 
 ==============================================
-(II) Test 1: Expected Behaviour:
-  1. Address increment by 0x8 for each iteration
-  2. Writes 0xDEADBEEFBAADC0DE every iteration
-  3. Writes to all 8 bytes
-  4. Disregard Prev_* for first iteration
-==============================================
-
-==============================================
-(II) Test 2: Expected Behaviour:
-  1. Address increment by 0x8 for each iteration
-  2. Writes 0xBADA661E11223344 every iteration
-  3. Writes to individual bytes equal to iteration count
-  4. Disregard Prev_* for first iteration
-==============================================
-
-==============================================
 (II) Test 3: Expected Behaviour:
-  1. Address increment by 0x8 for each iteration
-  2. Writes 0x4B1D0D06F00DCAFE every iteration
-  3. Writes two bytes at a time
-  4. Disregard Prev_* for first iteration
-==============================================
-
-==============================================
-(II) Test 4: Expected Behaviour:
-  1. Address increment by 0x8 for each iteration
-  2. Writes 0xB00000000000DEAD every iteration
-  3. Writes four bytes at a time
-  4. Disregard Prev_* for first iteration
+  1. Instruction Address increment by 0x8 for each iteration
+  2. Writes 0x0FF1CECAFEBADF00D every iteration
+  3. Writes only high 4 bytes
+  4. At the same time, Data Address increment by 0x8 for each iteration
+  5. The two ports should give identical outputs
 ==============================================
