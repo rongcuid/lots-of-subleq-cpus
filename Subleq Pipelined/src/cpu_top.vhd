@@ -184,7 +184,7 @@ begin
   cpu_rom_addr <= boot_addr;
   boot_mmu_en_i <= '0' when boot_done_temp = '1' else '1';
   boot_mmu_we_i <= '0' when boot_done_temp = '1' else '1';
-  boot_mmu_addr_i <= std_logic_vector(boot_addr);
+  -- boot_mmu_addr_i <= std_logic_vector(boot_addr);
   boot_loader : process (clk, resetb)
   begin
     if (resetb = '0') then
@@ -200,15 +200,14 @@ begin
           boot_wait_one_clock <= '1';
         end if;
         boot_addr <= boot_addr + 4;
+        boot_mmu_addr_i <= std_logic_vector(boot_addr);
         -- Low word, then high word
-        if (boot_second_word = '1') then
+        if (boot_addr(2) = '1') then
           boot_mmu_ben_i <= "00001111";
           boot_mmu_di_i(63 downto 32) <= cpu_rom_data;
-          boot_second_word <= '0';
         else
           boot_mmu_ben_i <= "11110000";
           boot_mmu_di_i(31 downto 0) <= cpu_rom_data;
-          boot_second_word <= '1';
         end if;
       elsif (boot_wait_one_clock = '1') then
         core_resetb <= '1';
