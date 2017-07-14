@@ -67,7 +67,7 @@ architecture behavioral of test_cpu_top_tb is
       exit when endfile(FileHandle);
 
       readline(FileHandle, CurrentLine);
-      hread(CurrentLine, TempWord);
+      read(CurrentLine, TempWord);
       Result(i)    := TempWord;
     end loop;
 
@@ -90,7 +90,7 @@ architecture behavioral of test_cpu_top_tb is
     signal rom : inout ram_t
     ) is
   begin
-    rom <= ocram_ReadMemFile("test/simulation/code/00-SW.hex");
+    rom <= ocram_ReadMemFile("test/simulation/code/00-SW.bin");
     reset(resetb);
     write(output, lf & "(TT)==============================================" & lf);    
     write(output, "(TT) Test 1 SW Expected Behaviour:" & lf);

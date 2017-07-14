@@ -82,15 +82,15 @@ architecture simple_pipeline of CPUCore is
   signal ID_Valid : std_logic;
   signal ID_RType, ID_IType, ID_SType, ID_UType : std_logic;
   signal ID_Instr : instr_t;
-  alias ID_opcode : opcode_t is core_mmu_do_i(6 downto 0);
-  alias ID_rs1 : rf_addr_t is core_mmu_do_i(19 downto 15);
-  alias ID_rs2 : rf_addr_t is core_mmu_do_i(24 downto 20);
+  alias ID_opcode : opcode_t is ID_Instr(6 downto 0);
+  alias ID_rs1 : rf_addr_t is ID_Instr(19 downto 15);
+  alias ID_rs2 : rf_addr_t is ID_Instr(24 downto 20);
   alias ID_rs1_d : data_t is core_rf_rs_d;
   alias ID_rs2_d : data_t is core_rf_rt_d;
   alias ID_wb_d : data_t is core_rf_wb_d;
-  alias ID_rd : rf_addr_t is core_mmu_do_i(11 downto 7);
-  alias ID_func3 : func3_t is core_mmu_do_i(14 downto 12);
-  alias ID_func7 : func7_t is core_mmu_do_i(31 downto 25);
+  alias ID_rd : rf_addr_t is ID_Instr(11 downto 7);
+  alias ID_func3 : func3_t is ID_Instr(14 downto 12);
+  alias ID_func7 : func7_t is ID_Instr(31 downto 25);
   --signal ID_RegWrite, ID_MemRead, ID_MemWrite : std_logic;
   -- XB stage signals
   signal XB_RType, XB_IType, XB_SType, XB_UType : std_logic;
@@ -108,7 +108,7 @@ architecture simple_pipeline of CPUCore is
   signal MEM_RType, MEM_IType, MEM_SType, MEM_UType : std_logic;
   signal MEM_MemRead, MEM_MemWrite, MEM_RegWrite : std_logic;
   signal MEM_rs1, MEM_rs2, MEM_rd : rf_addr_t;
-  signal MEM_data : int64_t;
+  signal MEM_aluresult, MEM_rs2_d : int64_t;
   -- WB stage signals
   signal WB_RegWrite : std_logic;
   signal WB_rd : rf_addr_t;
@@ -186,6 +186,7 @@ begin
   -- THE CPU CORE IS HERE!!!!!!
   core : process (clk, resetb)
     variable IF_nextPC : signed(31 downto 0);
+    variable IF_Instr : instr_t;
     variable XB_forwrs1, XB_forwrs2 : int64_t;
     variable XB_op1, XB_op2, XB_aluout : int64_t;
     variable XB_Branch : std_logic;
@@ -220,8 +221,8 @@ begin
         WB_data <= signed(core_mmu_do_d);
         core_rf_wb_d <= core_mmu_do_d;
       else
-        WB_data <= MEM_data;
-        core_rf_wb_d <= std_logic_vector(MEM_data);
+        WB_data <= MEM_aluresult;
+        core_rf_wb_d <= std_logic_vector(MEM_aluresult);
       end if;
       ------------------------------------- XB stage
       ---- Note that the mem control signals are shadow registers
@@ -241,7 +242,7 @@ begin
       XB_forwrs1 := XB_rs1_d;
       if (XB_FORW1_MEM_XB = '1') then
         -- Forward from Mem stage
-        XB_forwrs1 := MEM_data;
+        XB_forwrs1 := MEM_aluresult;
       elsif (XB_FORW1_WB_XB = '1') then
         -- Forward from WB stage
         XB_forwrs1 := WB_data;
@@ -249,11 +250,12 @@ begin
       XB_forwrs2 := XB_rs2_d;
       if (XB_FORW2_MEM_XB = '1') then
         -- Forward from Mem stage
-        XB_forwrs2 := MEM_data;
+        XB_forwrs2 := MEM_aluresult;
       elsif (XB_FORW2_WB_XB = '1') then
         -- Forward from WB stage
         XB_forwrs2 := WB_data;
       end if;
+      MEM_rs2_d <= XB_forwrs2;
       
       XB_op1 := XB_forwrs1;
       XB_op2_mux : if (XB_op2rs2 = '1') then
@@ -284,7 +286,7 @@ begin
           XB_Branch := '1';
         end if;
       end if;
-      MEM_data <= XB_aluout;
+      MEM_aluresult <= XB_aluout;
       ---- Memory
       core_mmu_en_d <= '0';
       core_mmu_we_d <= '0';
@@ -322,6 +324,7 @@ begin
       XB_opls3 <= '0';
       XB_op2rs2 <= '0';
       XB_op2imm <= '0';
+      XB_opneg <= '0';
       -- Only continue if instruction is valid
       ID_is_valid : if (ID_Valid = '1') then
         side_effect_signals : if (ID_IType = '1') then
@@ -361,6 +364,8 @@ begin
                 -- Immediate value left shift 3 bits, add to register value
                 XB_rs1 <= ID_rs1;
                 XB_rs1_d <= signed(ID_rs1_d);
+                XB_rs2 <= ID_rs2;
+                XB_rs2_d <= signed(ID_rs2_d);
                 XB_opls3 <= '1';
                 XB_opadd <= '1';
                 XB_op2imm <= '1';
@@ -417,10 +422,13 @@ begin
       PC <= IF_nextPC;
       mmu_addr_i_s32(31 downto 3) <= IF_nextPC(31 downto 3);
       if (PC(2) = '0') then
-        ID_Instr <= core_mmu_do_i(31 downto 0);
+        IF_Instr := core_mmu_do_i(31 downto 0);
       else
-        ID_Instr <= core_mmu_do_i(63 downto 32);
+        IF_Instr := core_mmu_do_i(63 downto 32);
       end if;
+      ID_Instr <= IF_Instr;
+      core_rf_rs_a <= IF_Instr(19 downto 15);
+      core_rf_rt_a <= IF_Instr(24 downto 20);
     end if;
   end process core;
 

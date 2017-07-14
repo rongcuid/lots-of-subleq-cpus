@@ -199,10 +199,10 @@ begin
           boot_done_temp <= '1';
           boot_wait_one_clock <= '1';
         end if;
+        boot_addr <= boot_addr + 4;
         -- Low word, then high word
         if (boot_second_word = '1') then
           boot_mmu_ben_i <= "00001111";
-          boot_addr <= boot_addr + 4;
           boot_mmu_di_i(63 downto 32) <= cpu_rom_data;
           boot_second_word <= '0';
         else
