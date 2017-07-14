@@ -133,6 +133,7 @@ architecture syn of cpu_top is
   signal mmu_we_i, mmu_en_i, mmu_we_d, mmu_en_d : std_logic;
   signal boot_done_temp, boot_second_word : std_logic;
   signal boot_addr : unsigned(31 downto 0);
+  signal boot_wait_one_clock : std_logic;
   constant ZERO64 : std_logic_vector(63 downto 0) := (others => '0');
 begin
   core : CPUCore
@@ -191,16 +192,17 @@ begin
       boot_done_temp <= '0';
       boot_second_word <= '0';
       boot_addr <= (others => '0');
+      boot_wait_one_clock <= '0';
     elsif (clk'event and clk = '1') then
-      if (boot_mmu_di_i = ZERO64) then
-        boot_done_temp <= '1';
-        core_resetb <= '1';
-      end if;
-      if (boot_done_temp = '0') then
+      if (boot_done_temp = '0' and boot_wait_one_clock = '0') then
+        if (boot_mmu_di_i = ZERO64) then
+          boot_done_temp <= '1';
+          boot_wait_one_clock <= '1';
+        end if;
         -- Low word, then high word
         if (boot_second_word = '1') then
           boot_mmu_ben_i <= "00001111";
-          boot_addr <= boot_addr + 8;
+          boot_addr <= boot_addr + 4;
           boot_mmu_di_i(63 downto 32) <= cpu_rom_data;
           boot_second_word <= '0';
         else
@@ -208,6 +210,8 @@ begin
           boot_mmu_di_i(31 downto 0) <= cpu_rom_data;
           boot_second_word <= '1';
         end if;
+      elsif (boot_wait_one_clock = '1') then
+        core_resetb <= '1';
       end if;
     end if;
   end process boot_loader;

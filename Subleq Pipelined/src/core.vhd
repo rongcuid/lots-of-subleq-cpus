@@ -76,6 +76,7 @@ architecture simple_pipeline of CPUCore is
   signal mmu_addr_i_s32 : signed(31 downto 3);
   -- ID stage signals
   signal stall : std_logic;
+  signal ID_highword : std_logic;
   signal ID_XMXB1, ID_XMXB2 : std_logic;
   signal ID_XMMEM1, ID_XMMEM2 : std_logic;
   signal ID_Valid : std_logic;
@@ -90,7 +91,7 @@ architecture simple_pipeline of CPUCore is
   alias ID_rd : rf_addr_t is core_mmu_do_i(11 downto 7);
   alias ID_func3 : func3_t is core_mmu_do_i(14 downto 12);
   alias ID_func7 : func7_t is core_mmu_do_i(31 downto 25);
-  signal ID_RegWrite, ID_MemRead, ID_MemWrite : std_logic;
+  --signal ID_RegWrite, ID_MemRead, ID_MemWrite : std_logic;
   -- XB stage signals
   signal XB_RType, XB_IType, XB_SType, XB_UType : std_logic;
   ---- Note that add and negate can make subtract
@@ -143,17 +144,17 @@ begin
               (XB_RType = '1' or XB_SType = '1')
               else '0';
   ID_XMMEM1 <= '1' when
-              XB_RegWrite = '1' and
-              ID_rs1 = MEM_rs1 and
-              ID_rs1 /= "00000" and
-              (MEM_RType = '1' or MEM_Itype = '1')
-              else '0';
+               XB_RegWrite = '1' and
+               ID_rs1 = MEM_rs1 and
+               ID_rs1 /= "00000" and
+               (MEM_RType = '1' or MEM_Itype = '1')
+               else '0';
   ID_XMMEM2 <= '1' when
-              XB_RegWrite = '1' and
-              ID_rs2 = MEM_rs2 and
-              ID_rs2 /= "00000" and
-              (MEM_RType = '1' or MEM_SType = '1')
-              else '0';
+               XB_RegWrite = '1' and
+               ID_rs2 = MEM_rs2 and
+               ID_rs2 /= "00000" and
+               (MEM_RType = '1' or MEM_SType = '1')
+               else '0';
   -- The stall signal.
   -- Stall is needed when source register is dependant on an immediate
   -- senior LW.
@@ -172,21 +173,22 @@ begin
   ID_UType <= '0';
 
   -- IF stage combinational
-  PC_ben : process (PC)
-  begin
-    core_mmu_ben_i <= (others => 'X');
-    if (PC(2 downto 0) = "000") then
-      core_mmu_ben_i <= "11110000";
-    elsif (PC(2 downto 0) = "100") then
-      core_mmu_ben_i <= "00001111";
-    end if;
-  end process;
+  core_mmu_ben_i <= "00000000";
+  -- PC_ben : process (PC)
+  -- begin
+  --   core_mmu_ben_i <= (others => 'X');
+  --   if (PC(2 downto 0) = "000") then
+  --     core_mmu_ben_i <= "11110000";
+  --   elsif (PC(2 downto 0) = "100") then
+  --     core_mmu_ben_i <= "00001111";
+  --   end if;
+  -- end process;
   -- THE CPU CORE IS HERE!!!!!!
   core : process (clk, resetb)
     variable IF_nextPC : signed(31 downto 0);
-  variable XB_forwrs1, XB_forwrs2 : int64_t;
-  variable XB_op1, XB_op2, XB_aluout : int64_t;
-  variable XB_Branch : std_logic;
+    variable XB_forwrs1, XB_forwrs2 : int64_t;
+    variable XB_op1, XB_op2, XB_aluout : int64_t;
+    variable XB_Branch : std_logic;
     variable inc_pc : addr_t;
   begin
     if (resetb = '0') then
@@ -320,52 +322,56 @@ begin
       XB_opls3 <= '0';
       XB_op2rs2 <= '0';
       XB_op2imm <= '0';
-      side_effect_signals : if (ID_IType = '1') then
-        case ID_opcode is
-          when OP_IC =>
-            if (ID_func3 = FUNC3_SUBLEQ) then
-              -- There is only the SubLEq instruction
-              XB_RegWrite <= '1';
-              XB_rs1 <= ID_rs1;
-              XB_rs1_d <= signed(ID_rs1_d);
-              XB_rd <= ID_rd;
-              XB_op2rs2 <= '0'; XB_op2imm <= '1';
-              XB_opadd <= '1';
-              XB_opneg <= '1';
-              XB_opbranch <= '1';
-            else -- No illegal instruction here
-            end if;
-          when OP_LOAD =>
-            if (ID_func3 = FUNC3_LD) then
-              -- Immediate value left shift 3 bits, add to register value
-              XB_rs1 <= ID_rs1;
-              XB_rs1_d <= signed(ID_rs1_d);
-              XB_rd <= ID_rd;
-              XB_opls3 <= '1';
-              XB_op2imm <= '1';
-              XB_opadd <= '1';
-              XB_MemRead <= '1';
-              XB_RegWrite <= '1';
-            else -- No illegal instructions here
-            end if;
-          when others => NULL; -- No illegal instruction here
-        end case;
-      elsif (ID_SType = '1') then
-        case ID_opcode is
-          when OP_STORE =>
-            if (ID_func3 = FUNC3_SD) then
-              -- Immediate value left shift 3 bits, add to register value
-              XB_rs1 <= ID_rs1;
-              XB_rs1_d <= signed(ID_rs1_d);
-              XB_opls3 <= '1';
-              XB_opadd <= '1';
-              XB_op2imm <= '1';
-              XB_MemWrite <= '1';
-            else -- No illegal instructions here              
-            end if;
-          when others => NULL;
-        end case;
-      end if side_effect_signals;
+      -- Only continue if instruction is valid
+      ID_is_valid : if (ID_Valid = '1') then
+        side_effect_signals : if (ID_IType = '1') then
+          case ID_opcode is
+            when OP_IC =>
+              if (ID_func3 = FUNC3_SUBLEQ) then
+                -- There is only the SubLEq instruction
+                XB_RegWrite <= '1';
+                XB_rs1 <= ID_rs1;
+                XB_rs1_d <= signed(ID_rs1_d);
+                XB_rd <= ID_rd;
+                XB_op2rs2 <= '0'; XB_op2imm <= '1';
+                XB_opadd <= '1';
+                XB_opneg <= '1';
+                XB_opbranch <= '1';
+              else -- No illegal instruction here
+              end if;
+            when OP_LOAD =>
+              if (ID_func3 = FUNC3_LD) then
+                -- Immediate value left shift 3 bits, add to register value
+                XB_rs1 <= ID_rs1;
+                XB_rs1_d <= signed(ID_rs1_d);
+                XB_rd <= ID_rd;
+                XB_opls3 <= '1';
+                XB_op2imm <= '1';
+                XB_opadd <= '1';
+                XB_MemRead <= '1';
+                XB_RegWrite <= '1';
+              else -- No illegal instructions here
+              end if;
+            when others => NULL; -- No illegal instruction here
+          end case;
+        elsif (ID_SType = '1') then
+          case ID_opcode is
+            when OP_STORE =>
+              if (ID_func3 = FUNC3_SD) then
+                -- Immediate value left shift 3 bits, add to register value
+                XB_rs1 <= ID_rs1;
+                XB_rs1_d <= signed(ID_rs1_d);
+                XB_opls3 <= '1';
+                XB_opadd <= '1';
+                XB_op2imm <= '1';
+                XB_MemWrite <= '1';
+              else -- No illegal instructions here              
+              end if;
+            when others => NULL;
+          end case;
+        end if side_effect_signals;
+      end if ID_is_valid;
+      
 
       ------------------------------------- Hazard Detection Unit in ID
       -- Default Value
@@ -394,13 +400,16 @@ begin
       end if hdu_rs2;
       ------------------------------------- IF stage
       ---- Update PC
+      ID_highword <= PC(2);
       update_pc : if (stall = '0' or XB_Branch = '1') then
         -- Branch overrides stall, or there will be deadlock
         if (XB_Branch = '0') then
           -- PC increment by 4 when not branching
+          ID_valid <= '1';
           inc_pc := to_signed(4, 32);
         else
           -- PC increment by signed extended branch offset. Aligned to 4-bytes
+          ID_valid <= '0';
           inc_pc := shift_left(resize(XB_Imm(19 downto 8), 32), 2);
         end if;
       end if update_pc;
