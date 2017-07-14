@@ -99,7 +99,7 @@ architecture behavioral of test_cpu_top_tb is
     write(output, "(TT)   3. RAM data in range should be cleared" & lf);
     write(output, "(TT)   4. Waveforms must be read" & lf);
     write(output, "(TT) ==============================================" & lf);
-    for i in 0 to 1023 loop
+    for i in 0 to 127 loop
       wait until rising_edge(clk);
     end loop;
   end procedure test_1;
