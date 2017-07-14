@@ -58,28 +58,30 @@ entity CPUCore is
     core_mmu_addr_d : out std_logic_vector(31 downto 3);
     core_mmu_ben_d : out std_logic_vector(7 downto 0);
     core_mmu_di_d : out std_logic_vector(63 downto 0);
-    core_mmu_do_d : in std_logic_vector(63 downto 0);
+    core_mmu_do_d : in std_logic_vector(63 downto 0)
     );
 end entity CPUCore;    
 
 architecture simple_pipeline of CPUCore is
-  type opcode_t is std_logic_vector(6 downto 0);
-  type func3_t is std_logic_vector(2 downto 0);
-  type func7_t is std_logic_vector(7 downto 0);
-  type addr_t is signed(31 downto 0);
-  type rf_addr_t is std_logic_vector(4 downto 0);
-  type data_t is signed(63 downto 0);
-  type instr_t is std_logic_vector(31 downto 0);
-  signal stall : std_logic;
+  subtype opcode_t is std_logic_vector(6 downto 0);
+  subtype int64_t is signed(63 downto 0);
+  subtype func3_t is std_logic_vector(2 downto 0);
+  subtype func7_t is std_logic_vector(6 downto 0);
+  subtype addr_t is signed(31 downto 0);
+  subtype rf_addr_t is std_logic_vector(4 downto 0);
+  subtype data_t is std_logic_vector(63 downto 0);
+  subtype instr_t is std_logic_vector(31 downto 0);
+  -- IF stage signals
   signal PC : addr_t;
-  signal mmu_addr_i_s32 : signed(31 downto 0);
+  signal mmu_addr_i_s32 : signed(31 downto 3);
   -- ID stage signals
+  signal stall : std_logic;
   signal ID_XMXB1, ID_XMXB2 : std_logic;
   signal ID_XMMEM1, ID_XMMEM2 : std_logic;
   signal ID_Valid : std_logic;
   signal ID_RType, ID_IType, ID_SType, ID_UType : std_logic;
-  alias ID_instr : instr_t is core_mmu_do_i(31 downto 0);
-  alias ID_op : opcode_t is core_mmu_do_i(6 downto 0);
+  signal ID_Instr : instr_t;
+  alias ID_opcode : opcode_t is core_mmu_do_i(6 downto 0);
   alias ID_rs1 : rf_addr_t is core_mmu_do_i(19 downto 15);
   alias ID_rs2 : rf_addr_t is core_mmu_do_i(24 downto 20);
   alias ID_rs1_d : data_t is core_rf_rs_d;
@@ -95,34 +97,32 @@ architecture simple_pipeline of CPUCore is
   ---- ls3 = Left Shift 3 bits
   signal XB_opadd, XB_opneg, XB_opls3, XB_opbranch : std_logic;
   signal XB_op2rs2, XB_op2imm : std_logic;
-  variable XB_forwrs1, XB_forwrs2 : data_t;
-  variable XB_op1, XB_op2, XB_aluout : data_t;
   signal XB_Imm : signed(31 downto 0);
   signal XB_rs1, XB_rs2, XB_rd : rf_addr_t;
-  signal XB_rs1_d, XB_rs2_d : data_t;
+  signal XB_rs1_d, XB_rs2_d : int64_t;
   signal XB_RegWrite, XB_MemRead, XB_MemWrite : std_logic;
-  variable XB_Branch : std_logic;
   signal XB_FORW1_MEM_XB, XB_FORW1_WB_XB : std_logic;
   signal XB_FORW2_MEM_XB, XB_FORW2_WB_XB : std_logic;
   -- MEM stage signals
+  signal MEM_RType, MEM_IType, MEM_SType, MEM_UType : std_logic;
   signal MEM_MemRead, MEM_MemWrite, MEM_RegWrite : std_logic;
-  signal MEM_rd : rf_addr_t;
-  signal MEM_data : data_t;
+  signal MEM_rs1, MEM_rs2, MEM_rd : rf_addr_t;
+  signal MEM_data : int64_t;
   -- WB stage signals
   signal WB_RegWrite : std_logic;
   signal WB_rd : rf_addr_t;
-  signal WB_data : data_t;
+  signal WB_data : int64_t;
 
   -- Constants
   ---- Opcode types
   ------ This means "I-type Custom"
-  constant OP_IC : opcode_t = "0001000";
+  constant OP_IC : opcode_t := "0001000";
   constant OP_LOAD : opcode_t := "0000011";
   constant OP_STORE : opcode_t := "0100011";
   constant FUNC3_SUBLEQ : func3_t := "000";
   constant FUNC3_LD : func3_t := "011";
   constant FUNC3_SD : func3_t := "011";
-  constant ZERO64 : data_t := (others => '0');
+  constant ZERO64 : int64_t := (others => '0');
 begin
 
   -- Signed/Unsigned signals for convenience
@@ -130,29 +130,33 @@ begin
 
   -- Check source/destination matches
   ID_XMXB1 <= '1' when
-              XB_RegWrite and
+              XB_RegWrite = '1' and
               ID_rs1 = XB_rs1 and
+              ID_rs1 /= "00000" and
               (XB_RType = '1' or XB_Itype = '1')
               else '0';
   ID_XMXB2 <= '1' when
-              XB_RegWrite and
+              XB_RegWrite = '1'and
               ID_rs2 = XB_rs2 and
+              ID_rs2 /= "00000" and
               (XB_RType = '1' or XB_SType = '1')
               else '0';
   ID_XMMEM1 <= '1' when
-              XB_RegWrite and
+              XB_RegWrite = '1' and
               ID_rs1 = MEM_rs1 and
+              ID_rs1 /= "00000" and
               (MEM_RType = '1' or MEM_Itype = '1')
               else '0';
   ID_XMMEM2 <= '1' when
-              XB_RegWrite and
+              XB_RegWrite = '1' and
               ID_rs2 = MEM_rs2 and
+              ID_rs2 /= "00000" and
               (MEM_RType = '1' or MEM_SType = '1')
               else '0';
   -- The stall signal.
   -- Stall is needed when source register is dependant on an immediate
   -- senior LW.
-  stall <= '1' when (ID_XMXB1 = '1' or ID_XMXB2)
+  stall <= '1' when (ID_XMXB1 = '1' or ID_XMXB2 = '1')
            and XB_MemRead = '1' and XB_RegWrite = '1'
            else '0';
 
@@ -166,14 +170,27 @@ begin
   ID_SType <= '1' when (ID_opcode = OP_STORE) else '0';
   ID_UType <= '0';
 
-  
+  -- IF stage combinational
+  mmu_addr_i_s32(31 downto 3) <= PC(31 downto 3);
+  PC_ben : process (PC)
+  begin
+    core_mmu_ben_i <= (others => 'X');
+    if (PC(2 downto 0) = "000") then
+      core_mmu_ben_i <= "11110000";
+    elsif (PC(2 downto 0) = "100") then
+      core_mmu_ben_i <= "00001111";
+    end if;
+  end process;
   -- THE CPU CORE IS HERE!!!!!!
   core : process (clk, resetb)
+  variable XB_forwrs1, XB_forwrs2 : int64_t;
+  variable XB_op1, XB_op2, XB_aluout : int64_t;
+  variable XB_Branch : std_logic;
     variable inc_pc : addr_t;
   begin
     if (resetb = '0') then
       -- IF reset
-      PC <= X"00000200";
+      PC <= X"00000000";
       -- ID reset
       ID_Valid <= '0';
       -- XB reset
@@ -196,18 +213,25 @@ begin
       WB_rd <= MEM_rd;
       core_rf_wb_a <= MEM_rd;
       if (MEM_MemRead = '1') then
-        WB_data <= core_mmu_do_d;
+        WB_data <= signed(core_mmu_do_d);
         core_rf_wb_d <= core_mmu_do_d;
       else
         WB_data <= MEM_data;
-        core_rf_wb_d <= MEM_data;
+        core_rf_wb_d <= std_logic_vector(MEM_data);
       end if;
       ------------------------------------- XB stage
       ---- Note that the mem control signals are shadow registers
       MEM_MemRead <= XB_MemRead;
       MEM_MemWrite <= XB_MemWrite;
       MEM_RegWrite <= XB_RegWrite;
+
+      MEM_Rs1 <= XB_Rs1;
+      MEM_Rs2 <= XB_Rs2;
       MEM_Rd <= XB_Rd;
+      MEM_RType <= XB_RType;
+      MEM_ITYPE <= XB_IType;
+      MEM_SType <= XB_SType;
+      MEM_UType <= XB_UType;
 
       -- Forwarding
       XB_forwrs1 := XB_rs1_d;
@@ -228,12 +252,12 @@ begin
       end if;
       
       XB_op1 := XB_forwrs1;
-      XB_op2_mux : if (XB_op2rs2) then
+      XB_op2_mux : if (XB_op2rs2 = '1') then
         XB_op2 := XB_forwrs2;
-      elsif (XB_op2imm) then
+      elsif (XB_op2imm = '1') then
         if (XB_IType = '1' or XB_SType = '1') then
           -- Sign extend
-          XB_op2 := signed(XB_Imm(11 downto 0), 64);
+          XB_op2 := resize(XB_Imm(11 downto 0), 64);
         end if;
       end if XB_op2_mux;
       ---- Left shift op2 when needed, such as in LD and SD
@@ -263,14 +287,14 @@ begin
       if (XB_MemRead = '1' or XB_MemWrite = '1') then
         core_mmu_en_d <= '1';
         -- No memory protection!
-        core_mmu_addr_d <= XB_aluout;
+        core_mmu_addr_d <= std_logic_vector(XB_aluout);
         core_mmu_ben_d <= "00000000";
         if (XB_MemWrite = '1') then
           core_mmu_we_d <= '1';
         end if;
       end if;
       if (XB_MemWrite = '1') then
-        core_mmu_di_d <= XB_rs2_d;
+        core_mmu_di_d <= std_logic_vector(XB_rs2_d);
       end if;      
 
       ------------------------------------- ID stage
@@ -279,12 +303,12 @@ begin
       XB_SType <= ID_SType;
       XB_UType <= ID_UType;
       immediate_field : if (ID_IType = '1') then
-        XB_Imm(11 downto 0) <= ID_Instr(31 downto 20);
+        XB_Imm(11 downto 0) <= signed(ID_Instr(31 downto 20));
       elsif (ID_SType = '1') then
-        XB_Imm(11 downto 5) <= ID_Instr(31 downto 25);
-        XB_Imm(4 downto 0) <= ID_Instr(11 downto 7);
+        XB_Imm(11 downto 5) <= signed(ID_Instr(31 downto 25));
+        XB_Imm(4 downto 0) <= signed(ID_Instr(11 downto 7));
       elsif (ID_UType = '1') then
-        XB_Imm(31 downto 12) <= ID_Instr(31 downto 12);
+        XB_Imm(31 downto 12) <= signed(ID_Instr(31 downto 12));
       end if immediate_field;
       -- Defaults
       XB_RegWrite <= '0';
@@ -301,7 +325,7 @@ begin
               -- There is only the SubLEq instruction
               XB_RegWrite <= '1';
               XB_rs1 <= ID_rs1;
-              XB_rs1_d <= ID_rs1_d;
+              XB_rs1_d <= signed(ID_rs1_d);
               XB_rd <= ID_rd;
               XB_op2rs2 <= '0'; XB_op2imm <= '1';
               XB_opadd <= '1';
@@ -313,7 +337,7 @@ begin
             if (ID_func3 = FUNC3_LD) then
               -- Immediate value left shift 3 bits, add to register value
               XB_rs1 <= ID_rs1;
-              XB_rs1_d <= ID_rs1_d;
+              XB_rs1_d <= signed(ID_rs1_d);
               XB_rd <= ID_rd;
               XB_opls3 <= '1';
               XB_op2imm <= '1';
@@ -330,7 +354,7 @@ begin
             if (ID_func3 = FUNC3_SD) then
               -- Immediate value left shift 3 bits, add to register value
               XB_rs1 <= ID_rs1;
-              XB_rs1_d <= ID_rs1_d;
+              XB_rs1_d <= signed(ID_rs1_d);
               XB_opls3 <= '1';
               XB_opadd <= '1';
               XB_op2imm <= '1';
@@ -372,13 +396,17 @@ begin
         -- Branch overrides stall, or there will be deadlock
         if (XB_Branch = '0') then
           -- PC increment by 4 when not branching
-          inc_pc := 4;
+          inc_pc := to_signed(4, 32);
         else
           -- PC increment by signed extended branch offset. Aligned to 4-bytes
-          inc_pc := PC + shift_left(signed(XB_Imm(19 downto 8), 32), 2);
+          inc_pc := shift_left(resize(XB_Imm(19 downto 8), 32), 2);
         end if;
       end if update_pc;
-      
+      if (PC(2) = '0') then
+        ID_Instr <= core_mmu_do_i(31 downto 0);
+      else
+        ID_Instr <= core_mmu_do_i(63 downto 32);
+      end if;
     end if;
   end process core;
 

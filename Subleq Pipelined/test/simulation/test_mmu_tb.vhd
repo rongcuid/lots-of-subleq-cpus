@@ -56,6 +56,8 @@ architecture behavioral of test_mmu_tb is
       );
   end component MMU;
 
+  subtype word_t is std_logic_vector(31 downto 0);
+  type ram_t is array(0 to 1023) of word_t;
   -- Signals
   signal clk, resetb, we_i, en_i, we_d, en_d : std_logic;
   signal ben_i, ben_d : std_logic_vector(7 downto 0);
@@ -82,6 +84,27 @@ architecture behavioral of test_mmu_tb is
 
   end procedure reset;
   
+-- https://electronics.stackexchange.com/questions/180446/how-to-load-std-logic-vector-array-from-text-file-at-start-of-simulation
+-- Read a *.hex file
+  impure function ocram_ReadMemFile(FileName : STRING) return ram_t is
+    file FileHandle       : TEXT open READ_MODE is FileName;
+    variable CurrentLine  : LINE;
+    variable TempWord     : word_t;
+    variable Result       : ram_t    := (others => (others => '0'));
+    variable i : integer;
+
+  begin
+    for i in 0 to 1023 loop
+      exit when endfile(FileHandle);
+
+      readline(FileHandle, CurrentLine);
+      hread(CurrentLine, TempWord);
+      Result(i)    := TempWord;
+    end loop;
+
+    return Result;
+  end function;
+
   procedure test_1(
     signal resetb : out std_logic;
     signal en_i, we_i, en_d, we_d : out std_logic;
