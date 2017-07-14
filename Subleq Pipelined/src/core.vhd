@@ -124,7 +124,8 @@ architecture simple_pipeline of CPUCore is
   constant FUNC3_SD : func3_t := "011";
   constant ZERO64 : int64_t := (others => '0');
 begin
-
+  core_mmu_en_i <= '1';
+  core_mmu_we_i <= '0';
   -- Signed/Unsigned signals for convenience
   core_mmu_addr_i <= std_logic_vector(mmu_addr_i_s32);
 
@@ -171,7 +172,6 @@ begin
   ID_UType <= '0';
 
   -- IF stage combinational
-  mmu_addr_i_s32(31 downto 3) <= PC(31 downto 3);
   PC_ben : process (PC)
   begin
     core_mmu_ben_i <= (others => 'X');
@@ -183,6 +183,7 @@ begin
   end process;
   -- THE CPU CORE IS HERE!!!!!!
   core : process (clk, resetb)
+    variable IF_nextPC : signed(31 downto 0);
   variable XB_forwrs1, XB_forwrs2 : int64_t;
   variable XB_op1, XB_op2, XB_aluout : int64_t;
   variable XB_Branch : std_logic;
@@ -191,6 +192,7 @@ begin
     if (resetb = '0') then
       -- IF reset
       PC <= X"00000000";
+      mmu_addr_i_s32 <= (others => '0');
       -- ID reset
       ID_Valid <= '0';
       -- XB reset
@@ -287,7 +289,7 @@ begin
       if (XB_MemRead = '1' or XB_MemWrite = '1') then
         core_mmu_en_d <= '1';
         -- No memory protection!
-        core_mmu_addr_d <= std_logic_vector(XB_aluout);
+        core_mmu_addr_d <= std_logic_vector(XB_aluout(31 downto 3));
         core_mmu_ben_d <= "00000000";
         if (XB_MemWrite = '1') then
           core_mmu_we_d <= '1';
@@ -402,6 +404,9 @@ begin
           inc_pc := shift_left(resize(XB_Imm(19 downto 8), 32), 2);
         end if;
       end if update_pc;
+      IF_nextPC := PC + inc_pc;
+      PC <= IF_nextPC;
+      mmu_addr_i_s32(31 downto 3) <= IF_nextPC(31 downto 3);
       if (PC(2) = '0') then
         ID_Instr <= core_mmu_do_i(31 downto 0);
       else

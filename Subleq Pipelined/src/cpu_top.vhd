@@ -166,6 +166,8 @@ begin
       wb_we=>rf_wb_we, wb_a=>rf_wb_a, wb_d=>rf_wb_d
       );
 
+  core_mmu_do_i <= mmu_do_i;
+  core_mmu_do_d <= mmu_do_d;
   mmu_addr_i <= core_mmu_addr_i when boot_done_temp = '1' else boot_mmu_addr_i;
   mmu_addr_d <= core_mmu_addr_d;
   mmu_ben_i <= core_mmu_ben_i when boot_done_temp = '1' else boot_mmu_ben_i;
@@ -179,6 +181,9 @@ begin
   mmu_en_d <= core_mmu_en_d;
   boot_done <= boot_done_temp;
   cpu_rom_addr <= boot_addr;
+  boot_mmu_en_i <= '0' when boot_done_temp = '1' else '1';
+  boot_mmu_we_i <= '0' when boot_done_temp = '1' else '1';
+  boot_mmu_addr_i <= std_logic_vector(boot_addr);
   boot_loader : process (clk, resetb)
   begin
     if (resetb = '0') then
@@ -197,13 +202,14 @@ begin
           boot_mmu_ben_i <= "00001111";
           boot_addr <= boot_addr + 8;
           boot_mmu_di_i(63 downto 32) <= cpu_rom_data;
+          boot_second_word <= '0';
         else
           boot_mmu_ben_i <= "11110000";
           boot_mmu_di_i(31 downto 0) <= cpu_rom_data;
+          boot_second_word <= '1';
         end if;
       end if;
     end if;
-    
   end process boot_loader;
   
 end architecture syn;
