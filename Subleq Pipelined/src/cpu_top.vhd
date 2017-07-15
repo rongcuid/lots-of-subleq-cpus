@@ -131,7 +131,7 @@ architecture syn of cpu_top is
   
   signal boot_mmu_we_i, boot_mmu_en_i : std_logic;
   signal mmu_we_i, mmu_en_i, mmu_we_d, mmu_en_d : std_logic;
-  signal boot_done_temp, boot_second_word : std_logic;
+  signal boot_possibly_done, boot_done_temp, boot_second_word : std_logic;
   signal boot_addr : unsigned(31 downto 0);
   signal boot_wait_one_clock : std_logic;
   constant ZERO64 : std_logic_vector(63 downto 0) := (others => '0');
@@ -193,11 +193,18 @@ begin
       boot_second_word <= '0';
       boot_addr <= (others => '0');
       boot_wait_one_clock <= '0';
+      boot_possibly_done <= '0';
     elsif (clk'event and clk = '1') then
       if (boot_done_temp = '0' and boot_wait_one_clock = '0') then
         if (boot_mmu_di_i = ZERO64) then
-          boot_done_temp <= '1';
-          boot_wait_one_clock <= '1';
+          if (boot_possibly_done = '1') then
+            boot_done_temp <= '1';
+            boot_wait_one_clock <= '1';
+          else
+            boot_possibly_done <= '1';
+          end if;
+        else
+          boot_possibly_done <= '0';
         end if;
         boot_addr <= boot_addr + 4;
         boot_mmu_addr_i <= std_logic_vector(boot_addr);

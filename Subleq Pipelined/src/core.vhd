@@ -73,6 +73,7 @@ architecture simple_pipeline of CPUCore is
   subtype instr_t is std_logic_vector(31 downto 0);
   -- IF stage signals
   signal IF_PC : addr_t;
+  signal IF_Instr : instr_t;
   signal mmu_addr_i_s32 : signed(31 downto 3);
   signal IF_nextPC : signed(31 downto 0);
   signal IF_Valid : std_logic;
@@ -139,25 +140,24 @@ begin
   -- Check source/destination matches
   ID_XMXB1 <= '1' when
               XB_RegWrite = '1' and
-              ID_rs1 = XB_rs1 and
+              ID_rs1 = XB_rd and
               ID_rs1 /= "00000" and
-              (XB_RType = '1' or XB_Itype = '1')
+              (ID_RType = '1' or ID_Itype = '1' or ID_SType = '1')
               else '0';
   ID_XMXB2 <= '1' when
               XB_RegWrite = '1'and
-              ID_rs2 = XB_rs2 and
-              ID_rs2 /= "00000" and
-              (XB_RType = '1' or XB_SType = '1')
+              ID_rs2 = XB_rd and
+              ID_rs2 /= "00000" and (ID_RType = '1' or ID_SType = '1')
               else '0';
   ID_XMMEM1 <= '1' when
                XB_RegWrite = '1' and
-               ID_rs1 = MEM_rs1 and
+               ID_rs1 = MEM_rd and
                ID_rs1 /= "00000" and
                (MEM_RType = '1' or MEM_Itype = '1')
                else '0';
   ID_XMMEM2 <= '1' when
                XB_RegWrite = '1' and
-               ID_rs2 = MEM_rs2 and
+               ID_rs2 = MEM_rd and
                ID_rs2 /= "00000" and
                (MEM_RType = '1' or MEM_SType = '1')
                else '0';
@@ -180,6 +180,20 @@ begin
 
   -- IF stage combinational
   core_mmu_ben_i <= "00000000";
+  if_comb : process (IF_PC, core_mmu_do_i, IF_Instr)
+  begin
+    IF_Instr <= (others=>'-');
+    core_rf_rs_a <= (others=>'-');
+    core_rf_rt_a <= (others=>'-');
+    if (IF_PC(2) = '0') then
+      IF_Instr <= core_mmu_do_i(31 downto 0);
+    else
+      IF_Instr <= core_mmu_do_i(63 downto 32);
+    end if;
+    core_rf_rs_a <= IF_Instr(19 downto 15);
+    core_rf_rt_a <= IF_Instr(24 downto 20);
+  end process if_comb;
+  
   -- Branch overrides stall, or there will be deadlock
   update_pc : process (stall, XB_Branch, IF_PC, XB_Imm)
   begin
@@ -202,15 +216,16 @@ begin
   -- Forwarding
   xb_comb : process
     (
-    XB_rs1_d,
-    XB_FORW1_MEM_XB, MEM_aluresult, XB_FORW1_WB_XB, WB_data,
-    XB_rs2_d, 
-    XB_FORW2_MEM_XB, XB_FORW2_WB_XB, 
-    XB_forwrs2, XB_op2rs2, XB_op2imm, XB_IType, XB_SType, XB_Imm,
-    XB_opls3, XB_opneg, XB_opadd, XB_opbranch, XB_aluout
-    )
-  variable XB_forwrs1 : int64_t;
-  variable XB_op1, XB_op2 : int64_t;
+      XB_rs1_d,
+      XB_FORW1_MEM_XB, MEM_aluresult, XB_FORW1_WB_XB, WB_data,
+      XB_rs2_d, 
+      XB_FORW2_MEM_XB, XB_FORW2_WB_XB, 
+      XB_forwrs2, XB_op2rs2, XB_op2imm, XB_IType, XB_SType, XB_Imm,
+      XB_opls3, XB_opneg, XB_opadd, XB_opbranch, XB_aluout,
+      XB_MemRead, XB_MemWrite
+      )
+    variable XB_forwrs1 : int64_t;
+    variable XB_op1, XB_op2 : int64_t;
   begin
     XB_forwrs1 := XB_rs1_d;
     if (XB_FORW1_MEM_XB = '1') then
@@ -218,18 +233,27 @@ begin
       XB_forwrs1 := MEM_aluresult;
     elsif (XB_FORW1_WB_XB = '1') then
       -- Forward from WB stage
-      XB_forwrs1 := WB_data;
+      if (MEM_MemRead = '1')then
+        XB_forwrs1 := signed(core_mmu_do_d);
+      else
+        XB_forwrs1 := MEM_aluresult;
+      end if;
     end if;
     XB_forwrs2 <= XB_rs2_d;
     if (XB_FORW2_MEM_XB = '1') then
       -- Forward from Mem stage
-      XB_forwrs2 <= MEM_aluresult;
+      if (MEM_MemRead = '1')then
+        XB_forwrs2 <= signed(core_mmu_do_d);
+      else
+        XB_forwrs2 <= MEM_aluresult;
+      end if;
     elsif (XB_FORW2_WB_XB = '1') then
       -- Forward from WB stage
       XB_forwrs2 <= WB_data;
     end if;
     
     XB_op1 := XB_forwrs1;
+    XB_op2 := (others => '-');
     XB_op2_mux : if (XB_op2rs2 = '1') then
       XB_op2 := XB_forwrs2;
     elsif (XB_op2imm = '1') then
@@ -247,6 +271,7 @@ begin
       XB_op2 := -XB_op2;
     end if;
     ---- Compute
+    XB_aluout <= (others => '-');
     if XB_opadd = '1' then
       XB_aluout <= XB_op1 + XB_op2; 
     end if;
@@ -259,7 +284,38 @@ begin
       end if;
     end if;
 
+    ---- Memory
+    core_mmu_en_d <= '0';
+    core_mmu_we_d <= '0';
+    core_mmu_ben_d <= "00000000";
+    core_mmu_di_d <= (others => '-');
+    if (XB_MemRead = '1' or XB_MemWrite = '1') then
+      core_mmu_en_d <= '1';
+      -- No memory protection!
+      core_mmu_addr_d <= std_logic_vector(XB_aluout(31 downto 3));
+      if (XB_MemWrite = '1') then
+        core_mmu_we_d <= '1';
+      end if;
+    end if;
+    if (XB_MemWrite = '1') then
+      core_mmu_di_d <= std_logic_vector(XB_rs2_d);
+    end if;      
   end process xb_comb;
+
+  -- MEM stage combinational
+  mem_comb : process (MEM_RegWrite, MEM_rd,
+                      MEM_MemRead, core_mmu_do_d, MEM_aluresult)
+  begin
+    -- Note that WB signals are shadow registers
+    core_rf_wb_we <= MEM_RegWrite;
+    core_rf_wb_a <= MEM_rd;
+    core_rf_wb_d <= (others=>'-');
+    if (MEM_MemRead = '1') then
+      core_rf_wb_d <= core_mmu_do_d;
+    else
+      core_rf_wb_d <= std_logic_vector(MEM_aluresult);
+    end if;
+  end process mem_comb;
   
   -- PC_ben : process (PC)
   -- begin
@@ -272,11 +328,11 @@ begin
   -- end process;
   -- THE CPU CORE IS HERE!!!!!!
   core : process (clk, resetb)
-    variable IF_Instr : instr_t;
+  --variable IF_Instr : instr_t;
   --variable XB_Branch : std_logic;
   --variable inc_pc : addr_t;
   begin
-    if (resetb = '0') then
+    main_clock : if (resetb = '0') then
       -- IF reset
       IF_PC <= X"FFFFFFFC";
       IF_Valid <= '0';
@@ -299,15 +355,11 @@ begin
       ------------------------------------- MEM stage
       -- Note that WB signals are shadow registers
       WB_RegWrite <= MEM_RegWrite;
-      core_rf_wb_we <= MEM_RegWrite;
       WB_rd <= MEM_rd;
-      core_rf_wb_a <= MEM_rd;
       if (MEM_MemRead = '1') then
         WB_data <= signed(core_mmu_do_d);
-        core_rf_wb_d <= core_mmu_do_d;
       else
         WB_data <= MEM_aluresult;
-        core_rf_wb_d <= std_logic_vector(MEM_aluresult);
       end if;
       ------------------------------------- XB stage
       ---- Note that the mem control signals are shadow registers
@@ -324,22 +376,7 @@ begin
       MEM_UType <= XB_UType;
       MEM_rs2_d <= XB_forwrs2;
 
-      MEM_aluresult <= XB_aluout;
-      ---- Memory
-      core_mmu_en_d <= '0';
-      core_mmu_we_d <= '0';
-      if (XB_MemRead = '1' or XB_MemWrite = '1') then
-        core_mmu_en_d <= '1';
-        -- No memory protection!
-        core_mmu_addr_d <= std_logic_vector(XB_aluout(31 downto 3));
-        core_mmu_ben_d <= "00000000";
-        if (XB_MemWrite = '1') then
-          core_mmu_we_d <= '1';
-        end if;
-      end if;
-      if (XB_MemWrite = '1') then
-        core_mmu_di_d <= std_logic_vector(XB_rs2_d);
-      end if;      
+      MEM_aluresult <= XB_aluout;    
 
       ------------------------------------- IF stage
       ---- Update PC
@@ -356,119 +393,112 @@ begin
       end if;
       IF_PC <= IF_nextPC;
       ID_PC <= IF_PC;
-      --mmu_addr_i_s32(31 downto 3) <= IF_nextPC(31 downto 3);
-      if (IF_PC(2) = '0') then
-        IF_Instr := core_mmu_do_i(31 downto 0);
-      else
-        IF_Instr := core_mmu_do_i(63 downto 32);
-      end if;
       ID_Instr <= IF_Instr;
-      core_rf_rs_a <= IF_Instr(19 downto 15);
-      core_rf_rt_a <= IF_Instr(24 downto 20);
-    end if;
-    ------------------------------------- ID stage
-    XB_RType <= ID_RType;
-    XB_IType <= ID_IType;
-    XB_SType <= ID_SType;
-    XB_UType <= ID_UType;
-    XB_PC <= ID_PC;
-    immediate_field : if (ID_IType = '1') then
-      XB_Imm(11 downto 0) <= signed(ID_Instr(31 downto 20));
-    elsif (ID_SType = '1') then
-      XB_Imm(11 downto 5) <= signed(ID_Instr(31 downto 25));
-      XB_Imm(4 downto 0) <= signed(ID_Instr(11 downto 7));
-    elsif (ID_UType = '1') then
-      XB_Imm(31 downto 12) <= signed(ID_Instr(31 downto 12));
-    end if immediate_field;
-    -- Defaults
-    XB_RegWrite <= '0';
-    XB_MemRead <= '0';
-    XB_MemWrite <='0';
-    XB_opbranch <= '0';
-    XB_opls3 <= '0';
-    XB_op2rs2 <= '0';
-    XB_op2imm <= '0';
-    XB_opneg <= '0';
-    -- Only continue if instruction is valid
-    ID_is_valid : if (ID_Valid = '1') then
-      side_effect_signals : if (ID_IType = '1') then
-        case ID_opcode is
-          when OP_LOAD =>
-            if (ID_func3 = FUNC3_LD) then
-              -- Immediate value left shift 3 bits, add to register value
-              XB_rs1 <= ID_rs1;
-              XB_rs1_d <= signed(ID_rs1_d);
-              XB_rd <= ID_rd;
-              XB_opls3 <= '1';
-              XB_op2imm <= '1';
-              XB_opadd <= '1';
-              XB_MemRead <= '1';
-              XB_RegWrite <= '1';
-            else -- No illegal instructions here
-            end if;
-          when others => NULL; -- No illegal instruction here
-        end case;
+      ------------------------------------- ID stage
+      XB_RType <= ID_RType;
+      XB_IType <= ID_IType;
+      XB_SType <= ID_SType;
+      XB_UType <= ID_UType;
+      XB_PC <= ID_PC;
+      immediate_field : if (ID_IType = '1') then
+        XB_Imm(11 downto 0) <= signed(ID_Instr(31 downto 20));
       elsif (ID_SType = '1') then
-        case ID_opcode is
-          when OP_SC =>
-            if (ID_func3 = FUNC3_SUBLEQ) then
-              -- There is only the SubLEq instruction
-              XB_RegWrite <= '1';
-              XB_rs1 <= ID_rs1;
-              XB_rs1_d <= signed(ID_rs1_d);
-              XB_rs2 <= ID_rs2;
-              XB_rs2_d <= signed(ID_rs2_d);
-              XB_rd <= ID_rs1;
-              XB_op2rs2 <= '1'; XB_op2imm <= '0';
-              XB_opadd <= '1';
-              XB_opneg <= '1';
-              XB_opbranch <= '1';
-            else -- No illegal instruction here
-            end if;
-          when OP_STORE =>
-            if (ID_func3 = FUNC3_SD) then
-              -- Immediate value left shift 3 bits, add to register value
-              XB_rs1 <= ID_rs1;
-              XB_rs1_d <= signed(ID_rs1_d);
-              XB_rs2 <= ID_rs2;
-              XB_rs2_d <= signed(ID_rs2_d);
-              XB_opls3 <= '1';
-              XB_opadd <= '1';
-              XB_op2imm <= '1';
-              XB_MemWrite <= '1';
-            else -- No illegal instructions here              
-            end if;
-          when others => NULL;
-        end case;
-      end if side_effect_signals;
-    end if ID_is_valid;
-    
+        XB_Imm(11 downto 5) <= signed(ID_Instr(31 downto 25));
+        XB_Imm(4 downto 0) <= signed(ID_Instr(11 downto 7));
+      elsif (ID_UType = '1') then
+        XB_Imm(31 downto 12) <= signed(ID_Instr(31 downto 12));
+      end if immediate_field;
+      -- Defaults
+      XB_RegWrite <= '0';
+      XB_MemRead <= '0';
+      XB_MemWrite <='0';
+      XB_opbranch <= '0';
+      XB_opls3 <= '0';
+      XB_op2rs2 <= '0';
+      XB_op2imm <= '0';
+      XB_opneg <= '0';
+      -- Only continue if instruction is valid
+      ID_is_valid : if (ID_Valid = '1') then
+        side_effect_signals : if (ID_IType = '1') then
+          case ID_opcode is
+            when OP_LOAD =>
+              if (ID_func3 = FUNC3_LD) then
+                -- Immediate value left shift 3 bits, add to register value
+                XB_rs1 <= ID_rs1;
+                XB_rs1_d <= signed(ID_rs1_d);
+                XB_rd <= ID_rd;
+                XB_opls3 <= '1';
+                XB_op2imm <= '1';
+                XB_opadd <= '1';
+                XB_MemRead <= '1';
+                XB_RegWrite <= '1';
+              else -- No illegal instructions here
+              end if;
+            when others => NULL; -- No illegal instruction here
+          end case;
+        elsif (ID_SType = '1') then
+          case ID_opcode is
+            when OP_SC =>
+              if (ID_func3 = FUNC3_SUBLEQ) then
+                -- There is only the SubLEq instruction
+                XB_RegWrite <= '1';
+                XB_rs1 <= ID_rs1;
+                XB_rs1_d <= signed(ID_rs1_d);
+                XB_rs2 <= ID_rs2;
+                XB_rs2_d <= signed(ID_rs2_d);
+                XB_rd <= ID_rs1;
+                XB_op2rs2 <= '1'; XB_op2imm <= '0';
+                XB_opadd <= '1';
+                XB_opneg <= '1';
+                XB_opbranch <= '1';
+              else -- No illegal instruction here
+              end if;
+            when OP_STORE =>
+              if (ID_func3 = FUNC3_SD) then
+                -- Immediate value left shift 3 bits, add to register value
+                XB_rs1 <= ID_rs1;
+                XB_rs1_d <= signed(ID_rs1_d);
+                XB_rs2 <= ID_rs2;
+                XB_rs2_d <= signed(ID_rs2_d);
+                XB_opls3 <= '1';
+                XB_opadd <= '1';
+                XB_op2imm <= '1';
+                XB_MemWrite <= '1';
+              else -- No illegal instructions here              
+              end if;
+            when others => NULL;
+          end case;
+        end if side_effect_signals;
+      end if ID_is_valid;
+      
 
-    ------------------------------------- Hazard Detection Unit in ID
-    -- Default Value
-    XB_FORW1_MEM_XB <= '0';
-    XB_FORW1_WB_XB <= '0';
-    hdu_rs1 : if (ID_XMXB1 = '1') then
-      -- RS1 forwarding from MEM to XB.
-      -- When an instr in XB needs immediate senior's help.
-      -- | XB | MEM |
-      -- | SUBLEQ x2, x3, C1 | SUBLEQ x3, x8, C2 |
-      --              ^-----Depend-----^
-      -- | LW x4, (off)x2 | SUBLEQ x2, x0, C4 |
-      --               ^---Depend---^
-      XB_FORW1_MEM_XB <= '1';
-    elsif (ID_XMMEM1 = '1') then
-      -- RS1 forwarding from WB to XB
-      XB_FORW1_WB_XB <= '1';
-    end if hdu_rs1;
-    XB_FORW2_MEM_XB <= '0';
-    XB_FORW2_WB_XB <= '0';
-    hdu_rs2 : if (ID_XMXB2 = '1') then
-      -- RS2 forwarding from MEM to XB
-      XB_FORW2_MEM_XB <= '1';
-    elsif (ID_XMMEM2 = '1')then
-      XB_FORW2_WB_XB <= '1';
-    end if hdu_rs2;
+      ------------------------------------- Hazard Detection Unit in ID
+      -- Default Value
+      XB_FORW1_MEM_XB <= '0';
+      XB_FORW1_WB_XB <= '0';
+      hdu_rs1 : if (ID_XMXB1 = '1') then
+        -- RS1 forwarding from MEM to XB.
+        -- When an instr in XB needs immediate senior's help.
+        -- | XB | MEM |
+        -- | SUBLEQ x2, x3, C1 | SUBLEQ x3, x8, C2 |
+        --              ^-----Depend-----^
+        -- | LW x4, (off)x2 | SUBLEQ x2, x0, C4 |
+        --               ^---Depend---^
+        XB_FORW1_MEM_XB <= '1';
+      elsif (ID_XMMEM1 = '1') then
+        -- RS1 forwarding from WB to XB
+        XB_FORW1_WB_XB <= '1';
+      end if hdu_rs1;
+      XB_FORW2_MEM_XB <= '0';
+      XB_FORW2_WB_XB <= '0';
+      hdu_rs2 : if (ID_XMXB2 = '1') then
+        -- RS2 forwarding from MEM to XB
+        XB_FORW2_MEM_XB <= '1';
+      elsif (ID_XMMEM2 = '1')then
+        XB_FORW2_WB_XB <= '1';
+      end if hdu_rs2;
+    end if main_clock;
+
   end process core;
 
 end architecture simple_pipeline;
