@@ -122,6 +122,25 @@ architecture behavioral of test_cpu_top_tb is
     end loop;
   end procedure test_2;
 
+  procedure test_3(
+    signal resetb : out std_logic;
+    signal rom : inout ram_t
+    ) is
+  begin
+    rom <= ocram_ReadMemFile("test/simulation/code/02-accum.bin"); 
+    -- rom <= ocram_ReadMemFile("01-add.bin");
+    reset(resetb);
+    write(output, lf & "(TT) ==============================================" & lf);    
+    write(output, "(TT) Test 2 Add Expected Behaviour:" & lf);
+    write(output, "(TT)   1. 1+1 is performed" & lf);
+    write(output, "(TT)   2. 2 is stored in 0x100" & lf);
+    write(output, "(TT)   3. Waveforms must be read" & lf);
+    write(output, "(TT) ==============================================" & lf);
+    for i in 0 to 127 loop
+      wait until rising_edge(clk);
+    end loop;
+  end procedure test_3;
+  
 
 begin
   -- Reads ROM
@@ -143,7 +162,8 @@ begin
   stimulus : process
   begin
     -- test_1(resetb, rom);
-    test_2(resetb, rom);
+    -- test_2(resetb, rom);
+    test_3(resetb, rom);
     -- End Simulation
     END_SIMULATION := true;
     wait;
