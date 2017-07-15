@@ -101,7 +101,7 @@ architecture simple_pipeline of CPUCore is
   signal XB_RType, XB_IType, XB_SType, XB_UType : std_logic;
   ---- Note that add and negate can make subtract
   ---- ls3 = Left Shift 3 bits
-  signal XB_aluout, XB_forwrs2 : int64_t;
+  signal XB_aluop1, XB_aluop2, XB_aluout, XB_forwrs1, XB_forwrs2 : int64_t;
   signal XB_opadd, XB_opneg, XB_opls3, XB_opbranch : std_logic;
   signal XB_op2rs2, XB_op2imm : std_logic;
   signal XB_Branch : std_logic;
@@ -219,25 +219,26 @@ begin
       XB_rs1_d,
       XB_FORW1_MEM_XB, MEM_aluresult, XB_FORW1_WB_XB, WB_data,
       XB_rs2_d, 
-      XB_FORW2_MEM_XB, XB_FORW2_WB_XB, 
+      XB_FORW2_MEM_XB, XB_FORW2_WB_XB, XB_forwrs1,
       XB_forwrs2, XB_op2rs2, XB_op2imm, XB_IType, XB_SType, XB_Imm,
       XB_opls3, XB_opneg, XB_opadd, XB_opbranch, XB_aluout,
+      XB_aluop1, XB_aluop2,
       XB_MemRead, XB_MemWrite
       )
-    variable XB_forwrs1 : int64_t;
+    --variable XB_forwrs1 : int64_t;
     variable XB_op1, XB_op2 : int64_t;
   begin
-    XB_forwrs1 := XB_rs1_d;
+    XB_forwrs1 <= XB_rs1_d;
     if (XB_FORW1_MEM_XB = '1') then
       -- Forward from Mem stage
-      XB_forwrs1 := MEM_aluresult;
+      if (MEM_MemRead = '1')then
+        XB_forwrs1 <= signed(core_mmu_do_d);
+      else
+        XB_forwrs1 <= MEM_aluresult;
+      end if;
     elsif (XB_FORW1_WB_XB = '1') then
       -- Forward from WB stage
-      if (MEM_MemRead = '1')then
-        XB_forwrs1 := signed(core_mmu_do_d);
-      else
-        XB_forwrs1 := MEM_aluresult;
-      end if;
+      XB_forwrs1 <= WB_data;
     end if;
     XB_forwrs2 <= XB_rs2_d;
     if (XB_FORW2_MEM_XB = '1') then
@@ -271,9 +272,11 @@ begin
       XB_op2 := -XB_op2;
     end if;
     ---- Compute
+    XB_aluop1 <= XB_op1;
+    XB_aluop2 <= XB_op2;
     XB_aluout <= (others => '-');
     if XB_opadd = '1' then
-      XB_aluout <= XB_op1 + XB_op2; 
+      XB_aluout <= XB_aluop1 + XB_aluop2; 
     end if;
     ---- Branch
     XB_Branch <= '0';
