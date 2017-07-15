@@ -101,6 +101,7 @@ architecture simple_pipeline of CPUCore is
   signal XB_RType, XB_IType, XB_SType, XB_UType : std_logic;
   ---- Note that add and negate can make subtract
   ---- ls3 = Left Shift 3 bits
+  signal XB_is_bubble : std_logic;
   signal XB_aluop1, XB_aluop2, XB_aluout, XB_forwrs1, XB_forwrs2 : int64_t;
   signal XB_opadd, XB_opneg, XB_opls3, XB_opbranch : std_logic;
   signal XB_op2rs2, XB_op2imm : std_logic;
@@ -134,32 +135,39 @@ architecture simple_pipeline of CPUCore is
 begin
   core_mmu_en_i <= '1';
   core_mmu_we_i <= '0';
+  core_rf_en <= '1';
   -- Signed/Unsigned signals for convenience
   core_mmu_addr_i <= std_logic_vector(mmu_addr_i_s32);
 
   -- Check source/destination matches
   ID_XMXB1 <= '1' when
               XB_RegWrite = '1' and
-              ID_rs1 = XB_rd and
+              ((ID_rs1 = XB_rd and XB_SType = '0') or
+               (ID_rs1 = XB_rs1 and XB_SType = '1')) and
               ID_rs1 /= "00000" and
               (ID_RType = '1' or ID_Itype = '1' or ID_SType = '1')
               else '0';
   ID_XMXB2 <= '1' when
               XB_RegWrite = '1'and
-              ID_rs2 = XB_rd and
+              ((ID_rs2 = XB_rd and XB_SType = '0') or
+               (ID_rs2 = XB_rs1 and XB_SType = '1')) and
               ID_rs2 /= "00000" and (ID_RType = '1' or ID_SType = '1')
               else '0';
   ID_XMMEM1 <= '1' when
-               XB_RegWrite = '1' and
-               ID_rs1 = MEM_rd and
+               MEM_RegWrite = '1' and
+               ((ID_rs1 = MEM_rd and MEM_SType = '0') or
+                (ID_rs1 = MEM_rs1 and MEM_SType = '1')
+                ) and
                ID_rs1 /= "00000" and
-               (MEM_RType = '1' or MEM_Itype = '1')
+               (ID_RType = '1' or ID_Itype = '1' or ID_SType = '1')
                else '0';
   ID_XMMEM2 <= '1' when
-               XB_RegWrite = '1' and
-               ID_rs2 = MEM_rd and
+               MEM_RegWrite = '1' and
+               ((ID_rs2 = MEM_rd and MEM_SType = '0') or
+                (ID_rs2 = MEM_rs1 and MEM_SType = '1')
+                ) and
                ID_rs2 /= "00000" and
-               (MEM_RType = '1' or MEM_SType = '1')
+               (ID_RType = '1' or ID_SType = '1')
                else '0';
   -- The stall signal.
   -- Stall is needed when source register is dependant on an immediate
@@ -213,10 +221,12 @@ begin
   mmu_addr_i_s32(31 downto 3) <= IF_nextPC(31 downto 3);
 
   -- XB stage combinational
-  -- Forwarding
+  -- Helper
+  XB_is_bubble <= '1' when XB_RegWrite = '0' and XB_opbranch = '0' and
+                  XB_MemRead = '0' and XB_MemWrite = '0' else '0';
   xb_comb : process
     (
-      XB_rs1_d,
+      XB_rs1_d, XB_RegWrite,
       XB_FORW1_MEM_XB, MEM_aluresult, XB_FORW1_WB_XB, WB_data,
       XB_rs2_d, 
       XB_FORW2_MEM_XB, XB_FORW2_WB_XB, XB_forwrs1,
@@ -228,6 +238,7 @@ begin
     --variable XB_forwrs1 : int64_t;
     variable XB_op1, XB_op2 : int64_t;
   begin
+    -- Forwarding
     XB_forwrs1 <= XB_rs1_d;
     if (XB_FORW1_MEM_XB = '1') then
       -- Forward from Mem stage
@@ -393,10 +404,11 @@ begin
           ID_valid <= '0';
         --inc_pc := shift_left(resize(XB_Imm(19 downto 8), 32), 2);
         end if;
+        IF_PC <= IF_nextPC;
+        ID_PC <= IF_PC;
+        ID_Instr <= IF_Instr;
       end if;
-      IF_PC <= IF_nextPC;
-      ID_PC <= IF_PC;
-      ID_Instr <= IF_Instr;
+      
       ------------------------------------- ID stage
       XB_RType <= ID_RType;
       XB_IType <= ID_IType;
@@ -421,7 +433,8 @@ begin
       XB_op2imm <= '0';
       XB_opneg <= '0';
       -- Only continue if instruction is valid
-      ID_is_valid : if (ID_Valid = '1') then
+      ID_is_valid : if (ID_Valid = '1' and stall = '0' and
+                        XB_Branch = '0') then
         side_effect_signals : if (ID_IType = '1') then
           case ID_opcode is
             when OP_LOAD =>
